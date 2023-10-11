@@ -1,4 +1,3 @@
-HELLLLOOOOOOOO!!!!!
 
 # Flask React Project (test)
 
