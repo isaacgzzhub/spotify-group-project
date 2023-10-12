@@ -13,3 +13,4 @@ class Song(db.Model):
 
   album = db.relationship('Album', back_populates='songs')
   user = db.relationship('User', back_populates='songs')
+  playlist_song = db.relationship('PlaylistSong', back_populates='songs')
