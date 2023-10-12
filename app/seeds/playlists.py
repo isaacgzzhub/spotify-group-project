@@ -2,7 +2,6 @@ from app.models import db, Playlist, environment, SCHEMA
 from sqlalchemy.sql import text
 
 
-# Adds a demo user, you can add other songs here if you want
 def seed_playlists():
     playlist1 = Playlist(user_id=1, name='Favorites', public=True)
     db.session.add(playlist1)

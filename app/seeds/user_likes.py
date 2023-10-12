@@ -2,7 +2,6 @@ from app.models import db, UserLike, environment, SCHEMA
 from sqlalchemy.sql import text
 
 
-# Adds a demo user, you can add other songs here if you want
 def seed_user_likes():
     user_like1 = UserLike(user_id=1, song_id=1)
     db.session.add(user_like1)
