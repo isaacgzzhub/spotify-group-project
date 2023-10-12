@@ -1,7 +1,4 @@
 from .db import db
-from flask_sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy()
 
 class Song(db.Model):
   __tablename__ = 'songs'
