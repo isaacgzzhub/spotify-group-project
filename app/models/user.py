@@ -13,6 +13,8 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    songs = db.relationship('Song', back_populates='users')
+    albums = db.relationship('Album', back_populates='users')
 
     @property
     def password(self):
