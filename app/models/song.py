@@ -5,7 +5,7 @@ class Song(db.Model):
 
   id = db.Column(db.Integer, primary_key=True)
   user_id = db.Column(db.Integer, nullable=False)
-  album_id = db.Column(db.Integer, nullable=False, db.ForeignKey('albums.id'))
+  album_id = db.Column(db.Integer, db.ForeignKey("albums.id"), nullable=False)
   song_name = db.Column(db.String(50), nullable=False)
   seconds = db.Column(db.Integer, nullable=False)
   song_content = db.Column(db.String, unique=True, nullable=False)
