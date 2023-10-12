@@ -2,7 +2,6 @@ from app.models import db, Song, environment, SCHEMA
 from sqlalchemy.sql import text
 
 
-# Adds a demo user, you can add other songs here if you want
 def seed_songs():
     song1 = Song(user_id=1, album_id=1, song_name='Barbie Girl', seconds=180, song_content='kaljsdfljsdlfjdlfa.mp3', release_year=2023)
     db.session.add(song1)

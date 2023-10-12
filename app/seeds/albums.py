@@ -2,7 +2,6 @@ from app.models import db, Album, environment, SCHEMA
 from sqlalchemy.sql import text
 
 
-# Adds a demo user, you can add other songs here if you want
 def seed_albums():
     album1 = Album(user_id=1, album_name='Barbie', thumbnail='super_cool_thing.jpg', release_year=2023)
     db.session.add(album1)
