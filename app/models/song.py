@@ -1,4 +1,7 @@
 from .db import db
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
 
 class Song(db.Model):
   __tablename__ = 'songs'
@@ -14,3 +17,4 @@ class Song(db.Model):
   album = db.relationship('Album', back_populates='songs')
   user = db.relationship('User', back_populates='songs')
   playlist_song = db.relationship('PlaylistSong', back_populates='songs')
+  user_like = db.relationship('UserLike', back_populates='songs')
