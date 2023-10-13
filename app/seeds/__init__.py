@@ -40,8 +40,8 @@ def seed():
 @seed_commands.command('undo')
 def undo():
     undo_users()
-    undo_songs()
     undo_albums()
+    undo_songs()
     undo_playlist()
     undo_playlist_songs()
     undo_user_likes()
