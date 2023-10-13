@@ -12,7 +12,7 @@ class Song(db.Model):
   song_content = db.Column(db.String, unique=True, nullable=False)
   release_year = db.Column(db.Integer, nullable=False)
 
-  album = db.relationship('Album', back_populates='songs')
+  album = db.relationship('Album', back_populates='songs', primaryjoin='Album.id == Song.album_id') # add primary join
   user = db.relationship('User', back_populates='songs')
   playlist_song = db.relationship('PlaylistSong', back_populates='songs')
   user_like = db.relationship('UserLike', back_populates='songs')
