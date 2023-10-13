@@ -1,4 +1,4 @@
-from .db import db
+from .db import db, add_prefix_for_prod
 
 class Album(db.Model):
   __tablename__ = 'albums'
