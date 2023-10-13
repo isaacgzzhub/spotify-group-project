@@ -9,5 +9,5 @@ class Album(db.Model):
   thumbnail = db.Column(db.String, nullable=False)
   release_year = db.Column(db.Integer, nullable=False)
 
-  songs = db.relationship('Song', back_populates='album', primaryjoin='Album.id == Song.album_id') # add primary join
+  songs = db.relationship('Song', back_populates='album')
   user = db.relationship('User', back_populates='albums')
