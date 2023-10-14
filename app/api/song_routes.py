@@ -15,3 +15,11 @@ def get_songs():
     # print(songs)
     # return songs
     return {'songs': [song.to_dict() for song in songs]}
+
+# Create a song
+@song_routes.route('/', methods=['POST'])
+@login_required
+def create_song():
+    """
+    Create a new song and returns it
+    """
