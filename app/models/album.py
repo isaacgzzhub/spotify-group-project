@@ -15,14 +15,14 @@ class Album(db.Model):
   songs = db.relationship('Song', back_populates='album')
   user = db.relationship('User', back_populates='albums')
 
-  def __to_dict__(self):
-      album_dict = {
+  def to_dict(self):
+      return {
           'id': self.id,
           'user_id': self.user_id,
           'album_name': self.album_name,
           'thumbnail': self.thumbnail,
           'release_year': self.release_year,
       }
-      return album_dict
+
 
 #album model

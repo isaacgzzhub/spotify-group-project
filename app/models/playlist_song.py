@@ -13,10 +13,9 @@ class PlaylistSong(db.Model):
   playlists = db.relationship('Playlist', back_populates='playlist_song')
   songs = db.relationship('Song', back_populates='playlist_song')
 
-  def __to_dict__(self):
-      playlist_song_dict = {
+  def to_dict(self):
+      return {
           'id': self.id,
           'playlist_id': self.playlist_id,
           'song_id': self.song_id
       }
-      return playlist_song_dict
