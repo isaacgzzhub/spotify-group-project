@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: b4a7fb040179
+Revision ID: b5ab73db8868
 Revises: 
-Create Date: 2023-10-11 23:01:56.122822
+Create Date: 2023-10-14 15:53:20.782709
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'b4a7fb040179'
+revision = 'b5ab73db8868'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -31,7 +31,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('album_name', sa.String(length=50), nullable=False),
-    sa.Column('thumbnail', sa.String(), nullable=False),
+    sa.Column('thumbnail_url', sa.String(), nullable=False),
     sa.Column('release_year', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -47,15 +47,16 @@ def upgrade():
     op.create_table('songs',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('album_id', sa.Integer(), nullable=False),
+    sa.Column('album_id', sa.Integer(), nullable=True),
     sa.Column('song_name', sa.String(length=50), nullable=False),
+    sa.Column('thumbnail_url', sa.String(), nullable=True),
     sa.Column('seconds', sa.Integer(), nullable=False),
-    sa.Column('song_content', sa.String(), nullable=False),
+    sa.Column('song_url', sa.String(), nullable=False),
     sa.Column('release_year', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['album_id'], ['albums.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('song_content')
+    sa.UniqueConstraint('song_url')
     )
     op.create_table('playlist_songs',
     sa.Column('id', sa.Integer(), nullable=False),
