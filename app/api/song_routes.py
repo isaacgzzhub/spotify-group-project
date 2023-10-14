@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, jsonify
 from flask_login import login_required
 from app.models import Song
 
@@ -12,4 +12,6 @@ def get_songs():
     Query for all songs and returns them in a list of song dictionaries
     """
     songs = Song.query.all()
+    # print(songs)
+    # return songs
     return {'songs': [song.to_dict() for song in songs]}

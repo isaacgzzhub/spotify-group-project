@@ -19,8 +19,8 @@ class Song(db.Model):
   playlist_song = db.relationship('PlaylistSong', back_populates='songs')
   user_like = db.relationship('UserLike', back_populates='songs')
 
-  def __to_dict__(self):
-      song_dict = {
+  def to_dict(self):
+      return {
           'id': self.id,
           'user_id': self.user_id,
           'album_id': self.album_id,
@@ -29,4 +29,3 @@ class Song(db.Model):
           'song_content': self.song_content,
           'release_year': self.release_year,
       }
-      return song_dict
