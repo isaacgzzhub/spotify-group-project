@@ -13,10 +13,9 @@ class UserLike(db.Model):
   songs = db.relationship('Song', back_populates='user_like')
   users = db.relationship('User', back_populates='user_like')
 
-  def __to_dict__(self):
-      user_like_dict = {
+  def to_dict(self):
+      return {
           'id': self.id,
           'user_id': self.user_id,
           'song_id': self.song_id
       }
-      return user_like_dict
