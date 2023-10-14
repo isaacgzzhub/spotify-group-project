@@ -9,7 +9,7 @@ class Album(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
   album_name = db.Column(db.String(50), nullable=False)
-  thumbnail = db.Column(db.String, nullable=False)
+  thumbnail_url = db.Column(db.String, nullable=False)
   release_year = db.Column(db.Integer, nullable=False)
 
   songs = db.relationship('Song', back_populates='album')
@@ -20,7 +20,7 @@ class Album(db.Model):
           'id': self.id,
           'user_id': self.user_id,
           'album_name': self.album_name,
-          'thumbnail': self.thumbnail,
+          'thumbnail_url': self.thumbnail_url,
           'release_year': self.release_year,
       }
 

@@ -8,10 +8,11 @@ class Song(db.Model):
 
   id = db.Column(db.Integer, primary_key=True)
   user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
-  album_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("albums.id")), nullable=False)
+  album_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("albums.id")), nullable=True)
   song_name = db.Column(db.String(50), nullable=False)
+  thumbnail_url = db.Column(db.String, nullable=True)
   seconds = db.Column(db.Integer, nullable=False)
-  song_content = db.Column(db.String, unique=True, nullable=False)
+  song_url = db.Column(db.String, unique=True, nullable=False)
   release_year = db.Column(db.Integer, nullable=False)
 
   album = db.relationship('Album', back_populates='songs')
@@ -25,7 +26,8 @@ class Song(db.Model):
           'user_id': self.user_id,
           'album_id': self.album_id,
           'song_name': self.song_name,
+          'thumbnail_url': self.thumbnail_url,
           'seconds': self.seconds,
-          'song_content': self.song_content,
+          'song_url': self.song_url,
           'release_year': self.release_year,
       }
