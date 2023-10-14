@@ -24,3 +24,5 @@ class Album(db.Model):
           'release_year': self.release_year,
       }
       return album_dict
+
+#album model
