@@ -30,7 +30,7 @@ def seed_songs():
     song9 = Song(user_id=1, album_id=5, song_name='Can\'t Stop the Feeling!', thumbnail_url='laksdflj.jpg', seconds=236, song_url='alksdjflkajsdf.mp3', release_year=2016)
     db.session.add(song9)
 
-    song10 = Song(user_id=2, album_id=5, song_name='Shape of You', thumbnail_url='laksdflj.jpg', seconds=230, song_url='alskjdfalksjdf.mp3', release_year=2017)
+    song10 = Song(user_id=2, song_name='Shape of You', thumbnail_url='laksdflj.jpg', seconds=230, song_url='alskjdfalksjdf.mp3', release_year=2017)
     db.session.add(song10)
 
     db.session.commit()
