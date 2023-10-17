@@ -58,3 +58,13 @@ def edit_song(id):
         db.session.commit()
         return song.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+# Delete a song
+@song_routes.route('/<int:id>', methods=['DELETE'])
+@login_required
+def delete_song(id):
+
+    db.session.commit()
+    return "Song deleted successfully!"
+
+return "Song does not exist"
