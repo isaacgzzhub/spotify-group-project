@@ -24,9 +24,9 @@ def get_album(album_id):  # Note the argument to accept album_id
     """
     album = Album.query.get(album_id)
     if album:
-        return jsonify({'album': [album.to_dict()]})
+        return album.to_dict()
     else:
-        return jsonify({"error": "Album not found"}), 404
+        return {"error": "Album not found"}
 
 #Create an album
 @album_routes.route('/create-album', methods=['POST'])
@@ -37,7 +37,7 @@ def create_album():
     """
     # data = request.get_json()
     form = AlbumForm()  # Assuming AlbumForm can validate JSON data
-    print(form)
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         new_album = Album(
             user_id=form.data['user_id'],
@@ -47,8 +47,6 @@ def create_album():
         )
         db.session.add(new_album)
         db.session.commit()
-
-        # Redirect to the newly created album's page
-        return redirect(url_for('get_album', album_id=new_album.id))
+        return new_album.to_dict()
     else:
         return jsonify({"error": "Invalid album data provided"}), 400  # Bad Request status
