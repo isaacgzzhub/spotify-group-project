@@ -40,7 +40,7 @@ def create_song():
         db.session.add(song)
         db.session.commit()
         return song.to_dict()
-    return {'error'}
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 # Edit a song
 # Come back for constraints/validators?
@@ -63,8 +63,12 @@ def edit_song(id):
 @song_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def delete_song(id):
+    song = Song.query.get_or_404(id)
+
+    if song is None:
+        return {"error": "Song does not exist"}, 404
+
+    db.session.delete(song)
 
     db.session.commit()
     return "Song deleted successfully!"
-
-return "Song does not exist"
