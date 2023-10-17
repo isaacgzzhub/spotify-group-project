@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import Song, db
 from app.forms.song_form import SongForm
@@ -13,8 +13,7 @@ def get_songs():
     Query for all songs and returns them in a list of song dictionaries
     """
     songs = Song.query.all()
-    # print(songs)
-    # return songs
+
     return {'songs': [song.to_dict() for song in songs]}
 
 # Create a song
@@ -25,6 +24,7 @@ def create_song():
     Create a new song and returns it
     """
     form = SongForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         song = Song(
             user_id=form.data['user_id'],
