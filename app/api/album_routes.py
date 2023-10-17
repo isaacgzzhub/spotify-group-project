@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request, redirect, url_for
 from flask_login import login_required
 from app.models import Album, db
 from app.forms.album_form import AlbumForm
+from .auth_routes import validation_errors_to_error_messages
 
 album_routes = Blueprint('albums', __name__)
 
@@ -49,4 +50,4 @@ def create_album():
         db.session.commit()
         return new_album.to_dict()
     else:
-        return jsonify({"error": "Invalid album data provided"}), 400  # Bad Request status
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400  # Bad Request status
