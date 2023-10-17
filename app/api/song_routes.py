@@ -2,6 +2,8 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import Song, db
 from app.forms.song_form import SongForm
+from app.forms.song_edit_form import SongEditForm
+from .auth_routes import validation_errors_to_error_messages
 
 song_routes = Blueprint('songs', __name__)
 
@@ -39,3 +41,20 @@ def create_song():
         db.session.commit()
         return song.to_dict()
     return {'error'}
+
+# Edit a song
+# Come back for constraints/validators?
+@song_routes.route('/<int:id>', methods=['PUT'])
+@login_required
+def edit_song(id):
+    form = SongEditForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        song = Song.query.get_or_404(id)
+        song.album_id = form.data['album_id']
+        song.song_name = form.data['song_name']
+        song.thumbnail_url = form.data['thumbnail_url']
+
+        db.session.commit()
+        return song.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
