@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request, redirect, url_for
 from flask_login import login_required
 from app.models import Album, db
 from app.forms.album_form import AlbumForm
@@ -15,16 +15,29 @@ def get_albums():
     albums = Album.query.all()
     return {'albums': [album.to_dict() for album in albums]}
 
-#Get one song
+#Get one album
+@album_routes.route('/<album_id>')
+@login_required
+def get_album(album_id):  # Note the argument to accept album_id
+    """
+    Query for an album by id and returns it in a list of the album songs
+    """
+    album = Album.query.get(album_id)
+    if album:
+        return jsonify({'album': [album.to_dict()]})
+    else:
+        return jsonify({"error": "Album not found"}), 404
 
 #Create an album
-@album_routes.route('/', methods=['POST'])
+@album_routes.route('/create-album', methods=['POST'])
 @login_required
 def create_album():
     """
     Create a new album and returns it
     """
-    form = AlbumForm()
+    # data = request.get_json()
+    form = AlbumForm()  # Assuming AlbumForm can validate JSON data
+    print(form)
     if form.validate_on_submit():
         new_album = Album(
             user_id=form.data['user_id'],
@@ -34,5 +47,8 @@ def create_album():
         )
         db.session.add(new_album)
         db.session.commit()
-        return new_album.to_dict()
-    return {'error'}
+
+        # Redirect to the newly created album's page
+        return redirect(url_for('get_album', album_id=new_album.id))
+    else:
+        return jsonify({"error": "Invalid album data provided"}), 400  # Bad Request status
