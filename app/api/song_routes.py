@@ -72,3 +72,16 @@ def delete_song(id):
 
     db.session.commit()
     return "Song deleted successfully!"
+
+#Get one song
+@song_routes.route('/<id>')
+@login_required
+def get_song(id):
+    """
+    Query for an song by id and returns it in a list of the album songs
+    """
+    song = Song.query.get(id)
+    if song:
+        return song.to_dict()
+    else:
+        return {"error": "Song not found"}, 404
