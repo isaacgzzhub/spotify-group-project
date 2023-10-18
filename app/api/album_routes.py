@@ -15,7 +15,7 @@ def get_albums():
     Query for all albums and returns them in a list of album dictionaries
     """
     albums = Album.query.all()
-    return {'albums': [album.to_dict() for album in albums]}
+    return jsonify([album.to_dict() for album in albums])
 
 #Get one album
 @album_routes.route('/<album_id>')
