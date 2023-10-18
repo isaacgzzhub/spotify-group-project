@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request, redirect, url_for
 from flask_login import login_required
 from app.models import Album, db
 from app.forms.album_form import AlbumForm
+from app.forms.album_edit_form import AlbumEditForm
 from .auth_routes import validation_errors_to_error_messages
 
 album_routes = Blueprint('albums', __name__)
@@ -27,7 +28,7 @@ def get_album(album_id):  # Note the argument to accept album_id
     if album:
         return album.to_dict()
     else:
-        return {"error": "Album not found"}
+        return {"error": "Album not found"}, 404
 
 #Create an album
 @album_routes.route('/create-album', methods=['POST'])
@@ -51,3 +52,34 @@ def create_album():
         return new_album.to_dict()
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400  # Bad Request status
+
+
+#Edit an Album
+@album_routes.route('/<int:id>', methods=['PUT'])
+@login_required
+def edit_album(id):
+    form = AlbumEditForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        album = Album.query.get(id)
+        album.album_name = form.data['album_name']
+        album.thumbnail_url = form.data['thumbnail_url']
+        album.release_year = form.data['release_year']
+
+        db.session.commit()
+        return album.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+
+#Delete an Album
+@album_routes.route('/<int:id>', methods=['DELETE'])
+@login_required
+def delete_album(id):
+    album = Album.query.get(id)
+
+    if not album:
+        return {'error': 'Album does not exist'}, 404
+
+    db.session.delete(album)
+    db.session.commit()
+    return "Album deleted successfully!"
