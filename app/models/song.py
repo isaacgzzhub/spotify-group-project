@@ -12,7 +12,7 @@ class Song(db.Model):
   song_name = db.Column(db.String(50), nullable=False)
   thumbnail_url = db.Column(db.String, nullable=True)
   seconds = db.Column(db.Integer, nullable=False)
-  song_url = db.Column(db.String, unique=True, nullable=False)
+  song_url = db.Column(db.String, nullable=False)
   release_year = db.Column(db.Integer, nullable=False)
 
   album = db.relationship('Album', back_populates='songs')

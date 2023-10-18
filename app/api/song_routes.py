@@ -50,7 +50,7 @@ def edit_song(id):
     form = SongEditForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        song = Song.query.get_or_404(id)
+        song = Song.query.get(id)
         song.album_id = form.data['album_id']
         song.song_name = form.data['song_name']
         song.thumbnail_url = form.data['thumbnail_url']
@@ -63,7 +63,7 @@ def edit_song(id):
 @song_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def delete_song(id):
-    song = Song.query.get_or_404(id)
+    song = Song.query.get(id)
 
     if song is None:
         return {"error": "Song does not exist"}, 404
