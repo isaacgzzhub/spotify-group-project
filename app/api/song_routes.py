@@ -16,7 +16,7 @@ def get_songs():
     """
     songs = Song.query.all()
 
-    return {'songs': [song.to_dict() for song in songs]}
+    return jsonify([song.to_dict() for song in songs])
 
 # Create a song
 @song_routes.route('/', methods=['POST'])
