@@ -10,4 +10,4 @@ class SongForm(FlaskForm):
     thumbnail_url = StringField('thumbnail_url', validators=[DataRequired(), URL(require_tld=False)])
     seconds = IntegerField('seconds', validators=[DataRequired()])
     song_url = StringField('song_url', validators=[DataRequired(), URL(require_tld=False)])
-    release_year = IntegerField('release_year', validators=[DataRequired()])
+    release_year = IntegerField('release_year', validators=[DataRequired(message="This field is required and must be an integer")])
