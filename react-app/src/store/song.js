@@ -34,6 +34,7 @@ export const getAllSongsThunk = () => async (dispatch) => {
 	const response = await fetch("/api/songs");
 
 	if (response.ok) {
+    console.log('hello')
 		const songs = await response.json();
 		if (songs.errors) {
 			return songs.errors
@@ -56,14 +57,16 @@ export const getSongByIdThunk = (songId) => async (dispatch) => {
   }
 };
 
-const initialState = { user: null };
+
+
+const initialState = { songs: [], song: null };
 
 export default function reducer(state = initialState, action) {
 	switch (action.type) {
-		case SET_USER:
-			return { user: action.payload };
-		case REMOVE_USER:
-			return { user: null };
+		case GET_SONGS:
+			return { ...state, songs: action.payload };
+		case GET_SONG_BY_ID:
+			return { ...state, song: action.payload };
 		default:
 			return state;
 	}
