@@ -30,7 +30,7 @@ const deleteAlbum = (albumId) => ({
 // Thunk Middleware
 
 export const getAllAlbumsThunk = () => async (dispatch) => {
-  const response = await fetch("/api/albums");
+  const response = await fetch("/api/albums/");
 
   if (response.ok) {
     const albums = await response.json();
