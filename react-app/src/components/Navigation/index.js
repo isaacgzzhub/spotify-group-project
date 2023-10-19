@@ -8,16 +8,49 @@ function Navigation({ isLoaded }){
 	const sessionUser = useSelector(state => state.session.user);
 
 	return (
-		<ul>
-			<li>
-				<NavLink exact to="/">Home</NavLink>
-			</li>
+		<div>
+
+		<div id="home-profile">
 			{isLoaded && (
-				<li>
+				<div>
 					<ProfileButton user={sessionUser} />
-				</li>
+				</div>
 			)}
-		</ul>
+			<div>
+				<NavLink exact to="/">Home</NavLink>
+			</div>
+		</div>
+
+		<div id="nav-links">
+			<NavLink to='/songs'>
+				All Songs
+			</NavLink>
+			<NavLink to='/mysongs'>
+				Your Songs
+			</NavLink>
+			<NavLink to='/likedsongs'>
+				Liked Songs
+			</NavLink>
+			<NavLink to='/albums'>
+				All Albums
+			</NavLink>
+			<NavLink to='/myalbums'>
+				Your Albums
+			</NavLink>
+			<NavLink to='/playlists'>
+				All Playlists
+			</NavLink>
+			<NavLink to='/myplaylists'>
+				Your Playlists
+			</NavLink>
+		</div>
+
+
+
+		</div>
+
+
+
 	);
 }
 
