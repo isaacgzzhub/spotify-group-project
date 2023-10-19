@@ -6,11 +6,11 @@ import { getAllSongsThunk } from "../../store/song";
 
 function SongsPage() {
   const dispatch = useDispatch();
-  const songs = useSelector((state) => state.song.songs);
+  // const songs = useSelector((state) => state.song.songs);
 
   useEffect(() => {
-    dispatch(getAllSongsThunk())
-  }, [dispatch])
+    dispatch(getAllSongsThunk());
+  }, [dispatch]);
 
   return (
     <>
