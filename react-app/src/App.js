@@ -6,6 +6,7 @@ import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import SongsPage from "./components/SongsPage";
+import AlbumsPage from "./components/AlbumsPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,6 +28,9 @@ function App() {
           </Route>
           <Route path="/songs">
             <SongsPage />
+          </Route>
+          <Route path="/albums">
+            <AlbumsPage />
           </Route>
         </Switch>
       )}
