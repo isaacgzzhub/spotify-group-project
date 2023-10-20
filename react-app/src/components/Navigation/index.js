@@ -10,26 +10,40 @@ function Navigation({ isLoaded }) {
   return (
     <div className="navbar-container">
       <div id="home-profile">
+        <div>
+          <NavLink exact to="/">
+            <img src="/spotify-logo2.png" alt="Home" className="home-logo" />
+          </NavLink>
+        </div>
         {isLoaded && (
           <div>
             <ProfileButton user={sessionUser} />
           </div>
         )}
-        <div>
-          <NavLink exact to="/">
-            Home
-          </NavLink>
-        </div>
       </div>
 
       <div id="nav-links">
-        <NavLink to="/songs">All Songs</NavLink>
-        <NavLink to="/mysongs">Your Songs</NavLink>
-        <NavLink to="/likedsongs">Liked Songs</NavLink>
-        <NavLink to="/albums">All Albums</NavLink>
-        <NavLink to="/myalbums">Your Albums</NavLink>
-        <NavLink to="/playlists">All Playlists</NavLink>
-        <NavLink to="/myplaylists">Your Playlists</NavLink>
+        <NavLink to="/songs" activeClassName="active-link">
+          All Songs
+        </NavLink>
+        <NavLink to="/mysongs" activeClassName="active-link">
+          Your Songs
+        </NavLink>
+        <NavLink to="/likedsongs" activeClassName="active-link">
+          Liked Songs
+        </NavLink>
+        <NavLink to="/albums" activeClassName="active-link">
+          All Albums
+        </NavLink>
+        <NavLink to="/myalbums" activeClassName="active-link">
+          Your Albums
+        </NavLink>
+        <NavLink to="/playlists" activeClassName="active-link">
+          All Playlists
+        </NavLink>
+        <NavLink to="/myplaylists" activeClassName="active-link">
+          Your Playlists
+        </NavLink>
       </div>
     </div>
   );
