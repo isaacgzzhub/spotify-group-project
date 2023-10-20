@@ -13,7 +13,6 @@ function AlbumsPage() {
 
   const albumsObj = useSelector((state) => state.albums);
   const albums = Object.values(albumsObj)
-  console.log(albums)
 
   return (
     <div id='albums-page'>
