@@ -64,3 +64,9 @@
 #nav-links a:hover {
   background-color: #575757;
 }
+
+/* STYLING THE SIZE OF THE ALBUM IMAGES! */
+.album-img {
+  width: 150px;
+  height: 150px;
+}
