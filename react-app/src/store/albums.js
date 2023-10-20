@@ -104,7 +104,6 @@ export default function reducer(state = initialState, action) {
       action.payload.forEach((album) => {
         newState[album.id] = album;
       });
-      console.log(newState);
       return newState;
 
     case GET_ALBUM:
