@@ -5,3 +5,44 @@
 .hidden {
   display: none;
 }
+
+.navbar-container {
+  background-color: #1f1e1e;
+  position: fixed; /* Make it stick to the window */
+  left: 0; /* Left and top 0 makes the navbar start from the top left and hug the left side of the screen */
+  top: 0;
+  height: 100%;
+  width: 400px;
+  z-index: 1000;
+  overflow-y: auto; /* Enable scrolling if the content overflows */
+}
+
+#home-profile {
+  background-color: #1f1e1e;
+  padding: 16px;
+  margin-bottom: 10px;
+}
+
+#nav-links {
+  display: flex;
+  flex-direction: row; /* Horizontal layout */
+  flex-wrap: wrap; /* Wrap onto next line if overflow or run out of space */
+  padding: 16px;
+  gap: 16px; /* Gap between links */
+}
+
+#nav-links a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #3d3c3c;
+  color: white;
+  width: 105px;
+  height: 35px;
+  border-radius: 15px; /* Rounded edges */
+  text-decoration: none;
+}
+
+#nav-links a:hover {
+  background-color: #575757;
+}
