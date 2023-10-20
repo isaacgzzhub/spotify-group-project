@@ -38,7 +38,7 @@ function MyAlbumsPage() {
         ))}
       </div>
 
-      <NavLink>Create Album</NavLink>
+      <NavLink to="/">Create Album</NavLink>
     </div>
   );
 }
