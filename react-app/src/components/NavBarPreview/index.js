@@ -2,13 +2,15 @@ import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+// Receive a prop named activeSection from the Navigation index.js (the parent), which is a string that indicates which nav link section is currently active
 function NavBarPreview({ activeSection }) {
   const albumsObj = useSelector((state) => state.albums);
   const albums = Object.values(albumsObj);
-  console.log(albums);
+  // console.log(albums);
 
   return (
     <div>
+      {/* Check if the activeSection is "allAlbums" */}
       {activeSection === "allAlbums" && (
         <div>
           <div className="album-tile-list">

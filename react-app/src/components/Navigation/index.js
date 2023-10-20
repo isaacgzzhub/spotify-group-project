@@ -7,10 +7,10 @@ import "./Navigation.css";
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
+  const [activeSection, setActiveSection] = useState(null); // initiate a state varaible and set it to null initially to keep track of which section is active
 
-  const [activeSection, setActiveSection] = useState(null);
-
-  const handleClick = (section) => {
+  // Set the clicked navbar link to the actionSection state set above
+  const handleNavLinkClick = (section) => {
     setActiveSection(section);
   };
 
@@ -30,57 +30,59 @@ function Navigation({ isLoaded }) {
       </div>
 
       <div id="nav-links">
+        {/* For each NavLink, we attach an onClick handler that calls handleNavLinkClick with a string argument.
+            This argument is used to set the activeSection, determining which section is displayed in the NavBarPreview component. */}
         <NavLink
           to="/songs"
           activeClassName="active-link"
-          onClick={() => handleClick("allSongs")}
+          onClick={() => handleNavLinkClick("allSongs")}
         >
           All Songs
         </NavLink>
         <NavLink
           to="/mysongs"
           activeClassName="active-link"
-          onClick={() => handleClick("yourSongs")}
+          onClick={() => handleNavLinkClick("yourSongs")}
         >
           Your Songs
         </NavLink>
         <NavLink
           to="/likedsongs"
           activeClassName="active-link"
-          onClick={() => handleClick("likedSongs")}
+          onClick={() => handleNavLinkClick("likedSongs")}
         >
           Liked Songs
         </NavLink>
         <NavLink
           to="/albums"
           activeClassName="active-link"
-          onClick={() => handleClick("allAlbums")}
+          onClick={() => handleNavLinkClick("allAlbums")}
         >
           All Albums
         </NavLink>
         <NavLink
           to="/myalbums"
           activeClassName="active-link"
-          onClick={() => handleClick("yourAlbums")}
+          onClick={() => handleNavLinkClick("yourAlbums")}
         >
           Your Albums
         </NavLink>
         <NavLink
           to="/playlists"
           activeClassName="active-link"
-          onClick={() => handleClick("allPlaylists")}
+          onClick={() => handleNavLinkClick("allPlaylists")}
         >
           All Playlists
         </NavLink>
         <NavLink
           to="/myplaylists"
           activeClassName="active-link"
-          onClick={() => handleClick("yourPlaylists")}
+          onClick={() => handleNavLinkClick("yourPlaylists")}
         >
           Your Playlists
         </NavLink>
       </div>
-      {/* Display preview based on active section */}
+      {/* Pass the activeSection state variable to the child component, NavBarPreview */}
       <NavBarPreview activeSection={activeSection} />
     </div>
   );
