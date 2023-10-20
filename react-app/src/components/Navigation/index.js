@@ -44,7 +44,7 @@ function Navigation({ isLoaded }) {
           activeClassName="active-link"
           onClick={() => handleNavLinkClick("yourSongs")}
         >
-          Your Songs
+          My Songs
         </NavLink>
         <NavLink
           to="/likedsongs"
@@ -65,7 +65,7 @@ function Navigation({ isLoaded }) {
           activeClassName="active-link"
           onClick={() => handleNavLinkClick("yourAlbums")}
         >
-          Your Albums
+          My Albums
         </NavLink>
         <NavLink
           to="/playlists"
@@ -79,7 +79,7 @@ function Navigation({ isLoaded }) {
           activeClassName="active-link"
           onClick={() => handleNavLinkClick("yourPlaylists")}
         >
-          Your Playlists
+          My Playlists
         </NavLink>
       </div>
       {/* Pass the activeSection state variable to the child component, NavBarPreview */}
