@@ -42,7 +42,7 @@ function Navigation({ isLoaded }) {
         <NavLink
           to="/mysongs"
           activeClassName="active-link"
-          onClick={() => handleNavLinkClick("yourSongs")}
+          onClick={() => handleNavLinkClick("mySongs")}
         >
           My Songs
         </NavLink>
