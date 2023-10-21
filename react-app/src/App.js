@@ -8,6 +8,9 @@ import Navigation from "./components/Navigation";
 import SongsPage from "./components/SongsPage";
 import AlbumsPage from "./components/AlbumsPage";
 import MyAlbumsPage from "./components/MyAlbumsPage";
+import UpdateAlbum from "./components/UpdateAlbumForm";
+import AlbumForm from "./components/AlbumForm";
+import OneAlbum from "./components/OneAlbumPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +38,15 @@ function App() {
           </Route>
           <Route path="/myalbums">
             <MyAlbumsPage />
+          </Route>
+          <Route path="/albums/create">
+            <AlbumForm />
+          </Route>
+          <Route path="/albums/:albumId">
+            <OneAlbum />
+          </Route>
+          <Route path="/albums/:albumId/update">
+            <UpdateAlbum />
           </Route>
         </Switch>
       )}
