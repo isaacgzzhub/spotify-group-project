@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { getAllAlbumsThunk, createAlbum } from "../../store/albums";
 
 function AlbumForm() {
@@ -41,7 +41,56 @@ function AlbumForm() {
   };
   return (
     <div>
-      <h1>Album Form</h1>
+
+     <form className="album-form" onSubmit={handleSubmit}>
+
+      <h1>Create A New Album</h1>
+
+      <label>
+        <div className="form-row">
+            Album Name
+            <p className="errors">{errors.albumName}</p>
+        </div>
+        <input
+            type="text"
+            placeholder="Album Name"
+            value={albumName}
+            onChange={updateAlbumName}
+        />
+      </label>
+
+      <label>
+        <div className="form-row">
+            Release Year
+            <p className="errors">{errors.releaseYear}</p>
+        </div>
+        <input
+            type="text"
+            placeholder="Release Year"
+            value={releaseYear}
+            onChange={updateReleaseYear}
+        />
+      </label>
+
+      <label>
+        <div className="form-row">
+            Cover Photo
+            <p className="errors">{errors.thumbnailUrl}</p>
+        </div>
+        <input
+            type="text"
+            placeholder="Cover Photo URL"
+            value={thumbnailUrl}
+            onChange={updateThumbnailUrl}
+        />
+      </label>
+
+      <button type="submit" disabled={!albumName || !releaseYear || !thumbnailUrl}>Create Spot</button>
+
+
+     </form>
+
+
     </div>
   );
 }
