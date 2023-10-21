@@ -7,6 +7,8 @@ function AlbumForm() {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.session.user.id);
   const history = useHistory();
+  const albumsObj = useSelector((state) => state.albums);
+  const albums = Object.values(albumsObj);
   const [albumName, setAlbumName] = useState("");
   const [thumbnailUrl, setThumbnailUrl] = useState("");
   const [releaseYear, setReleaseYear] = useState("");
@@ -35,62 +37,63 @@ function AlbumForm() {
       thumbnail_url: thumbnailUrl,
       release_year: releaseYear,
     };
+    console.log(payload);
 
     const createdAlbum = await dispatch(createAlbum(payload));
-    history.push(`/albums/${createdAlbum.id}`);
+    history.push(`/albums/${createdAlbum?.id}`);
+    console.log("Created Album Response:", createdAlbum);
   };
   return (
     <div>
+      <form className="album-form" onSubmit={handleSubmit}>
+        <h1>Create A New Album</h1>
 
-     <form className="album-form" onSubmit={handleSubmit}>
-
-      <h1>Create A New Album</h1>
-
-      <label>
-        <div className="form-row">
+        <label>
+          <div className="form-row">
             Album Name
             <p className="errors">{errors.albumName}</p>
-        </div>
-        <input
+          </div>
+          <input
             type="text"
             placeholder="Album Name"
             value={albumName}
             onChange={updateAlbumName}
-        />
-      </label>
+          />
+        </label>
 
-      <label>
-        <div className="form-row">
+        <label>
+          <div className="form-row">
             Release Year
             <p className="errors">{errors.releaseYear}</p>
-        </div>
-        <input
+          </div>
+          <input
             type="text"
             placeholder="Release Year"
             value={releaseYear}
             onChange={updateReleaseYear}
-        />
-      </label>
+          />
+        </label>
 
-      <label>
-        <div className="form-row">
+        <label>
+          <div className="form-row">
             Cover Photo
             <p className="errors">{errors.thumbnailUrl}</p>
-        </div>
-        <input
+          </div>
+          <input
             type="text"
             placeholder="Cover Photo URL"
             value={thumbnailUrl}
             onChange={updateThumbnailUrl}
-        />
-      </label>
+          />
+        </label>
 
-      <button type="submit" disabled={!albumName || !releaseYear || !thumbnailUrl}>Create Spot</button>
-
-
-     </form>
-
-
+        <button
+          type="submit"
+          disabled={!albumName || !releaseYear || !thumbnailUrl}
+        >
+          Create Spot
+        </button>
+      </form>
     </div>
   );
 }
