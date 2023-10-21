@@ -37,11 +37,10 @@ function AlbumForm() {
       thumbnail_url: thumbnailUrl,
       release_year: releaseYear,
     };
-    console.log(payload);
 
     const createdAlbum = await dispatch(createAlbum(payload));
-    history.push(`/albums/${createdAlbum?.id}`);
-    console.log("Created Album Response:", createdAlbum);
+    history.push(`/albums/${albums?.length}`);
+
   };
   return (
     <div>

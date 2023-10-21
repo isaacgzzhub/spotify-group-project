@@ -11,8 +11,8 @@ function OneAlbum() {
   const userId = useSelector((state) => state.session.user.id);
   const album = useSelector((state) => state.albums[albumId]);
   const allSongs = useSelector((state) => state.song.songs);
-  const albumSongs = allSongs.filter((song) => song.album_id === album.id);
-  console.log(albumSongs);
+  const albumSongs = allSongs?.filter((song) => song?.album_id === album?.id);
+
   useEffect(() => {
     dispatch(getAlbumByIdThunk(albumId), dispatch(getAllSongsThunk()));
   }, [dispatch, albumId]);
@@ -27,22 +27,24 @@ function OneAlbum() {
           alt="album-cover"
           title={`${album?.album_name}`}
         />
+        {/* make sure this navlink is right */}
+        <NavLink to='/songs/create'> Add a Song </NavLink>
       </div>
 
       <div id="songs-bottom-section">
-        {albumSongs.map((song) => (
+        {albumSongs?.map((song) => (
           <NavLink
-            key={song.id}
+            key={song?.id}
             className="album-tile"
-            to={`/songs/${song.id}`}
+            to={`/songs/${song?.id}`}
           >
             <img
               className="album-img"
-              src={`${song.thumbnail_url}`}
+              src={`${song?.thumbnail_url}`}
               alt="album-cover"
-              title={`${song.song_name}`}
+              title={`${song?.song_name}`}
             />
-            <a>{`${song.song_name}`}</a>
+            <div>{`${song?.song_name}`}</div>
           </NavLink>
         ))}
       </div>
