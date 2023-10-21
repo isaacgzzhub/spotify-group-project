@@ -5,6 +5,7 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
+import MySongsPage from "./components/MySongsPage";
 import SongsPage from "./components/SongsPage";
 import AlbumsPage from "./components/AlbumsPage";
 import MyAlbumsPage from "./components/MyAlbumsPage";
@@ -29,6 +30,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route path="/mysongs">
+            <MySongsPage />
           </Route>
           <Route path="/songs">
             <SongsPage />
