@@ -56,7 +56,7 @@ export const getAlbumByIdThunk = (albumId) => async (dispatch) => {
 };
 
 export const createAlbum = (payload) => async (dispatch) => {
-  const response = await fetch("/api/albums", {
+  const response = await fetch("/api/albums/create-album", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
