@@ -7,7 +7,7 @@ function LikesPage() {
   const dispatch = useDispatch();
   const likes = useSelector((state) => state.song.likes);
   const userId = useSelector((state) => state.session.user.id);
-  console.log(likes)
+  console.log(likes);
 
   useEffect(() => {
     dispatch(getLikesThunk(userId));
@@ -15,7 +15,7 @@ function LikesPage() {
 
   return (
     <div id="albums-page">
-      <h1>My Songs</h1>
+      <h1>Liked Songs</h1>
       <div className="album-tile-list">
         {likes.map((song) => (
           <NavLink

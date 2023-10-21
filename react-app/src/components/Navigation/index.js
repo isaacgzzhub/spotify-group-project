@@ -63,7 +63,7 @@ function Navigation({ isLoaded }) {
         <NavLink
           to="/myalbums"
           activeClassName="active-link"
-          onClick={() => handleNavLinkClick("yourAlbums")}
+          onClick={() => handleNavLinkClick("myAlbums")}
         >
           My Albums
         </NavLink>

@@ -4,10 +4,11 @@ import { useSelector } from "react-redux";
 
 // Receive a prop named activeSection from the Navigation index.js (the parent), which is a string that indicates which nav link section is currently active
 function NavBarPreview({ activeSection }) {
+  const userId = useSelector((state) => state.session.user);
   const albumsObj = useSelector((state) => state.albums);
   const albums = Object.values(albumsObj);
   // console.log(albums);
-
+  const myAlbums = albums.filter((album) => album.user_id === userId.id);
   return (
     <div>
       {/* Check if the activeSection is "allAlbums" */}
@@ -30,6 +31,32 @@ function NavBarPreview({ activeSection }) {
                 <a>{`${album.album_name}`}</a>
               </NavLink>
             ))}
+          </div>
+        </div>
+      )}
+
+      {activeSection === "myAlbums" && (
+        <div>
+          <div className="album-tile-list">
+            {/* Show the first five myAlbums here */}
+            {myAlbums.slice(0, 5).map(
+              (album) =>
+                album && (
+                  <NavLink
+                    key={album.id}
+                    className="album-tile"
+                    to={`/albums/${album.id}`}
+                  >
+                    <img
+                      className="album-img"
+                      src={`${album.thumbnail_url}`}
+                      alt="album-cover"
+                      title={`${album.album_name}`}
+                    />
+                    <a>{`${album.album_name}`}</a>
+                  </NavLink>
+                )
+            )}
           </div>
         </div>
       )}
