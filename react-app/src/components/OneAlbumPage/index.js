@@ -28,7 +28,7 @@ function OneAlbum() {
           title={`${album?.album_name}`}
         />
         {/* make sure this navlink is right */}
-        <NavLink to='/songs/create'> Add a Song </NavLink>
+        <NavLink to='/mysongs'> Add a Song to an Album </NavLink>
       </div>
 
       <div id="songs-bottom-section">
