@@ -1,23 +1,44 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
-import { getAllAlbumsThunk } from "../../store/albums";
+import { useParams, NavLink } from "react-router-dom";
+import { getAlbumByIdThunk } from "../../store/albums";
+import { getAllSongsThunk } from "../../store/song";
+import Modal from "react-modal"
+
 
 function OneAlbum() {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getAllAlbumsThunk());
-  }, [dispatch]);
-
+  const { albumId } = useParams()
   const userId = useSelector((state) => state.session.user.id);
-  const albumsObj = useSelector((state) => state.albums);
-  const albums = Object.values(albumsObj);
-  const myAlbums = albums.filter((album) => album.user_id === userId);
+  const album = useSelector((state) => state.albums[albumId]);
+  const allSongs = useSelector((state) => state.song.songs)
+  const albumSongs = allSongs.filter((song) => song.album_id === album.id)
+  console.log(albumSongs)
+  useEffect(() => {
+    dispatch(getAlbumByIdThunk(albumId),
+    dispatch(getAllSongsThunk())
+    );
+  }, [dispatch, albumId]);
+
 
   return (
-    <div id="albums-page">
-      <h1>one Album </h1>
+    <div className="one-album-container">
+
+      <div id="album-top-section">
+      <h1> {album?.album_name} </h1>
+      <img id="album-cover" src={`${album?.thumbnail_url}`} alt="album-cover" title={`${album?.album_name}`} />
+      </div>
+
+      <div id="songs-bottom-section">
+      {
+          albumSongs.map(song => (
+            <NavLink key={song.id} className='album-tile' to={`/songs/${song.id}`}>
+              <img className='album-img' src={`${song.thumbnail_url}`} alt='album-cover' title={`${song.song_name}`}/>
+              <a>{`${song.song_name}`}</a>
+            </NavLink>
+          ))
+        }
+      </div>
 
     </div>
   );
