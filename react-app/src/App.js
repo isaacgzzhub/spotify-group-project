@@ -13,6 +13,7 @@ import UpdateAlbum from "./components/UpdateAlbumForm";
 import AlbumForm from "./components/AlbumForm";
 import OneAlbum from "./components/OneAlbumPage";
 import LikesPage from "./components/LikesPage";
+import LikeButton from "./components/LikeButton";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,6 +38,9 @@ function App() {
           </Route>
           <Route path="/likes">
             <LikesPage />
+          </Route>
+          <Route path="/testlikebutton">
+            <LikeButton />
           </Route>
           <Route path="/songs">
             <SongsPage />

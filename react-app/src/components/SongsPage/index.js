@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { getAllSongsThunk } from "../../store/song";
+import LikeButton from "../LikeButton";
 
 function SongsPage() {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ function SongsPage() {
             <NavLink key={song.id} className='album-tile' to={`/songs/${song.id}`}>
               <img className='album-img' src={`${song.thumbnail_url}`} alt='album-cover' title={`${song.song_name}`}/>
               <a>{`${song.song_name}`}</a>
+              <LikeButton songId={song.id}/>
             </NavLink>
           ))
         }
