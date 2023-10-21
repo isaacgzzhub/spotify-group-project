@@ -109,10 +109,15 @@ def get_likes(user_id):
 @song_routes.route('/<int:song_id>/like/<int:user_id>', methods=['POST'])
 @login_required
 def add_like(song_id, user_id):
-    like = UserLike(user_id=user_id, song_id=song_id)
-    db.session.add(like)
-    db.session.commit()
-    return like.to_dict()
+    # check if song is already liked
+    liked_song = UserLike.query.filter_by(song_id=song_id, user_id=user_id).first()
+    if liked_song is not None:
+        return {"error": "Song already liked"}, 400
+    else:
+        like = UserLike(user_id=user_id, song_id=song_id)
+        db.session.add(like)
+        db.session.commit()
+        return like.to_dict()
 
 #Unlike a song
 @song_routes.route('/<int:song_id>/like/<int:user_id>', methods=['DELETE'])
