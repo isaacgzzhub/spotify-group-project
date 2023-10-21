@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import { getAllAlbumsThunk } from "../../store/albums";
 import { removeAlbum } from "../../store/albums";
-import Modal from "react-modal"
+import Modal from "react-modal";
 function MyAlbumsPage() {
   const dispatch = useDispatch();
-  const history = useHistory()
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(getAllAlbumsThunk());
@@ -44,26 +44,29 @@ function MyAlbumsPage() {
       <h1>My Albums</h1>
       <div className="album-tile-list">
         {myAlbums.map((album) => (
-
-          <NavLink
-            key={album.id}
-            className="album-tile"
-            to={`/albums/${album.id}`}
-          >
-            <img
-              className="album-img"
-              src={`${album.thumbnail_url}`}
-              alt="album-cover"
-              title={`${album.album_name}`}
-            />
-            <a>{`${album.album_name}`}</a>
-                <button className="mng-update" onClick={() => handleUpdateClick(album.id)}>
-                  Update
-                </button>
-                <button className="mng-delete" onClick={() => handleDeleteClick(album.id)}>
-                  Delete
-                </button>
-          </NavLink>
+          <div key={album.id} className="album-wrapper">
+            <NavLink className="album-tile" to={`/albums/${album.id}`}>
+              <img
+                className="album-img"
+                src={`${album.thumbnail_url}`}
+                alt="album-cover"
+                title={`${album.album_name}`}
+              />
+              <a>{`${album.album_name}`}</a>
+            </NavLink>
+            <button
+              className="mng-update"
+              onClick={() => handleUpdateClick(album.id)}
+            >
+              Update
+            </button>
+            <button
+              className="mng-delete"
+              onClick={() => handleDeleteClick(album.id)}
+            >
+              Delete
+            </button>
+          </div>
         ))}
       </div>
 

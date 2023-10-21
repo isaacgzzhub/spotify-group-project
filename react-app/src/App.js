@@ -37,20 +37,20 @@ function App() {
           <Route path="/songs">
             <SongsPage />
           </Route>
-          <Route path="/albums">
-            <AlbumsPage />
+          <Route path="/albums/create">
+            <AlbumForm />
           </Route>
           <Route path="/myalbums">
             <MyAlbumsPage />
           </Route>
-          <Route path="/albums/create">
-            <AlbumForm />
+          <Route path="/albums/:albumId/update">
+            <UpdateAlbum />
           </Route>
           <Route path="/albums/:albumId">
             <OneAlbum />
           </Route>
-          <Route path="/albums/:albumId/update">
-            <UpdateAlbum />
+          <Route path="/albums">
+            <AlbumsPage />
           </Route>
         </Switch>
       )}
