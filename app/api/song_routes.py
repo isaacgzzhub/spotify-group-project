@@ -104,3 +104,29 @@ def get_likes(user_id):
     print(songs)
 
     return jsonify([song.to_dict() for song in songs])
+
+#Like a song
+@song_routes.route('/<int:song_id>/like/<int:user_id>', methods=['POST'])
+@login_required
+def add_like(song_id, user_id):
+    like = UserLike(user_id=user_id, song_id=song_id)
+    db.session.add(like)
+    db.session.commit()
+    return like.to_dict()
+
+#Unlike a song
+@song_routes.route('/<int:song_id>/like/<int:user_id>', methods=['DELETE'])
+@login_required
+def remove_like(song_id, user_id):
+    print('hello')
+    # queries and selects one *first()* record from UserLike table where song_id = song_id and user_id = user_id
+    liked_song = UserLike.query.filter_by(song_id=song_id, user_id=user_id).first()
+    print(liked_song)
+
+    if liked_song is None:
+        return {"error": "Liked song does not exist"}, 404
+
+    db.session.delete(liked_song)
+
+    db.session.commit()
+    return "Unliked song!"
