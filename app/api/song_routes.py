@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import Song, db
+from app.models import Song, db, UserLike
 from app.forms.song_form import SongForm
 from app.forms.song_edit_form import SongEditForm
 from .auth_routes import validation_errors_to_error_messages
@@ -85,3 +85,22 @@ def get_song(id):
         return song.to_dict()
     else:
         return {"error": "Song not found"}, 404
+
+#Get all liked songs
+@song_routes.route('/likes/<int:user_id>')
+@login_required
+def get_likes(user_id):
+    """
+    Query for all liked songs and returns them in a list
+    """
+    # Join UserLike with Song on song_id and filter by user_id
+    result = db.session.query(UserLike, Song).join(Song, UserLike.song_id == Song.id).filter(UserLike.user_id == user_id).all()
+
+    # result is a list of tuple with the songdata being index 1
+    print(result)
+
+    # extract a list of song objects from result
+    songs = [song[1] for song in result]
+    print(songs)
+
+    return jsonify([song.to_dict() for song in songs])

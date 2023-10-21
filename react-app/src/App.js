@@ -9,6 +9,7 @@ import MySongsPage from "./components/MySongsPage";
 import SongsPage from "./components/SongsPage";
 import AlbumsPage from "./components/AlbumsPage";
 import MyAlbumsPage from "./components/MyAlbumsPage";
+import LikesPage from "./components/LikesPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,6 +31,9 @@ function App() {
           </Route>
           <Route path="/mysongs">
             <MySongsPage />
+          </Route>
+          <Route path="/likes">
+            <LikesPage />
           </Route>
           <Route path="/songs">
             <SongsPage />
