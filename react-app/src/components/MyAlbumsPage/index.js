@@ -71,6 +71,7 @@ function MyAlbumsPage() {
       </div>
 
       <NavLink to="/albums/create">Create Album</NavLink>
+      <div className="modal-content">
 
       <Modal
         isOpen={showDeleteModal}
@@ -99,6 +100,7 @@ function MyAlbumsPage() {
           </div>
         </div>
       </Modal>
+      </div>
     </div>
   );
 }
