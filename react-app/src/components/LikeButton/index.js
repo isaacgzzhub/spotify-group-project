@@ -1,34 +1,35 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { getLikesThunk, likeASongThunk, unlikeASongThunk } from "../../store/song";
 
 function LikeButton({ songId }) {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.session.user.id)
   const likedSongs = useSelector((state) => state.song.likes)
-  const [isLiked, setIsLiked] = useState()
+  const [isLiked, setIsLiked] = useState(false)
   // const songId = 3 // we'll make this dynamic, passed in as a prop from parent song
 
-  // state changes arent working
+  // populates likedSongs
   useEffect(() => {
-    dispatch(getLikesThunk(userId));
-
-    if (likedSongs.some(obj => obj.id === songId)) {
-      setIsLiked(true)
-    } else {
-      setIsLiked(false)
-    }
+    dispatch(getLikesThunk(userId))
   }, [dispatch]);
 
+  // sets state to true if the song is in user's liked songs list else false
+  useEffect(() => {
+    setIsLiked(likedSongs.some(obj => obj.id === songId))
+  }, [likedSongs])
+
   const setLikedButtonState = () => {
-    console.log(likedSongs)
-    // if songId of the selected song is in the likedSong list, we set the isLiked state to true
-    if (likedSongs.some(obj => obj.id === songId)) {
-      dispatch(unlikeASongThunk(songId, userId))
-      setIsLiked(false)
+    // if the song is already liked, dispatch action to unlike it (removing the record from UserLike in db) and set state to false(not liked)
+    if (isLiked) {
+      dispatch(unlikeASongThunk(songId, userId)).then(() => {
+        setIsLiked(false)
+      });
+    // if the song is not liked, dispatch action to like it (adding the record from UserLike in db) and set state to true(liked)
     } else {
-      dispatch(likeASongThunk(songId, userId))
-      setIsLiked(true)
+      dispatch(likeASongThunk(songId, userId)).then(() => {
+        setIsLiked(true)
+      });
     }
   }
 

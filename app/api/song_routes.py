@@ -134,4 +134,4 @@ def remove_like(song_id, user_id):
     db.session.delete(liked_song)
 
     db.session.commit()
-    return "Unliked song!"
+    return jsonify("Unliked song!")
