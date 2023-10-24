@@ -5,8 +5,15 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
+import MySongsPage from "./components/MySongsPage";
 import SongsPage from "./components/SongsPage";
 import AlbumsPage from "./components/AlbumsPage";
+import MyAlbumsPage from "./components/MyAlbumsPage";
+import UpdateAlbum from "./components/UpdateAlbumForm";
+import AlbumForm from "./components/AlbumForm";
+import OneAlbum from "./components/OneAlbumPage";
+import LikesPage from "./components/LikesPage";
+import LikeButton from "./components/LikeButton";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,8 +33,29 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
+          <Route path="/mysongs">
+            <MySongsPage />
+          </Route>
+          <Route path="/likes">
+            <LikesPage />
+          </Route>
+          <Route path="/testlikebutton">
+            <LikeButton />
+          </Route>
           <Route path="/songs">
             <SongsPage />
+          </Route>
+          <Route path="/albums/create">
+            <AlbumForm />
+          </Route>
+          <Route path="/myalbums">
+            <MyAlbumsPage />
+          </Route>
+          <Route path="/albums/:albumId/update">
+            <UpdateAlbum />
+          </Route>
+          <Route path="/albums/:albumId">
+            <OneAlbum />
           </Route>
           <Route path="/albums">
             <AlbumsPage />

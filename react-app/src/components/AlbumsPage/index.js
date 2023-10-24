@@ -1,21 +1,39 @@
-import React, { useState, useEffect } from "react";
-import { login } from "../../store/session";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { getAllAlbumsThunk } from "../../store/albums";
 
 function AlbumsPage() {
   const dispatch = useDispatch();
-  // const songs = useSelector((state) => state.song.songs);
+
 
   useEffect(() => {
     dispatch(getAllAlbumsThunk());
   }, [dispatch]);
 
+  const albumsObj = useSelector((state) => state.albums);
+  const albums = Object.values(albumsObj)
+
   return (
-    <>
-      <h1>Hi</h1>
-    </>
+    <div id='albums-page'>
+      <h1>Albums</h1>
+      <div className='album-tile-list'>
+
+        {
+          albums.map(album => (
+            <NavLink key={album.id} className='album-tile' to={`/albums/${album.id}`}>
+              <img className='album-img' src={`${album.thumbnail_url}`} alt='album-cover' title={`${album.album_name}`}/>
+              <a>{`${album.album_name}`}</a>
+            </NavLink>
+          ))
+        }
+
+      </div>
+
+
+
+
+    </div>
   );
 }
 
