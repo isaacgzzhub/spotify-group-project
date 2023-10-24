@@ -7,47 +7,47 @@ import { getUserAlbumsThunk } from "../../store/albums";
 function CreateSongForm() {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.session.user.id);
-  const createdSong = useSelector((state) => state.song.createdSong);
+  // const createdSong = useSelector((state) => state.song.createdSong);
   const userAlbums = useSelector((state) => state.albums.userAlbums);
-  console.log('hello:',userAlbums)
+  // console.log('hello:',userAlbums)
 
-  const [songName, setSongName] = useState("")
-  const [songThumbnail, setSongThumbnail] = useState("")
-  const [songUrl, setSongUrl] = useState("")
-  const [releaseYear, setReleaseYear] = useState("")
-  const [albumId, setAlbumId] = useState("")
+  const [songName, setSongName] = useState("");
+  const [songThumbnail, setSongThumbnail] = useState("");
+  const [songUrl, setSongUrl] = useState("");
+  const [releaseYear, setReleaseYear] = useState("");
+  const [albumId, setAlbumId] = useState("");
   // const history = useHistory();
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    dispatch(getUserAlbumsThunk(userId))
+    dispatch(getUserAlbumsThunk(userId));
   }, [dispatch]);
   //   }, [dispatch, albumName, thumbnailUrl, releaseYear]);
 
-    // const errors = {};
-    // if (albumName.length > 50)
-    //   errors.albumName = "Album name must be less than 50 characters";
-    // if (!albumName) errors.albumName = "Album name is required";
-    // if (!thumbnailUrl) errors.thumbnailUrl = "Cover for album required";
-    // if (!releaseYear) errors.releaseYear = "Release Year for album required";
-    // setErrors(errors);
+  // const errors = {};
+  // if (albumName.length > 50)
+  //   errors.albumName = "Album name must be less than 50 characters";
+  // if (!albumName) errors.albumName = "Album name is required";
+  // if (!thumbnailUrl) errors.thumbnailUrl = "Cover for album required";
+  // if (!releaseYear) errors.releaseYear = "Release Year for album required";
+  // setErrors(errors);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('hihihiihi',albumId)
+
+    console.log("1", albumId);
     setErrors({});
     const payload = {
       user_id: userId,
-      album_id: parseInt(albumId),
+      album_id: albumId ? parseInt(albumId) : undefined,
       song_name: songName,
       thumbnail_url: songThumbnail,
       song_url: songUrl,
       release_year: releaseYear,
     };
-
+    console.log("2", albumId);
     await dispatch(createSongThunk(payload));
     // history.push(`/song/s);
-
   };
   return (
     <div>
@@ -107,20 +107,19 @@ function CreateSongForm() {
         </label>
 
         <label>
-        <div className="form-row">
+          <div className="form-row">
             Add Song to an Album
             <p className="errors">{errors.songThumbnail}</p>
           </div>
-          <select
-          onChange={(e) => setAlbumId(e.target.value)}
-          value={albumId}>
-          <option value="" disabled selected hidden>Choose an album</option>
-          {userAlbums?.map(album => {
-            return (
-              <option value={album.id}>{album.album_name}</option>
-            )
-          })}
-        </select>
+          <select onChange={(e) => setAlbumId(e.target.value)} value={albumId}>
+            <option value="" disabled selected hidden>
+              Choose an album
+            </option>
+            {userAlbums?.map((album) => {
+              return <option value={album.id}>{album.album_name}</option>;
+            })}
+            <option value="">No album</option>
+          </select>
         </label>
 
         <button
