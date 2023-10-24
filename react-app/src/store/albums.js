@@ -4,6 +4,7 @@ const GET_ALBUM = "albums/GET_ALBUM";
 const ADD_ALBUM = "albums/ADD_ALBUM";
 const UPDATE_ALBUM = "albums/UPDATE_ALBUM";
 const DELETE_ALBUM = "albums/DELETE_ALBUM";
+const GET_USER_ALBUMS = "albums/GET_USER_ALBUMS"
 
 // Action Creators
 const load = (allAlbums) => ({
@@ -26,6 +27,10 @@ const deleteAlbum = (albumId) => ({
   type: DELETE_ALBUM,
   payload: albumId,
 });
+const getUserAlbums = (userId) => ({
+  type: GET_USER_ALBUMS,
+  payload: userId
+});
 
 // Thunk Middleware
 
@@ -39,6 +44,19 @@ export const getAllAlbumsThunk = () => async (dispatch) => {
     }
 
     dispatch(load(albums));
+  }
+};
+
+export const getUserAlbumsThunk = (userId) => async (dispatch) => {
+  const response = await fetch(`/api/albums/user/${userId}`);
+
+  if (response.ok) {
+    const albums = await response.json();
+    if (albums.errors) {
+      return albums.errors;
+    }
+
+    dispatch(getUserAlbums(albums));
   }
 };
 
@@ -109,6 +127,11 @@ export default function reducer(state = initialState, action) {
     case GET_ALBUM:
       newState = { ...state };
       newState[action.payload.id] = action.payload;
+      return newState;
+
+    case GET_USER_ALBUMS:
+      newState = { ...state };
+      newState["userAlbums"] = action.payload;
       return newState;
 
     case ADD_ALBUM:

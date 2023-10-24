@@ -74,6 +74,22 @@ export const getSongByIdThunk = (songId) => async (dispatch) => {
   }
 };
 
+export const createSongThunk = (payload) => async (dispatch) => {
+  const response = await fetch(`/api/songs/`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+
+  if (response.ok) {
+    const song = await response.json();
+    if (song.errors) {
+      return song.errors;
+    }
+    dispatch(createSong(song));
+  }
+};
+
 export const getLikesThunk = (userId) => async (dispatch) => {
   const response = await fetch(`/api/songs/likes/${userId}`);
   console.log("thunk:", userId);
@@ -120,7 +136,7 @@ export const unlikeASongThunk = (songId, userId) => async (dispatch) => {
   }
 };
 
-const initialState = { songs: [], song: null, likes: [], likedSong: null };
+const initialState = { songs: [], song: null, likes: [], likedSong: null, createdSong: null };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
@@ -128,6 +144,8 @@ export default function reducer(state = initialState, action) {
       return { ...state, songs: action.payload };
     case GET_SONG_BY_ID:
       return { ...state, song: action.payload };
+    case CREATE_SONG:
+      return { ...state, createdSong: action.payload };
     case GET_LIKES:
       return { ...state, likes: action.payload };
     case LIKE_A_SONG:
