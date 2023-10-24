@@ -43,6 +43,7 @@ function MyAlbumsPage() {
     <div id="albums-page">
       <h1>My Albums</h1>
       <div className="album-tile-list">
+        <NavLink to="/albums/create-album">Create Album</NavLink>
         {myAlbums.map((album) => (
           <div key={album.id} className="album-wrapper">
             <NavLink className="album-tile" to={`/albums/${album.id}`}>
@@ -70,7 +71,6 @@ function MyAlbumsPage() {
         ))}
       </div>
 
-      <NavLink to="/albums/create">Create Album</NavLink>
       <div className="modal-content">
 
       <Modal
