@@ -39,7 +39,7 @@ function AlbumForm() {
     };
 
     const createdAlbum = await dispatch(createAlbum(payload));
-    history.push(`/albums/${albums?.length}`);
+    history.push(`/albums/${albums.length + 1}`);
 
   };
   return (
@@ -90,7 +90,7 @@ function AlbumForm() {
           type="submit"
           disabled={!albumName || !releaseYear || !thumbnailUrl}
         >
-          Create Spot
+          Create Album
         </button>
       </form>
     </div>

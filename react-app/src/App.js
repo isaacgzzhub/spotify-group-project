@@ -45,7 +45,7 @@ function App() {
           <Route path="/songs">
             <SongsPage />
           </Route>
-          <Route path="/albums/create">
+          <Route path="/albums/create-album">
             <AlbumForm />
           </Route>
           <Route path="/myalbums">
