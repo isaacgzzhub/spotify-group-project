@@ -16,17 +16,17 @@ function SongsPage() {
     <div id='albums-page'>
       <h1>Songs</h1>
       <div className='album-tile-list'>
-
         {
           songs.map(song => (
-            <NavLink key={song.id} className='album-tile' to={`/songs/${song.id}`}>
+            <>
+              <NavLink key={song.id} className='album-tile' to={`/songs/${song.id}`}>
               <img className='album-img' src={`${song.thumbnail_url}`} alt='album-cover' title={`${song.song_name}`}/>
               <a>{`${song.song_name}`}</a>
+              </NavLink>
               <LikeButton songId={song.id}/>
-            </NavLink>
+            </>
           ))
         }
-
       </div>
     </div>
   )
