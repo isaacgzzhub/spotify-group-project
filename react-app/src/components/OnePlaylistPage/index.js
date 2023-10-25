@@ -4,16 +4,14 @@ import { NavLink } from "react-router-dom";
 import { getPlaylistByIdThunk } from "../../store/playlists";
 
 function OnePlaylistPage() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(getPlaylistByIdThunk());
-  // }, [dispatch]);
-
-
+  useEffect(() => {
+    dispatch(getPlaylistByIdThunk());
+  }, [dispatch]);
 
   return (
-    <div className="one-playlist-page">
+    <div className="albums-page">
       <h1>ONE PLAYLIST</h1>
     </div>
   );

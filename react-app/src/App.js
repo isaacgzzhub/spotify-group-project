@@ -66,14 +66,14 @@ function App() {
           </Route>
           <Route path="/albums">
             <AlbumsPage />
+          </Route>
           <Route path="/myplaylists">
             <MyPlaylistsPage />
           </Route>
-          <Route exact path="/playlists/:playlistId">
+          <Route path="/playlists/:playlistId">
             <OnePlaylistPage />
           </Route>
-          </Route>
-          <Route exact path="/playlists">
+          <Route path="/playlists">
             <PlaylistsPage />
           </Route>
         </Switch>
