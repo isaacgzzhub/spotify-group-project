@@ -47,7 +47,7 @@ function MyAlbumsPage() {
       </NavLink>
       <div className="album-wrapper">
         {myAlbums.map((album) => (
-          <div key={album.id} className="album-wrapper">
+          <div key={album.id}>
             <div className="album-tile">
               <NavLink className="album-tile" to={`/albums/${album.id}`}>
                 <img
