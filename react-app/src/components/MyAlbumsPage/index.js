@@ -4,6 +4,8 @@ import { NavLink, useHistory } from "react-router-dom";
 import { getAllAlbumsThunk } from "../../store/albums";
 import { removeAlbum } from "../../store/albums";
 import Modal from "react-modal";
+import "./MyAlbums.css"; // The commented out modal css at the top is causing there to be a square white box half way down the screen
+
 function MyAlbumsPage() {
   const dispatch = useDispatch();
   const history = useHistory();
