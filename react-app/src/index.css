@@ -2,7 +2,9 @@
 
 body {
   font-family: "Nunito", sans-serif;
-  background-color: #0f0f0f;
+  /* background-color: #0f0f0f; */
+  background: linear-gradient(to bottom, #3a4bde, #000000);
+  background-attachment: fixed;
   margin-left: 28%;
 }
 
