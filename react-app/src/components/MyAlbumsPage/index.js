@@ -40,7 +40,7 @@ function MyAlbumsPage() {
   };
 
   return (
-    <div id="albums-page">
+    <div className="albums-page">
       <h1>My Albums</h1>
       <div className="album-tile-list">
         <NavLink to="/albums/create-album">Create Album</NavLink>
@@ -72,34 +72,33 @@ function MyAlbumsPage() {
       </div>
 
       <div className="modal-content">
-
-      <Modal
-        isOpen={showDeleteModal}
-        onRequestClose={handleCancelDelete}
-        className="mng-modal"
-        overlayClassName="overlay"
-      >
-        <div className="modal-content">
-          <h2 className="modal-title">Confirm Delete</h2>
-          <p className="modal-message">
-            Are you sure you want to delete this album?
-          </p>
-          <div className="modal-buttons">
-            <button
-              className="modal-delete-button"
-              onClick={handleConfirmDelete}
-            >
-              Yes (Delete Album)
-            </button>
-            <button
-              className="modal-cancel-button"
-              onClick={handleCancelDelete}
-            >
-              No (Keep Album)
-            </button>
+        <Modal
+          isOpen={showDeleteModal}
+          onRequestClose={handleCancelDelete}
+          className="mng-modal"
+          overlayClassName="overlay"
+        >
+          <div className="modal-content">
+            <h2 className="modal-title">Confirm Delete</h2>
+            <p className="modal-message">
+              Are you sure you want to delete this album?
+            </p>
+            <div className="modal-buttons">
+              <button
+                className="modal-delete-button"
+                onClick={handleConfirmDelete}
+              >
+                Yes (Delete Album)
+              </button>
+              <button
+                className="modal-cancel-button"
+                onClick={handleCancelDelete}
+              >
+                No (Keep Album)
+              </button>
+            </div>
           </div>
-        </div>
-      </Modal>
+        </Modal>
       </div>
     </div>
   );
