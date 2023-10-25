@@ -2,3 +2,17 @@
   width: 300px;
   height: 300px;
 }
+
+.create-album-link {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-top: -10px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.create-album-link:hover {
+  color: rgb(39, 201, 39);
+}
