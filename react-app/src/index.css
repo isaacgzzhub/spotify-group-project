@@ -2,7 +2,7 @@ body {
   font-family: "Nunito", sans-serif;
   background: linear-gradient(
     to bottom,
-    #3a4bde,
+    rgb(39, 201, 39),
     #000000
   ); /* gradient from blue to black! */
   background-attachment: fixed; /* This fixes the gradient to the viewport so that it will always look the same regardless of us scrolling */
