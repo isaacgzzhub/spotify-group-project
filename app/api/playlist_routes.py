@@ -7,13 +7,13 @@ from .auth_routes import validation_errors_to_error_messages
 playlist_routes = Blueprint('playlists', __name__)
 
 # Get all playlists
-
 @playlist_routes.route('/')
 @login_required
 def get_playlists():
     playlists = Playlist.query.all()
     return jsonify([playlist.to_dict() for playlist in playlists])
 
+#Get Playlist by ID
 @playlist_routes.route('/<playlist_id>')
 @login_required
 def get_playlist(playlist_id):
@@ -23,6 +23,7 @@ def get_playlist(playlist_id):
     else:
         return {"Error": "Playlist not found"}, 404
 
+# Get User Playlist
 @playlist_routes.route('/user/<user_id>')
 @login_required
 def get_user_playlists(user_id):  # Note the argument to accept album_id
@@ -32,14 +33,15 @@ def get_user_playlists(user_id):  # Note the argument to accept album_id
     else:
         return {"error": "Playlists not found"}, 404
 
+#Get Playlist Songs
 @playlist_routes.route('/<playlist_id>/songs')
 @login_required
 def get_playlist_songs(playlist_id):
     songs = PlaylistSong.query.filter_by(playlist_id=playlist_id).all()
     return jsonify([song.to_dict() for song in songs])
 
-
-@playlist_routes.route('/<playlist_id>/add-song', methods = ['POST'] )
+#Add Song to Playlist
+@playlist_routes.route('/add-song', methods = ['POST'] )
 @login_required
 def create_playlist_song():
      form = PlaylistSongForm()
@@ -55,8 +57,7 @@ def create_playlist_song():
      else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400  # Bad Request status
 
-#Remove a Song
-
+#Remove a Song from Playlist
 @playlist_routes.route('/songs/<int:id>', methods=['DELETE'])
 @login_required
 def remove_song(id):

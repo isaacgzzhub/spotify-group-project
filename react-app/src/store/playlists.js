@@ -78,7 +78,7 @@ export const getPlaylistSongs = (playlistId) => async (dispatch) => {
 };
 
 export const addPlaylistSong = (payload) => async (dispatch) => {
-  const response = await fetch(`/api/playlists/${playlistId}`, {
+  const response = await fetch(`/api/playlists/add-song`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
@@ -90,56 +90,52 @@ export const addPlaylistSong = (payload) => async (dispatch) => {
   }
 };
 
-export const removePlaylistSong = (playlistId) => async (dispatch) => {
-  const response = await fetch(`/api/playlists/${playlistId}`, {
+export const removePlaylistSong = (playlistSongId) => async (dispatch) => {
+  const response = await fetch(`/api/playlists/songs/${playlistSongId}`, {
     method: "DELETE",
   });
 
   if (response.ok) {
-    dispatch(deleteAlbum(albumId));
+    dispatch(deleteSong(playlistSongId));
   }
 };
 
-// Reducer Function
 
-const initialState = {};
+// Initial state
+const initialState = {
+  allPlaylists: [],
+  currentPlaylist: null,
+  playlistSongs: [],
+};
 
+// Reducer function
 export default function reducer(state = initialState, action) {
-  let newState;
   switch (action.type) {
     case LOAD:
-      newState = {};
-      action.payload.forEach((album) => {
-        newState[album.id] = album;
-      });
-      return newState;
-
-    case GET_ALBUM:
-      newState = { ...state };
-      newState[action.payload.id] = action.payload;
-      return newState;
-
-    case GET_USER_ALBUMS:
-      newState = { ...state };
-      newState["userAlbums"] = action.payload;
-      return newState;
-
-    case ADD_ALBUM:
-      newState = { ...state };
-      newState[action.payload.id] = action.payload;
-      return newState;
-
-    case UPDATE_ALBUM:
-      if (!action.payload.id) return state;
-      newState = { ...state };
-      newState[action.payload.id] = action.payload;
-      return newState;
-
-    case DELETE_ALBUM:
-      newState = { ...state };
-      delete newState[action.payload];
-      return newState;
-
+      return {
+        ...state,
+        allPlaylists: action.payload,
+      };
+    case GET_PLAYLIST:
+      return {
+        ...state,
+        currentPlaylist: action.payload,
+      };
+    case GET_SONGS:
+      return {
+        ...state,
+        playlistSongs: action.payload,
+      };
+    case ADD_SONG:
+      return {
+        ...state,
+        playlistSongs: [...state.playlistSongs, action.payload],
+      };
+    case DELETE_SONG:
+      return {
+        ...state,
+        playlistSongs: state.playlistSongs.filter(song => song.id !== action.payload),
+      };
     default:
       return state;
   }
