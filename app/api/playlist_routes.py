@@ -23,14 +23,23 @@ def get_playlist(playlist_id):
     else:
         return {"Error": "Playlist not found"}, 404
 
-@playlist_routes.route('/songs')
+@playlist_routes.route('/user/<user_id>')
 @login_required
-def get_playlist_songs():
-    songs = PlaylistSong.query.all()
+def get_user_playlists(user_id):  # Note the argument to accept album_id
+    playlists = Playlist.query.filter_by(user_id=user_id).all()
+    if playlists:
+        return jsonify([playlist.to_dict() for playlist in playlists])
+    else:
+        return {"error": "Playlists not found"}, 404
+
+@playlist_routes.route('/<playlist_id>/songs')
+@login_required
+def get_playlist_songs(playlist_id):
+    songs = PlaylistSong.query.filter_by(playlist_id=playlist_id).all()
     return jsonify([song.to_dict() for song in songs])
 
 
-@playlist_routes.route('/add-song', methods = ['POST'] )
+@playlist_routes.route('/<playlist_id>/add-song', methods = ['POST'] )
 @login_required
 def create_playlist_song():
      form = PlaylistSongForm()
