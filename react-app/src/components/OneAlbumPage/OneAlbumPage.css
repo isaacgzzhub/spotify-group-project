@@ -1,18 +1,42 @@
+/* Styling for the album cover when we click on a specific album */
 .album-cover {
   width: 300px;
   height: 300px;
-}
-
-.create-album-link {
   display: block;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-  margin-top: -10px;
-  margin-bottom: 20px;
-  font-weight: bold;
+  cursor: default;
+  /* border: 3px solid transparent; */
 }
 
-.create-album-link:hover {
+.album-cover:hover {
+  border: 2px solid transparent;
+}
+
+.add-song-to-album {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: white;
+  color: black;
+  border: 3px solid black;
+  padding: 10px;
+  border-radius: 15px;
+  border: 2px solid transparent;
+}
+
+.add-song-to-album:hover {
   color: rgb(39, 201, 39);
+  border: 2px solid rgb(39, 201, 39);
+}
+
+/* To center the "Add a Song to an Album" button on the page under the "My Albums" text */
+.one-album-container {
+  text-align: center;
 }
