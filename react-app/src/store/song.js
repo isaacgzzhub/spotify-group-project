@@ -104,6 +104,20 @@ export const editSongThunk = (songId, payload) => async (dispatch) => {
   }
 };
 
+export const deleteSongThunk = (songId) => async (dispatch) => {
+  const response = await fetch(`/api/songs/${songId}`, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+  });
+
+  if (response.ok) {
+    const deletedSong = await response.json();
+    dispatch(deleteSong(deletedSong.id))
+  } else {
+    console.log('delete failed')
+  }
+};
+
 export const getLikesThunk = (userId) => async (dispatch) => {
   const response = await fetch(`/api/songs/likes/${userId}`);
   console.log("thunk:", userId);
@@ -160,6 +174,9 @@ export default function reducer(state = initialState, action) {
       return { ...state, song: action.payload };
     case CREATE_SONG:
       return { ...state, createdSong: action.payload };
+    case DELETE_SONG:
+      const updatedSongs = state.songs.filter(song => song.id !== action.payload)
+      return { ...state, songs: updatedSongs, deletedSong: action.payload };
     case GET_LIKES:
       return { ...state, likes: action.payload };
     case LIKE_A_SONG:
