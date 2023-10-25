@@ -80,13 +80,27 @@ export const createSongThunk = (payload) => async (dispatch) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
-
   if (response.ok) {
     const song = await response.json();
     if (song.errors) {
       return song.errors;
     }
     dispatch(createSong(song));
+  }
+};
+
+export const editSongThunk = (songId, payload) => async (dispatch) => {
+  const response = await fetch(`/api/songs/${songId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  try {
+    const song = await response.json();
+    dispatch(editSong(song));
+    return song
+  } catch(error) {
+    return error
   }
 };
 
@@ -136,7 +150,7 @@ export const unlikeASongThunk = (songId, userId) => async (dispatch) => {
   }
 };
 
-const initialState = { songs: [], song: null, likes: [], likedSong: null, createdSong: null };
+const initialState = { songs: [], song: null, likes: [], likedSong: null, createdSong: null, editedSong: null };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
@@ -152,6 +166,8 @@ export default function reducer(state = initialState, action) {
       return { ...state, likedSong: action.payload };
     case UNLIKE_A_SONG:
       return { ...state, likedSong: action.payload };
+    case EDIT_SONG:
+      return { ...state, editedSong: action.payload };
     default:
       return state;
   }
