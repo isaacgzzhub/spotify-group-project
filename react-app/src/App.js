@@ -15,6 +15,7 @@ import OneAlbum from "./components/OneAlbumPage";
 import LikesPage from "./components/LikesPage";
 import LikeButton from "./components/LikeButton";
 import CreateSongForm from "./components/CreateSongForm";
+import EditSongForm from "./components/EditSongForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -45,6 +46,9 @@ function App() {
           </Route>
           <Route path="/songs/create">
             <CreateSongForm />
+          </Route>
+          <Route path="/songs/:songId/update">
+            <EditSongForm />
           </Route>
           <Route path="/songs">
             <SongsPage />
