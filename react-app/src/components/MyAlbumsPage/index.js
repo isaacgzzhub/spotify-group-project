@@ -42,31 +42,37 @@ function MyAlbumsPage() {
   return (
     <div className="albums-page">
       <h1>My Albums</h1>
-      <div className="album-tile-list">
-        <NavLink to="/albums/create-album">Create Album</NavLink>
+      <NavLink to="/albums/create-album" className="create-album-link">
+        Create Album
+      </NavLink>
+      <div className="album-wrapper">
         {myAlbums.map((album) => (
           <div key={album.id} className="album-wrapper">
-            <NavLink className="album-tile" to={`/albums/${album.id}`}>
-              <img
-                className="album-img"
-                src={`${album.thumbnail_url}`}
-                alt="album-cover"
-                title={`${album.album_name}`}
-              />
-              <a>{`${album.album_name}`}</a>
-            </NavLink>
-            <button
-              className="mng-update"
-              onClick={() => handleUpdateClick(album.id)}
-            >
-              Update
-            </button>
-            <button
-              className="mng-delete"
-              onClick={() => handleDeleteClick(album.id)}
-            >
-              Delete
-            </button>
+            <div className="album-tile">
+              <NavLink className="album-tile" to={`/albums/${album.id}`}>
+                <img
+                  className="album-img"
+                  src={`${album.thumbnail_url}`}
+                  alt="album-cover"
+                  title={`${album.album_name}`}
+                />
+                <a>{`${album.album_name}`}</a>
+              </NavLink>
+              <div className="button-wrapper">
+                <button
+                  className="update-button"
+                  onClick={() => handleUpdateClick(album.id)}
+                >
+                  Update
+                </button>
+                <button
+                  className="delete-button"
+                  onClick={() => handleDeleteClick(album.id)}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
           </div>
         ))}
       </div>

@@ -2,12 +2,16 @@
 
 body {
   font-family: "Nunito", sans-serif;
-  background-color: #0f0f0f;
+  /* background-color: #0f0f0f; */
+  background: linear-gradient(to bottom, #3a4bde, #000000);
+  background-attachment: fixed;
   margin-left: 28%;
 }
 
+/* Align all h1's for the website, this is for all the navbar item's main text at the top */
 h1 {
   color: white;
+  text-align: center;
 }
 
 h2 {
@@ -16,4 +20,57 @@ h2 {
 
 label {
   color: white;
+}
+
+/* Globally styled all a tags to not show the underline, and be white color text */
+a {
+  text-decoration: none;
+  color: white;
+}
+
+/**************** Styling update and delete buttons ***********************/
+.update-button {
+  font-weight: bold;
+  width: 70px;
+  height: 30px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.delete-button {
+  font-weight: bold;
+  width: 70px;
+  height: 30px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+/* Styling for update and delete buttons to be left right in a flex box */
+.button-wrapper {
+  display: flex;
+  justify-content: center; /* Center buttons horizontally */
+  gap: 10px; /* Gap between buttons */
+}
+
+.update-button:hover {
+  border: 3px solid rgb(39, 201, 39);
+  color: rgb(39, 201, 39);
+}
+
+.delete-button:hover {
+  border: 3px solid red;
+  color: red;
+}
+
+/***************** End of styling update and delete buttons  *******************/
+
+.modal-message {
+  color: white;
+}
+
+img {
+  border: 2px solid transparent; /* Reserve space for the border so that when we hover it, it doesn't shift things around */
+}
+img:hover {
+  border: 2px solid white;
 }

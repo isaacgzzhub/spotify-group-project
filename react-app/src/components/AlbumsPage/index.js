@@ -16,7 +16,7 @@ function AlbumsPage() {
 
   return (
     <div className="albums-page">
-      <h1>Albums</h1>
+      <h1>All Albums</h1>
       <div className="album-wrapper">
         {albums.map((album) => (
           <NavLink
