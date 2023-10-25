@@ -46,7 +46,7 @@ function AlbumForm() {
   return (
     <div>
 
-     <form className="album-form" onSubmit={handleSubmit}>
+     <form className="form" onSubmit={handleSubmit}>
 
       <h1>Update {album?.album_name} Album</h1>
 

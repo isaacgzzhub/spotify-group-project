@@ -51,7 +51,7 @@ function CreateSongForm() {
   };
   return (
     <div>
-      <form className="album-form" onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
         <h1>Create A New Song</h1>
 
         <label>

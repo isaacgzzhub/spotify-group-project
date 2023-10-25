@@ -40,11 +40,10 @@ function AlbumForm() {
 
     const createdAlbum = await dispatch(createAlbum(payload));
     history.push(`/albums/${albums.length + 1}`);
-
   };
   return (
     <div>
-      <form className="album-form" onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
         <h1>Create A New Album</h1>
 
         <label>
