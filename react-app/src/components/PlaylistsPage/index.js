@@ -10,12 +10,26 @@ function PlaylistsPage() {
     dispatch(getAllPlaylistsThunk());
   }, [dispatch]);
 
-  // const playlistAlbums = useSelector((state) => state.)
+  const playlistObj = useSelector((state) => state.playlists.allPlaylists);
+  const playlists = Object.values(playlistObj);
+  console.log(playlists);
 
   return (
-    <div className="albums-page">
+    <div className="playlist-page">
       <h1>ALL PLAYLISTS</h1>
-
+      <div className="playlist-wrapper">
+        {playlists.map((playlist) => (
+          <NavLink
+            key={playlist.id}
+            className="playlist-tile"
+            to={`/playlists/${playlist.id}`}
+          >
+            <div>
+              <a>{`${playlist.name}`}</a>
+            </div>
+          </NavLink>
+        ))}
+      </div>
     </div>
   );
 }
