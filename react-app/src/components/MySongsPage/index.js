@@ -26,7 +26,7 @@ function MySongsPage() {
   return (
     <div id="albums-page">
       <h1>My Songs</h1>
-      <NavLink to="/" className="create-song-button">
+      <NavLink to="/songs/create" className="create-song-button">
         Create Song
       </NavLink>
       <div className="album-wrapper">
