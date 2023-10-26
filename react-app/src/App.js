@@ -18,7 +18,6 @@ import CreateSongForm from "./components/CreateSongForm";
 import PlaylistsPage from "./components/PlaylistsPage";
 import MyPlaylistsPage from "./components/MyPlaylistsPage";
 import OnePlaylistPage from "./components/OnePlaylistPage";
-import EditSongForm from "./components/EditSongForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -50,9 +49,6 @@ function App() {
           <Route path="/songs/create">
             <CreateSongForm />
           </Route>
-          <Route path="/songs/:songId/update">
-            <EditSongForm />
-          </Route>
           <Route path="/songs">
             <SongsPage />
           </Route>
@@ -74,10 +70,10 @@ function App() {
           <Route path="/myplaylists">
             <MyPlaylistsPage />
           </Route>
-          <Route path="/playlists/:playlistId">
+          <Route exact path="/playlists/:playlistId">
             <OnePlaylistPage />
           </Route>
-          <Route path="/playlists">
+          <Route exact path="/playlists">
             <PlaylistsPage />
           </Route>
         </Switch>
