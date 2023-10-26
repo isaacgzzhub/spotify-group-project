@@ -5,6 +5,7 @@ import { useHistory, NavLink } from "react-router-dom";
 import { getAllSongsThunk } from "../../store/song";
 import DeleteSongButton from "../DeleteSongButton";
 import LikeButton from "../LikeButton";
+import "./MySongs.css";
 
 function MySongsPage() {
   const dispatch = useDispatch();
@@ -25,6 +26,9 @@ function MySongsPage() {
   return (
     <div id="albums-page">
       <h1>My Songs</h1>
+      <NavLink to="/" className="create-song-button">
+        Create Song
+      </NavLink>
       <div className="album-wrapper">
         {mySongs.map((song) => (
           <div>
@@ -41,16 +45,20 @@ function MySongsPage() {
               />
               <a>{`${song.song_name}`}</a>
             </NavLink>
-            <LikeButton songId={song.id} />
-            <button onClick={() => history.push(`/songs/${song.id}/update`)}>
-              Update Song
-            </button>
-            <DeleteSongButton songUserId={song.user_id} songId={song.id} />
+            <div className="three-buttons-my-songs">
+              <LikeButton songId={song.id} />
+              <button onClick={() => history.push(`/songs/${song.id}/update`)}>
+                Update Song
+              </button>
+              <DeleteSongButton
+                className="delete-button"
+                songUserId={song.user_id}
+                songId={song.id}
+              />
+            </div>
           </div>
         ))}
       </div>
-
-      <NavLink to="/">Create Song</NavLink>
     </div>
   );
 }
