@@ -26,13 +26,9 @@ function MySongsPage() {
   return (
     <div id="albums-page">
       <h1>My Songs</h1>
-<<<<<<< HEAD
       <NavLink to="/songs/create" className="create-song-button">
         Create Song
       </NavLink>
-=======
-      <NavLink to="/songs/create">Create Song</NavLink>
->>>>>>> jeff
       <div className="album-wrapper">
         {mySongs.map((song) => (
           <div>
