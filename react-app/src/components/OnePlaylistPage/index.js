@@ -2,18 +2,18 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, NavLink } from "react-router-dom";
 import { getPlaylistByIdThunk, getPlaylistSongs } from "../../store/playlists";
+import { getAllSongsThunk } from "../../store/song";
 
 function OnePlaylistPage() {
   const dispatch = useDispatch();
   const { playlistId } = useParams();
   const userId = useSelector((state) => state.session.user.id);
   const playlist = useSelector((state) => state.playlists.currentPlaylist);
-  const songs = useSelector((state) => state.playlists.playlistSongs);
-
-  console.log(songs);
+  const playlistSongs = useSelector((state) => state.playlists.playlistSongs);
+  const allSongs = useSelector((state) => state.song.songs);
 
   useEffect(() => {
-    dispatch(getPlaylistByIdThunk(playlistId));
+    dispatch(getPlaylistByIdThunk(playlistId), dispatch(getAllSongsThunk()));
     dispatch(getPlaylistSongs(playlistId));
   }, [dispatch, playlistId]);
 
@@ -26,7 +26,7 @@ function OnePlaylistPage() {
           <h1> {playlist?.name} Playlist</h1>
         </div>
         <div className="songs-list">
-          {songs.map((song) => (
+          {playlistSongs.map((song) => (
             <div>
               <NavLink
                 key={song.id}
