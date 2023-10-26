@@ -31,9 +31,21 @@ function HomeRedirectPage() {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        backgroundColor: "black",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        height: "50vh", // 100% of the viewport height
+        width: "50vw",
+        borderRadius: "15px",
+        marginTop: "100px",
+      }}
+    >
       <h1>Log in to Spotify</h1>
       <form
+        className="home-page-form"
         onSubmit={handleSubmit}
         style={{
           display: "flex",
@@ -71,13 +83,19 @@ function HomeRedirectPage() {
             marginTop: "10px",
           }}
         >
-          <button type="submit">Log In</button>
+          <button
+            type="submit"
+            style={{ marginBottom: "20px", marginRight: "20px" }}
+          >
+            Log In
+          </button>
+
+          <OpenModalButton
+            buttonText="Sign up"
+            onItemClick={closeMenu}
+            modalComponent={<SignupFormModal />}
+          />
         </div>
-        <OpenModalButton
-          buttonText="Sign up"
-          onItemClick={closeMenu}
-          modalComponent={<SignupFormModal />}
-        />
       </form>
     </div>
   );
