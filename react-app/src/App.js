@@ -58,9 +58,6 @@ function App() {
           <Route path="/songs/create">
             <CreateSongForm />
           </Route>
-          <Route path="/songs/:songId/update">
-            <EditSongForm />
-          </Route>
           <Route path="/songs">
             <SongsPage />
           </Route>
@@ -82,10 +79,10 @@ function App() {
           <Route path="/myplaylists">
             <MyPlaylistsPage />
           </Route>
-          <Route path="/playlists/:playlistId">
+          <Route exact path="/playlists/:playlistId">
             <OnePlaylistPage />
           </Route>
-          <Route path="/playlists">
+          <Route exact path="/playlists">
             <PlaylistsPage />
           </Route>
           <Route path="/">
