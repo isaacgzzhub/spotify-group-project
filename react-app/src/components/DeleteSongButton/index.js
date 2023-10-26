@@ -1,6 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteSongThunk } from "../../store/song";
+import OpenModalButton from "../OpenModalButton";
+import DeleteSongModal from "../DeleteSongModal";
 
 function DeleteSongButton({ songUserId, songId }) {
   const dispatch = useDispatch();
@@ -17,6 +19,7 @@ function DeleteSongButton({ songUserId, songId }) {
     }
   };
 
+<<<<<<< HEAD
   const handleClick = () => {
     dispatch(deleteSongThunk(songId));
   };
@@ -26,6 +29,18 @@ function DeleteSongButton({ songUserId, songId }) {
       <button onClick={handleClick} className="delete-button">
         Delete
       </button>
+=======
+  // const handleClick = () => {
+  //   dispatch(deleteSongThunk(songId))
+  // }
+
+  if (songOwnedByUser()) {
+    return (
+      <OpenModalButton
+                  buttonText="Delete"
+                  modalComponent={<DeleteSongModal songId={songId}/>}
+                />
+>>>>>>> jeff
     );
   } else {
     return null;
