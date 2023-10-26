@@ -11,7 +11,7 @@ class Song(db.Model):
   album_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("albums.id")), nullable=True)
   song_name = db.Column(db.String(50), nullable=False)
   thumbnail_url = db.Column(db.String, nullable=True)
-  seconds = db.Column(db.Integer, nullable=False)
+  seconds = db.Column(db.Integer, nullable=True)
   song_url = db.Column(db.String, nullable=False)
   release_year = db.Column(db.Integer, nullable=False)
 

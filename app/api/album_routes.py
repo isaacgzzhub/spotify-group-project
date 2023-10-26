@@ -30,6 +30,19 @@ def get_album(album_id):  # Note the argument to accept album_id
     else:
         return {"error": "Album not found"}, 404
 
+# Get albums of logged-in user
+@album_routes.route('/user/<user_id>')
+@login_required
+def get_user_albums(user_id):  # Note the argument to accept album_id
+    """
+    Query for albums by user_id and returns them in a list of the album songs
+    """
+    albums = Album.query.filter_by(user_id=user_id).all()
+    if albums:
+        return jsonify([album.to_dict() for album in albums])
+    else:
+        return {"error": "Albums not found"}, 404
+
 #Create an album
 @album_routes.route('/create-album', methods=['POST'])
 @login_required

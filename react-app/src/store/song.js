@@ -74,6 +74,50 @@ export const getSongByIdThunk = (songId) => async (dispatch) => {
   }
 };
 
+export const createSongThunk = (payload) => async (dispatch) => {
+  const response = await fetch(`/api/songs/`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  if (response.ok) {
+    const song = await response.json();
+    if (song.errors) {
+      return song.errors;
+    }
+    dispatch(createSong(song));
+  }
+};
+
+export const editSongThunk = (songId, payload) => async (dispatch) => {
+  const response = await fetch(`/api/songs/${songId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  try {
+    const song = await response.json();
+    dispatch(editSong(song));
+    return song
+  } catch(error) {
+    return error
+  }
+};
+
+export const deleteSongThunk = (songId) => async (dispatch) => {
+  const response = await fetch(`/api/songs/${songId}`, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+  });
+
+  if (response.ok) {
+    const deletedSong = await response.json();
+    dispatch(deleteSong(deletedSong.id))
+  } else {
+    console.log('delete failed')
+  }
+};
+
 export const getLikesThunk = (userId) => async (dispatch) => {
   const response = await fetch(`/api/songs/likes/${userId}`);
   console.log("thunk:", userId);
@@ -120,7 +164,7 @@ export const unlikeASongThunk = (songId, userId) => async (dispatch) => {
   }
 };
 
-const initialState = { songs: [], song: null, likes: [], likedSong: null };
+const initialState = { songs: [], song: null, likes: [], likedSong: null, createdSong: null, editedSong: null };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
@@ -128,12 +172,19 @@ export default function reducer(state = initialState, action) {
       return { ...state, songs: action.payload };
     case GET_SONG_BY_ID:
       return { ...state, song: action.payload };
+    case CREATE_SONG:
+      return { ...state, createdSong: action.payload };
+    case DELETE_SONG:
+      const updatedSongs = state.songs.filter(song => song.id !== action.payload)
+      return { ...state, songs: updatedSongs, deletedSong: action.payload };
     case GET_LIKES:
       return { ...state, likes: action.payload };
     case LIKE_A_SONG:
       return { ...state, likedSong: action.payload };
     case UNLIKE_A_SONG:
       return { ...state, likedSong: action.payload };
+    case EDIT_SONG:
+      return { ...state, editedSong: action.payload };
     default:
       return state;
   }

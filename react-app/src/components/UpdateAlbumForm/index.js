@@ -40,13 +40,13 @@ function AlbumForm() {
       release_year: releaseYear,
     };
 
-    const createdAlbum = await dispatch(editAlbum(payload));
+    await dispatch(editAlbum(payload));
     history.push(`/albums/${album.id}`);
   };
   return (
     <div>
 
-     <form className="album-form" onSubmit={handleSubmit}>
+     <form className="form" onSubmit={handleSubmit}>
 
       <h1>Update {album?.album_name} Album</h1>
 
@@ -89,7 +89,7 @@ function AlbumForm() {
         />
       </label>
 
-      <button type="submit" disabled={!albumName || !releaseYear || !thumbnailUrl}>Create Spot</button>
+      <button type="submit" disabled={!albumName || !releaseYear || !thumbnailUrl}>Update Album</button>
 
 
      </form>

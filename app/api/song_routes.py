@@ -71,7 +71,7 @@ def delete_song(id):
     db.session.delete(song)
 
     db.session.commit()
-    return "Song deleted successfully!"
+    return song.to_dict()
 
 #Get one song
 @song_routes.route('/<id>')

@@ -8,6 +8,6 @@ class SongForm(FlaskForm):
     album_id = IntegerField('album_id')
     song_name = StringField('song_name', validators=[DataRequired(), Length(min=3, max=50)])
     thumbnail_url = StringField('thumbnail_url', validators=[DataRequired(), URL(require_tld=False)])
-    seconds = IntegerField('seconds', validators=[DataRequired()])
+    seconds = IntegerField('seconds')
     song_url = StringField('song_url', validators=[DataRequired(), URL(require_tld=False)])
     release_year = IntegerField('release_year', validators=[DataRequired(message="This field is required and must be an integer")])

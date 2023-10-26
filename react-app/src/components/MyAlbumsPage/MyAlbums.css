@@ -1,9 +1,37 @@
-.modal-content {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    /* Add other styles for the modal content */
-  }
+/************* THIS IS CAUSING A SMALL WHITE BOX ON THE PAGE ****************/
+
+/* .modal-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  Add other styles for the modal content
+} */
+
+.create-album-link {
+  display: inline-block; /* To take up as much room as needed for the element */
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-top: -10px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  background-color: white;
+  color: black;
+  border: 3px solid black;
+  padding: 10px;
+  border-radius: 15px;
+  border: 2px solid transparent;
+}
+
+.create-album-link:hover {
+  color: rgb(39, 201, 39);
+  border: 2px solid rgb(39, 201, 39);
+}
+
+/* To center the "Create Album" button on the page under the "My Albums" text */
+.albums-page {
+  text-align: center;
+}

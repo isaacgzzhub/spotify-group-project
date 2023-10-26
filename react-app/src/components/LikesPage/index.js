@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { getLikesThunk } from "../../store/song";
+import DeleteSongButton from "../DeleteSongButton";
 
 function LikesPage() {
   const dispatch = useDispatch();
+  const history = useHistory()
   const likes = useSelector((state) => state.song.likes);
   const userId = useSelector((state) => state.session.user.id);
-  console.log(likes);
 
   useEffect(() => {
     dispatch(getLikesThunk(userId));
@@ -18,21 +19,23 @@ function LikesPage() {
       <h1>Liked Songs</h1>
       <div className="album-tile-list">
         {likes.map((song) => (
-          <NavLink
-            key={song.id}
-            className="album-tile"
-            to={`/songs/${song.id}`}
-          >
-            <img
-              className="album-img"
-              src={`${song.thumbnail_url}`}
-              alt="album-cover"
-              title={`${song.song_name}`}
-            />
-            <a>{`${song.song_name}`}</a>
-            <button>Update Song</button>
-            <button>Delete</button>
-          </NavLink>
+          <div>
+            <NavLink
+              key={song.id}
+              className="album-tile"
+              to={`/songs/${song.id}`}
+            >
+              <img
+                className="album-img"
+                src={`${song.thumbnail_url}`}
+                alt="album-cover"
+                title={`${song.song_name}`}
+              />
+              <a>{`${song.song_name}`}</a>
+            </NavLink>
+            <button onClick={()=> history.push(`/songs/${song.id}/update`)}>Update Song</button>
+            <DeleteSongButton songUserId={song.user_id} songId={song.id} />
+          </div>
         ))}
       </div>
 

@@ -14,6 +14,11 @@ import AlbumForm from "./components/AlbumForm";
 import OneAlbum from "./components/OneAlbumPage";
 import LikesPage from "./components/LikesPage";
 import LikeButton from "./components/LikeButton";
+import CreateSongForm from "./components/CreateSongForm";
+import PlaylistsPage from "./components/PlaylistsPage";
+import MyPlaylistsPage from "./components/MyPlaylistsPage";
+import OnePlaylistPage from "./components/OnePlaylistPage";
+import EditSongForm from "./components/EditSongForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -42,10 +47,16 @@ function App() {
           <Route path="/testlikebutton">
             <LikeButton />
           </Route>
+          <Route path="/songs/create">
+            <CreateSongForm />
+          </Route>
+          <Route path="/songs/:songId/update">
+            <EditSongForm />
+          </Route>
           <Route path="/songs">
             <SongsPage />
           </Route>
-          <Route path="/albums/create">
+          <Route path="/albums/create-album">
             <AlbumForm />
           </Route>
           <Route path="/myalbums">
@@ -59,6 +70,15 @@ function App() {
           </Route>
           <Route path="/albums">
             <AlbumsPage />
+          </Route>
+          <Route path="/myplaylists">
+            <MyPlaylistsPage />
+          </Route>
+          <Route path="/playlists/:playlistId">
+            <OnePlaylistPage />
+          </Route>
+          <Route path="/playlists">
+            <PlaylistsPage />
           </Route>
         </Switch>
       )}

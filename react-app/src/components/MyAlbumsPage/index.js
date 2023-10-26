@@ -4,6 +4,8 @@ import { NavLink, useHistory } from "react-router-dom";
 import { getAllAlbumsThunk } from "../../store/albums";
 import { removeAlbum } from "../../store/albums";
 import Modal from "react-modal";
+import "./MyAlbums.css"; // The commented out modal css at the top is causing there to be a square white box half way down the screen
+
 function MyAlbumsPage() {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -40,66 +42,71 @@ function MyAlbumsPage() {
   };
 
   return (
-    <div id="albums-page">
+    <div className="albums-page">
       <h1>My Albums</h1>
-      <div className="album-tile-list">
+      <NavLink to="/albums/create-album" className="create-album-link">
+        Create Album
+      </NavLink>
+      <div className="album-wrapper">
         {myAlbums.map((album) => (
-          <div key={album.id} className="album-wrapper">
-            <NavLink className="album-tile" to={`/albums/${album.id}`}>
-              <img
-                className="album-img"
-                src={`${album.thumbnail_url}`}
-                alt="album-cover"
-                title={`${album.album_name}`}
-              />
-              <a>{`${album.album_name}`}</a>
-            </NavLink>
-            <button
-              className="mng-update"
-              onClick={() => handleUpdateClick(album.id)}
-            >
-              Update
-            </button>
-            <button
-              className="mng-delete"
-              onClick={() => handleDeleteClick(album.id)}
-            >
-              Delete
-            </button>
+          <div key={album.id}>
+            <div className="album-tile">
+              <NavLink className="album-tile" to={`/albums/${album.id}`}>
+                <img
+                  className="album-img"
+                  src={`${album.thumbnail_url}`}
+                  alt="album-cover"
+                  title={`${album.album_name}`}
+                />
+                <a>{`${album.album_name}`}</a>
+              </NavLink>
+              <div className="button-wrapper">
+                <button
+                  className="update-button"
+                  onClick={() => handleUpdateClick(album.id)}
+                >
+                  Update
+                </button>
+                <button
+                  className="delete-button"
+                  onClick={() => handleDeleteClick(album.id)}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
           </div>
         ))}
       </div>
 
-      <NavLink to="/albums/create">Create Album</NavLink>
       <div className="modal-content">
-
-      <Modal
-        isOpen={showDeleteModal}
-        onRequestClose={handleCancelDelete}
-        className="mng-modal"
-        overlayClassName="overlay"
-      >
-        <div className="modal-content">
-          <h2 className="modal-title">Confirm Delete</h2>
-          <p className="modal-message">
-            Are you sure you want to delete this album?
-          </p>
-          <div className="modal-buttons">
-            <button
-              className="modal-delete-button"
-              onClick={handleConfirmDelete}
-            >
-              Yes (Delete Album)
-            </button>
-            <button
-              className="modal-cancel-button"
-              onClick={handleCancelDelete}
-            >
-              No (Keep Album)
-            </button>
+        <Modal
+          isOpen={showDeleteModal}
+          onRequestClose={handleCancelDelete}
+          className="mng-modal"
+          overlayClassName="overlay"
+        >
+          <div className="modal-content">
+            <h2 className="modal-title">Confirm Delete</h2>
+            <p className="modal-message">
+              Are you sure you want to delete this album?
+            </p>
+            <div className="modal-buttons">
+              <button
+                className="modal-delete-button"
+                onClick={handleConfirmDelete}
+              >
+                Yes (Delete Album)
+              </button>
+              <button
+                className="modal-cancel-button"
+                onClick={handleCancelDelete}
+              >
+                No (Keep Album)
+              </button>
+            </div>
           </div>
-        </div>
-      </Modal>
+        </Modal>
       </div>
     </div>
   );

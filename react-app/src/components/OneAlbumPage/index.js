@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, NavLink } from "react-router-dom";
 import { getAlbumByIdThunk } from "../../store/albums";
 import { getAllSongsThunk } from "../../store/song";
+import "./OneAlbumPage.css";
 import Modal from "react-modal";
 
 function OneAlbum() {
@@ -20,18 +21,21 @@ function OneAlbum() {
   return (
     <div className="one-album-container">
       <div id="album-top-section">
-        <h1> {album?.album_name} </h1>
+        <h1> {album?.album_name} Album</h1>
         <img
-          id="album-cover"
+          className="album-cover"
           src={`${album?.thumbnail_url}`}
           alt="album-cover"
           title={`${album?.album_name}`}
         />
         {/* make sure this navlink is right */}
-        <NavLink to='/mysongs'> Add a Song to an Album </NavLink>
+        <NavLink to="/mysongs" className="add-song-to-album">
+          {" "}
+          Add a Song to this Album{" "}
+        </NavLink>
       </div>
 
-      <div id="songs-bottom-section">
+      <div className="album-wrapper">
         {albumSongs?.map((song) => (
           <NavLink
             key={song?.id}
