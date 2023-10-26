@@ -16,7 +16,7 @@ function MySongsPage() {
     dispatch(getAllSongsThunk());
   }, [dispatch]);
 
-  const mySongs = songs.filter((song) => song.user_id === userId)
+  const mySongs = songs.filter((song) => song.user_id === userId);
 
   const handleUpdateClick = (songId) => {
     history.push(`/songs/${songId}/update`);
@@ -25,7 +25,7 @@ function MySongsPage() {
   return (
     <div id="albums-page">
       <h1>My Songs</h1>
-      <div className="album-tile-list">
+      <div className="album-wrapper">
         {mySongs.map((song) => (
           <div>
             <NavLink
@@ -42,7 +42,9 @@ function MySongsPage() {
               <a>{`${song.song_name}`}</a>
             </NavLink>
             <LikeButton songId={song.id} />
-            <button onClick={()=> history.push(`/songs/${song.id}/update`)}>Update Song</button>
+            <button onClick={() => history.push(`/songs/${song.id}/update`)}>
+              Update Song
+            </button>
             <DeleteSongButton songUserId={song.user_id} songId={song.id} />
           </div>
         ))}
