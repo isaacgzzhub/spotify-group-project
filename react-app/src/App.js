@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
@@ -19,13 +19,21 @@ import PlaylistsPage from "./components/PlaylistsPage";
 import MyPlaylistsPage from "./components/MyPlaylistsPage";
 import OnePlaylistPage from "./components/OnePlaylistPage";
 import EditSongForm from "./components/EditSongForm";
+import HomeRedirectPage from "./components/HomeRedirectPage";
 
 function App() {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.session.user)
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
+
+  if (!user) {
+    return (
+      <HomeRedirectPage />
+    )
+  }
 
   return (
     <>
@@ -79,6 +87,9 @@ function App() {
           </Route>
           <Route path="/playlists">
             <PlaylistsPage />
+          </Route>
+          <Route path="/">
+            <SongsPage />
           </Route>
         </Switch>
       )}
