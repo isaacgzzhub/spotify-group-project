@@ -26,9 +26,9 @@ function DeleteSongButton({ songUserId, songId }) {
   if (songOwnedByUser()) {
     return (
       <OpenModalButton
-                  buttonText="Delete"
-                  modalComponent={<DeleteSongModal songId={songId}/>}
-                />
+        buttonText="Delete"
+        modalComponent={<DeleteSongModal songId={songId} />}
+      />
     );
   } else {
     return null;
