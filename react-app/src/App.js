@@ -20,6 +20,7 @@ import MyPlaylistsPage from "./components/MyPlaylistsPage";
 import OnePlaylistPage from "./components/OnePlaylistPage";
 import EditSongForm from "./components/EditSongForm";
 import HomeRedirectPage from "./components/HomeRedirectPage";
+import AddPlaylistSong from "./components/AddPlaylistSongForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -78,6 +79,9 @@ function App() {
           </Route>
           <Route path="/myplaylists">
             <MyPlaylistsPage />
+          </Route>
+          <Route exact path="/playlists/add-song">
+            <AddPlaylistSong />
           </Route>
           <Route exact path="/playlists/:playlistId">
             <OnePlaylistPage />
