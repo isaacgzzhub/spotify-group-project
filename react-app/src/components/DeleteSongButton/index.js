@@ -19,17 +19,6 @@ function DeleteSongButton({ songUserId, songId }) {
     }
   };
 
-<<<<<<< HEAD
-  const handleClick = () => {
-    dispatch(deleteSongThunk(songId));
-  };
-
-  if (songOwnedByUser()) {
-    return (
-      <button onClick={handleClick} className="delete-button">
-        Delete
-      </button>
-=======
   // const handleClick = () => {
   //   dispatch(deleteSongThunk(songId))
   // }
@@ -40,7 +29,6 @@ function DeleteSongButton({ songUserId, songId }) {
                   buttonText="Delete"
                   modalComponent={<DeleteSongModal songId={songId}/>}
                 />
->>>>>>> jeff
     );
   } else {
     return null;
