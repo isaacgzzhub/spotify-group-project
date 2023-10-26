@@ -9,10 +9,11 @@
   border: 3px solid black;
   border-radius: 15px;
   margin-right: 5px;
+  padding: 5px;
 }
 
 .three-buttons-my-songs *:hover {
-  border: 3px solid red;
+  border: 3px solid orange;
 }
 
 /* THIS IS GLOBAL! aligning the text of parent id, pretty bad to do this here, but it centers the create song button, so oh well */

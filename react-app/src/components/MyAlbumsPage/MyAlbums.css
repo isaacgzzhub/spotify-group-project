@@ -27,7 +27,7 @@
 }
 
 .create-album-link:hover {
-  border: 3px solid red;
+  border: 3px solid orange;
 }
 
 /* To center the "Create Album" button on the page under the "My Albums" text */

@@ -47,8 +47,11 @@ function MySongsPage() {
             </NavLink>
             <div className="three-buttons-my-songs">
               <LikeButton songId={song.id} />
-              <button onClick={() => history.push(`/songs/${song.id}/update`)}>
-                Update Song
+              <button
+                className="update-button"
+                onClick={() => history.push(`/songs/${song.id}/update`)}
+              >
+                Update
               </button>
               <DeleteSongButton
                 className="delete-button"
