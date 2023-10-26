@@ -111,9 +111,14 @@ img:hover {
 
 /********* styling the login/signup form when user is logged out  ************/
 .home-page-form button {
-  font-size: 20px;
+  font-size: 16px;
   border-radius: 15px;
   border: 3px solid black;
-  padding: 10px;
+  padding: 0px 5px 0px 5px;
   height: 100%;
+  cursor: pointer;
+}
+
+.home-page-form button:hover {
+  border: 3px solid orange;
 }
