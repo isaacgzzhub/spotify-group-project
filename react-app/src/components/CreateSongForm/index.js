@@ -6,37 +6,25 @@ import { getUserAlbumsThunk } from "../../store/albums";
 
 function CreateSongForm() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const userId = useSelector((state) => state.session.user.id);
-  // const createdSong = useSelector((state) => state.song.createdSong);
   const userAlbums = useSelector((state) => state.albums.userAlbums);
-  // console.log('hello:',userAlbums)
 
   const [songName, setSongName] = useState("");
   const [songThumbnail, setSongThumbnail] = useState("");
   const [songUrl, setSongUrl] = useState("");
   const [releaseYear, setReleaseYear] = useState("");
   const [albumId, setAlbumId] = useState("");
-  // const history = useHistory();
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState([]);
 
   useEffect(() => {
     dispatch(getUserAlbumsThunk(userId));
   }, [dispatch]);
-  //   }, [dispatch, albumName, thumbnailUrl, releaseYear]);
-
-  // const errors = {};
-  // if (albumName.length > 50)
-  //   errors.albumName = "Album name must be less than 50 characters";
-  // if (!albumName) errors.albumName = "Album name is required";
-  // if (!thumbnailUrl) errors.thumbnailUrl = "Cover for album required";
-  // if (!releaseYear) errors.releaseYear = "Release Year for album required";
-  // setErrors(errors);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("1", albumId);
-    setErrors({});
+    setErrors([]);
     const payload = {
       user_id: userId,
       album_id: albumId ? parseInt(albumId) : undefined,
@@ -45,14 +33,23 @@ function CreateSongForm() {
       song_url: songUrl,
       release_year: releaseYear,
     };
-    console.log("2", albumId);
-    await dispatch(createSongThunk(payload));
-    // history.push(`/song/s);
+    const res = await dispatch(createSongThunk(payload));
+
+    if (res && res.errors) {
+      setErrors(res["errors"])
+    };
+
+    history.push("/mysongs")
   };
+
   return (
     <div>
       <form className="form" onSubmit={handleSubmit}>
         <h1>Create A New Song</h1>
+
+        {errors ?? errors.map((error) => {
+          return <p>{error}</p>
+        })}
 
         <label>
           <div className="form-row">
@@ -128,6 +125,7 @@ function CreateSongForm() {
         >
           Create Song
         </button>
+
       </form>
     </div>
   );

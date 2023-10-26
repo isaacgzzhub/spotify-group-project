@@ -38,8 +38,6 @@ function LikesPage() {
           </div>
         ))}
       </div>
-
-      <NavLink to="/">Create Song</NavLink>
     </div>
   );
 }

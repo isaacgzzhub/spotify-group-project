@@ -28,9 +28,7 @@ function EditSongForm() {
     if (song) {
     setSongName(song?.song_name)
     setSongThumbnail(song?.thumbnail_url)
-    console.log(song.album_id)
     setAlbumId(song?.album_id)
-    console.log('hi:', albumId)
     }
   }, [dispatch, song, songId, userId])
 
@@ -50,23 +48,6 @@ function EditSongForm() {
       setErrors(res.errors)
       console.log(typeof errors)
     }
-
-    // try {
-    //   const res = await dispatch(editSongThunk(songId, payload))
-    //   console.log(res)
-    // } catch (error) {
-    //   console.error(error);
-    // }
-
-    // const res = await dispatch(editSongThunk(songId, payload)).then((data) => {
-    //   console.log(data)
-    // })
-
-    // if (res && res.errors) {
-    //   console.log(res)
-    //   setErrors(res.errors)
-    // }
-    // history.push(`/albums/${album.id}`);
   };
 
   return (

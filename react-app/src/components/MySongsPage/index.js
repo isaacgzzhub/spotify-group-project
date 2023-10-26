@@ -25,6 +25,7 @@ function MySongsPage() {
   return (
     <div id="albums-page">
       <h1>My Songs</h1>
+      <NavLink to="/songs/create">Create Song</NavLink>
       <div className="album-wrapper">
         {mySongs.map((song) => (
           <div>
@@ -49,8 +50,6 @@ function MySongsPage() {
           </div>
         ))}
       </div>
-
-      <NavLink to="/">Create Song</NavLink>
     </div>
   );
 }
