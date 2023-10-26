@@ -12,7 +12,6 @@ function PlaylistsPage() {
 
   const playlistObj = useSelector((state) => state.playlists.allPlaylists);
   const playlists = Object.values(playlistObj);
-  console.log(playlists);
 
   return (
     <div className="playlist-page">
@@ -25,7 +24,7 @@ function PlaylistsPage() {
             to={`/playlists/${playlist.id}`}
           >
             <div>
-              <a>{`${playlist.name}`}</a>
+              <h2>{`${playlist.name}`}</h2>
             </div>
           </NavLink>
         ))}
