@@ -1,0 +1,34 @@
+.three-buttons-my-songs {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.three-buttons-my-songs * {
+  cursor: pointer;
+  font-weight: bold;
+  border: 3px solid black;
+  border-radius: 15px;
+  margin-right: 5px;
+  padding: 5px;
+}
+
+.three-buttons-my-songs *:hover {
+  border: 3px solid orange;
+}
+
+/* THIS IS GLOBAL! aligning the text of parent id, pretty bad to do this here, but it centers the create song button, so oh well */
+#albums-page {
+  text-align: center;
+}
+
+.create-song-button {
+  border: 3px solid black;
+  background-color: white;
+  border-radius: 15px;
+  padding: 5px;
+  color: black;
+  font-weight: bold;
+}
+.create-song-button:hover {
+  border: 3px solid orange;
+}
