@@ -9,8 +9,15 @@ function OnePlaylistPage() {
   const { playlistId } = useParams();
   const userId = useSelector((state) => state.session.user.id);
   const playlist = useSelector((state) => state.playlists.currentPlaylist);
-  const playlistSongs = useSelector((state) => state.playlists.playlistSongs);
   const allSongs = useSelector((state) => state.song.songs);
+  const playlistSongs = useSelector((state) => state.playlists.playlistSongs);
+  const truePlaylistSongs = allSongs?.filter((song) =>
+    playlistSongs.some((ps) => ps.song_id === song.id)
+  );
+
+  console.log(playlistSongs);
+  console.log(allSongs);
+  console.log(truePlaylistSongs);
 
   useEffect(() => {
     dispatch(getPlaylistByIdThunk(playlistId), dispatch(getAllSongsThunk()));
@@ -26,7 +33,7 @@ function OnePlaylistPage() {
           <h1> {playlist?.name} Playlist</h1>
         </div>
         <div className="songs-list">
-          {playlistSongs.map((song) => (
+          {truePlaylistSongs.map((song) => (
             <div>
               <NavLink
                 key={song.id}
