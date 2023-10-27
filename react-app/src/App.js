@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useLocation } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
@@ -25,13 +25,14 @@ import AddPlaylistSong from "./components/AddPlaylistSongForm";
 
 function App() {
   const dispatch = useDispatch();
+  const location = useLocation();
   const user = useSelector((state) => state.session.user);
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
-  if (!user) {
+  if (!user && location.pathname === "/") {
     return <HomeRedirectPage />;
   }
 
