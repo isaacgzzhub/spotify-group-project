@@ -83,6 +83,9 @@ function App() {
             <Route exact path="/playlists/:playlistId">
               <OnePlaylistPage />
             </Route>
+            <Route path="/add-playlist-song/:playlistId">
+              <AddPlaylistSong />
+            </Route>
             <Route exact path="/playlists">
               <PlaylistsPage />
             </Route>
