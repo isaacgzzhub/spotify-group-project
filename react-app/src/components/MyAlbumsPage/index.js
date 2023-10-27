@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import { getAllAlbumsThunk } from "../../store/albums";
 import { removeAlbum } from "../../store/albums";
+import DeleteAlbumButton from "../DeleteAlbumButton";
 import Modal from "react-modal";
 import "./MyAlbums.css"; // The commented out modal css at the top is causing there to be a square white box half way down the screen
 
@@ -58,7 +59,7 @@ function MyAlbumsPage() {
                   alt="album-cover"
                   title={`${album.album_name}`}
                 />
-                <a>{`${album.album_name}`}</a>
+                {`${album.album_name}`}
               </NavLink>
               <div className="button-wrapper">
                 <button
@@ -67,19 +68,27 @@ function MyAlbumsPage() {
                 >
                   Update
                 </button>
-                <button
+
+                <DeleteAlbumButton
+                className="delete-button"
+                albumId={album.id}
+              />
+
+                {/* <button
                   className="delete-button"
                   onClick={() => handleDeleteClick(album.id)}
                 >
                   Delete
-                </button>
+                </button> */}
               </div>
             </div>
           </div>
         ))}
       </div>
 
-      <div className="modal-content">
+
+      {/* old modal */}
+      {/* <div className="modal-content">
         <Modal
           isOpen={showDeleteModal}
           onRequestClose={handleCancelDelete}
@@ -107,7 +116,7 @@ function MyAlbumsPage() {
             </div>
           </div>
         </Modal>
-      </div>
+      </div> */}
     </div>
   );
 }

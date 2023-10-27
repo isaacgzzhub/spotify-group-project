@@ -6,7 +6,7 @@ import DeleteSongButton from "../DeleteSongButton";
 
 function LikesPage() {
   const dispatch = useDispatch();
-  const history = useHistory()
+  const history = useHistory();
   const likes = useSelector((state) => state.song.likes);
   const userId = useSelector((state) => state.session.user.id);
 
@@ -17,7 +17,10 @@ function LikesPage() {
   return (
     <div id="albums-page">
       <h1>Liked Songs</h1>
-      <div className="album-tile-list">
+      <NavLink to="/" className="create-song-button">
+        Create Song
+      </NavLink>
+      <div className="album-wrapper">
         {likes.map((song) => (
           <div>
             <NavLink
@@ -33,13 +36,19 @@ function LikesPage() {
               />
               <a>{`${song.song_name}`}</a>
             </NavLink>
-            <button onClick={()=> history.push(`/songs/${song.id}/update`)}>Update Song</button>
-            <DeleteSongButton songUserId={song.user_id} songId={song.id} />
+            {/* This className is awful here lol, need to refactor later */}
+            <div className="three-buttons-my-songs">
+              <button
+                className="update-button"
+                onClick={() => history.push(`/songs/${song.id}/update`)}
+              >
+                Update
+              </button>
+              <DeleteSongButton songUserId={song.user_id} songId={song.id} />
+            </div>
           </div>
         ))}
       </div>
-
-      <NavLink to="/">Create Song</NavLink>
     </div>
   );
 }

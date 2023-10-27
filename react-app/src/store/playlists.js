@@ -18,9 +18,9 @@ const getSongs = (songs) => ({
   type: GET_SONGS,
   payload: songs,
 });
-const addSong = (playlistSongId) => ({
+const addSong = (playlistSong) => ({
   type: ADD_SONG,
-  payload: playlistSongId,
+  payload: playlistSong,
 });
 const deleteSong = (playlistSongId) => ({
   type: DELETE_SONG,

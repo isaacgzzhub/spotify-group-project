@@ -80,12 +80,13 @@ export const createSongThunk = (payload) => async (dispatch) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
-  if (response.ok) {
+
+  try {
     const song = await response.json();
-    if (song.errors) {
-      return song.errors;
-    }
     dispatch(createSong(song));
+    return song
+  } catch(error) {
+    return error
   }
 };
 

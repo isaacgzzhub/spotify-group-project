@@ -80,10 +80,18 @@ export const createAlbum = (payload) => async (dispatch) => {
     body: JSON.stringify(payload),
   });
 
-  if (response.ok) {
+  try {
     const createdAlbum = await response.json();
     dispatch(addAlbum(createdAlbum));
+    return createdAlbum
+  } catch(error) {
+    return error
   }
+
+//   if (response.ok) {
+//     const createdAlbum = await response.json();
+//     dispatch(addAlbum(createdAlbum));
+//   }
 };
 
 export const editAlbum = (payload) => async (dispatch) => {
@@ -93,11 +101,19 @@ export const editAlbum = (payload) => async (dispatch) => {
     body: JSON.stringify(payload),
   });
 
-  if (response.ok) {
+  try {
     const updatedAlbum = await response.json();
     dispatch(updateAlbum(updatedAlbum));
-    return updatedAlbum;
+    return updatedAlbum
+  } catch(error) {
+    return error
   }
+
+  // if (response.ok) {
+  //   const updatedAlbum = await response.json();
+  //   dispatch(updateAlbum(updatedAlbum));
+  //   return updatedAlbum;
+  // }
 };
 
 export const removeAlbum = (albumId) => async (dispatch) => {
