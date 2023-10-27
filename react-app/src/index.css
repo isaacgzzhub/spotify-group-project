@@ -155,6 +155,11 @@ button:hover {
   width: 70px !important;
 }
 
+/* This global modal-content css makes the signup form text turn black now */
+#modal-content * {
+  color: black;
+}
+
 #modal-content {
   padding: 10px;
   border-radius: 15px;
