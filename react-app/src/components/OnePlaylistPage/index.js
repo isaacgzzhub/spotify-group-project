@@ -7,9 +7,12 @@ import {
   removePlaylistSong,
 } from "../../store/playlists";
 import { getAllSongsThunk } from "../../store/song";
+import { useHistory } from "react-router-dom";
+
 
 function OnePlaylistPage() {
   const dispatch = useDispatch();
+  const history = useHistory()
   const { playlistId } = useParams();
   const userId = useSelector((state) => state.session.user.id);
   const playlist = useSelector((state) => state.playlists.currentPlaylist);
@@ -18,8 +21,13 @@ function OnePlaylistPage() {
   const truePlaylistSongs = allSongs?.filter((song) =>
     playlistSongs.some((ps) => ps.song_id === song.id)
   );
+
   const handleDelete = (playlistSongId) => {
     dispatch(removePlaylistSong(playlistSongId));
+  };
+
+  const handleAddSongClick = () => {
+    history.push(`/add-playlist-song/${playlistId}`);
   };
 
   useEffect(() => {
@@ -32,6 +40,9 @@ function OnePlaylistPage() {
       <div className="one-playlist-container">
         <div id="playlist-top-section">
           <h1> {playlist?.name} Playlist</h1>
+          {userId === playlist?.user_id && (
+            <button onClick={handleAddSongClick}>Add a Song to this Playlist</button>
+          )}
         </div>
         <div className="songs-list">
           {truePlaylistSongs.map((song) => (
