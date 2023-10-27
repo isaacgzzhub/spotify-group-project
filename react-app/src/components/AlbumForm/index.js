@@ -55,7 +55,7 @@ function AlbumForm() {
         <h1>Create A New Album</h1>
 
         {errors ?? errors.map(error => {
-          return <p>{error}</p>
+          return {error}
         })}
 
         <label>
