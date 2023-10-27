@@ -37,9 +37,9 @@ function CreateSongForm() {
 
     if (res && res.errors) {
       setErrors(res["errors"])
-    };
-
-    history.push("/mysongs")
+    } else {
+      history.push("/mysongs")
+    }
   };
 
   return (
