@@ -1,7 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, NavLink } from "react-router-dom";
-import { getPlaylistByIdThunk, getPlaylistSongs } from "../../store/playlists";
+import {
+  getPlaylistByIdThunk,
+  getPlaylistSongs,
+  removePlaylistSong,
+} from "../../store/playlists";
 import { getAllSongsThunk } from "../../store/song";
 
 function OnePlaylistPage() {
@@ -14,10 +18,9 @@ function OnePlaylistPage() {
   const truePlaylistSongs = allSongs?.filter((song) =>
     playlistSongs.some((ps) => ps.song_id === song.id)
   );
-
-  console.log(playlistSongs);
-  console.log(allSongs);
-  console.log(truePlaylistSongs);
+  const handleDelete = (playlistSongId) => {
+    dispatch(removePlaylistSong(playlistSongId));
+  };
 
   useEffect(() => {
     dispatch(getPlaylistByIdThunk(playlistId), dispatch(getAllSongsThunk()));
@@ -26,8 +29,6 @@ function OnePlaylistPage() {
 
   return (
     <div className="playlist-page">
-      <h1>ONE PLAYLIST</h1>
-
       <div className="one-playlist-container">
         <div id="playlist-top-section">
           <h1> {playlist?.name} Playlist</h1>
@@ -48,6 +49,7 @@ function OnePlaylistPage() {
                 />
                 <a>{`${song?.song_name}`}</a>
               </NavLink>
+              <button onClick={() => handleDelete(song.id)}>Delete</button>
             </div>
           ))}
         </div>
