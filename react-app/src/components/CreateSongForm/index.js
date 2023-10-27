@@ -36,9 +36,9 @@ function CreateSongForm() {
     const res = await dispatch(createSongThunk(payload));
 
     if (res && res.errors) {
-      setErrors(res["errors"])
+      setErrors(res["errors"]);
     } else {
-      history.push("/mysongs")
+      history.push("/mysongs");
     }
   };
 
@@ -47,15 +47,17 @@ function CreateSongForm() {
       <form className="form" onSubmit={handleSubmit}>
         <h1>Create A New Song</h1>
 
-        {errors ?? errors.map((error) => {
-          return <p>{error}</p>
-        })}
+        {errors ??
+          errors.map((error) => {
+            return <p>{error}</p>;
+          })}
 
         <label>
           <div className="form-row">
             Song Name
             <p className="errors">{errors.songName}</p>
           </div>
+
           <input
             type="text"
             placeholder="Song Name"
@@ -84,7 +86,7 @@ function CreateSongForm() {
           </div>
           <input
             type="text"
-            placeholder="Cover Photo URL"
+            placeholder="Song Thumbnail Image"
             value={songThumbnail}
             onChange={(e) => setSongThumbnail(e.target.value)}
           />
@@ -125,7 +127,6 @@ function CreateSongForm() {
         >
           Create Song
         </button>
-
       </form>
     </div>
   );

@@ -169,3 +169,16 @@ button:hover {
 #modal-content button:hover {
   border: 3px solid orange;
 }
+
+form {
+  color: red;
+}
+
+label {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.form-row {
+  margin-bottom: -10px !important;
+}
