@@ -1,32 +1,51 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, NavLink } from "react-router-dom";
-import { getPlaylistByIdThunk, getPlaylistSongs } from "../../store/playlists";
+import {
+  getPlaylistByIdThunk,
+  getPlaylistSongs,
+  removePlaylistSong,
+} from "../../store/playlists";
+import { getAllSongsThunk } from "../../store/song";
+import { useHistory } from "react-router-dom";
+
 
 function OnePlaylistPage() {
   const dispatch = useDispatch();
+  const history = useHistory()
   const { playlistId } = useParams();
   const userId = useSelector((state) => state.session.user.id);
   const playlist = useSelector((state) => state.playlists.currentPlaylist);
-  const songs = useSelector((state) => state.playlists.playlistSongs);
+  const allSongs = useSelector((state) => state.song.songs);
+  const playlistSongs = useSelector((state) => state.playlists.playlistSongs);
+  const truePlaylistSongs = allSongs?.filter((song) =>
+    playlistSongs.some((ps) => ps.song_id === song.id)
+  );
 
-  console.log(songs);
+  const handleDelete = (playlistSongId) => {
+    dispatch(removePlaylistSong(playlistSongId));
+  };
+
+  const handleAddSongClick = () => {
+    history.push(`/add-playlist-song/${playlistId}`);
+  };
 
   useEffect(() => {
-    dispatch(getPlaylistByIdThunk(playlistId));
+    dispatch(getPlaylistByIdThunk(playlistId), dispatch(getAllSongsThunk()));
     dispatch(getPlaylistSongs(playlistId));
   }, [dispatch, playlistId]);
 
   return (
     <div className="playlist-page">
-      <h1>ONE PLAYLIST</h1>
-
       <div className="one-playlist-container">
         <div id="playlist-top-section">
           <h1> {playlist?.name} Playlist</h1>
+          {userId === playlist?.user_id && (
+            <button onClick={handleAddSongClick}>Add a Song to this Playlist</button>
+          )}
         </div>
         <div className="songs-list">
-          {songs.map((song) => (
+          {truePlaylistSongs.map((song) => (
             <div>
               <NavLink
                 key={song.id}
@@ -41,6 +60,7 @@ function OnePlaylistPage() {
                 />
                 <a>{`${song?.song_name}`}</a>
               </NavLink>
+              <button onClick={() => handleDelete(song.id)}>Delete</button>
             </div>
           ))}
         </div>

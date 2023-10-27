@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom";
 import SignupFormModal from "../SignupFormModal";
 import OpenModalButton from "../OpenModalButton";
 
@@ -27,19 +27,38 @@ function HomeRedirectPage() {
     if (data) {
       setErrors(data);
     }
-    history.push("/")
+    history.push("/");
   };
 
   return (
-    <div>
+    <div
+      style={{
+        backgroundColor: "black",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        height: "50vh", // 100% of the viewport height
+        width: "50vw",
+        borderRadius: "15px",
+        marginTop: "100px",
+      }}
+    >
       <h1>Log in to Spotify</h1>
-      <form onSubmit={handleSubmit}>
+      <form
+        className="home-page-form"
+        onSubmit={handleSubmit}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
         <ul>
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}
         </ul>
-        <label>
+        <label style={{ marginBottom: "10px" }}>
           Email
           <input
             type="text"
@@ -48,7 +67,7 @@ function HomeRedirectPage() {
             required
           />
         </label>
-        <label>
+        <label style={{ marginBottom: "10px" }}>
           Password
           <input
             type="password"
@@ -57,13 +76,27 @@ function HomeRedirectPage() {
             required
           />
         </label>
-        <button type="submit">Log In</button>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginTop: "10px",
+          }}
+        >
+          <button
+            type="submit"
+            style={{ marginBottom: "20px", marginRight: "20px" }}
+          >
+            Log In
+          </button>
+
+          <OpenModalButton
+            buttonText="Sign up"
+            onItemClick={closeMenu}
+            modalComponent={<SignupFormModal />}
+          />
+        </div>
       </form>
-      <OpenModalButton
-              buttonText="Sign up"
-              onItemClick={closeMenu}
-              modalComponent={<SignupFormModal />}
-            />
     </div>
   );
 }
