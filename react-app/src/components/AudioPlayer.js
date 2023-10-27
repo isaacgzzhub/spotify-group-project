@@ -1,4 +1,4 @@
-function MyAudioPlayer() {
+function AudioPlayer() {
   return (
     <audio controls>
       <source src="/Rachmaninoff-2-piano-suite.mp3" type="audio/mp3" />
@@ -7,4 +7,4 @@ function MyAudioPlayer() {
   );
 }
 
-export default MyAudioPlayer;
+export default AudioPlayer;

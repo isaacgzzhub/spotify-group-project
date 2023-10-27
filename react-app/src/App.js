@@ -20,7 +20,7 @@ import MyPlaylistsPage from "./components/MyPlaylistsPage";
 import OnePlaylistPage from "./components/OnePlaylistPage";
 import EditSongForm from "./components/EditSongForm";
 import HomeRedirectPage from "./components/HomeRedirectPage";
-import MyAudioPlayer from "./components/AudioPlayer";
+import AudioPlayer from "./components/AudioPlayer";
 import AddPlaylistSong from "./components/AddPlaylistSongForm";
 
 function App() {
@@ -100,7 +100,7 @@ function App() {
             zIndex: 1000,
           }}
         >
-          <MyAudioPlayer />
+          <AudioPlayer />
         </div>
       </div>
     </>
