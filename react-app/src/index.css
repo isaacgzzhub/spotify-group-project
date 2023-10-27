@@ -105,6 +105,20 @@ img:hover {
   border-radius: 15px;
 }
 
+/********* This is a terrible way to style one button that I just can't figure out how to target, but oh well, it works */
+/* This also styles the modal buttons (like the profile dropdown on the top left) and the modal buttons when we open them since those don't have specific styling on them right now */
+button {
+  font-weight: bold;
+  border: 3px solid black;
+  padding: 5px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+button:hover {
+  border: 3px solid orange;
+}
+
 .like-button:hover {
   border: 3px solid orange;
 }
@@ -121,4 +135,13 @@ img:hover {
 
 .home-page-form button:hover {
   border: 3px solid orange;
+}
+
+.profile-dropdown {
+  list-style-type: none;
+  padding: 10px;
+  margin-top: 15px;
+  background-color: white;
+  border-radius: 15px;
+  border: 4px solid black;
 }
