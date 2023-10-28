@@ -30,6 +30,15 @@ function HomeRedirectPage() {
     history.push("/");
   };
 
+  const handleDemoLogin = async (e) => {
+    e.preventDefault();
+    const data = await dispatch(login("demo@aa.io", "password"));
+    if (data) {
+      setErrors(data);
+    }
+    history.push("/");
+  };
+
   return (
     <div
       style={{
@@ -95,6 +104,9 @@ function HomeRedirectPage() {
             onItemClick={closeMenu}
             modalComponent={<SignupFormModal />}
           />
+
+          <button type="button" onClick={handleDemoLogin}>Demo User</button>
+
         </div>
       </form>
     </div>
