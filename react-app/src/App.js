@@ -34,7 +34,7 @@ function App() {
   }, [dispatch]);
 
   if (isLoaded) {
-    if (!user && location.pathname === "/") {
+    if (!user) {
       return <HomeRedirectPage />;
     }
 
