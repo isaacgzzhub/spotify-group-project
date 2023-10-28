@@ -73,11 +73,11 @@ function App() {
             <Route path="/albums/:albumId/update">
               <UpdateAlbum />
             </Route>
-            <Route path="/albums/:albumId">
-              <OneAlbum />
-            </Route>
             <Route path="/albums/:albumId/add-song">
               <AddAlbumSong />
+            </Route>
+            <Route path="/albums/:albumId">
+              <OneAlbum />
             </Route>
             <Route path="/albums">
               <AlbumsPage />
