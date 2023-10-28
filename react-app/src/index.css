@@ -71,7 +71,7 @@ a {
 
 /***************** Styling border and hover  *******************/
 img {
-  border: 2px solid transparent; /* Reserve space for the border so that when we hover it, it doesn't shift things around */
+  border: 2px solid black; /* Reserve space for the border so that when we hover it, it doesn't shift things around */
 }
 img:hover {
   border: 2px solid white;
@@ -113,6 +113,7 @@ button {
   padding: 5px;
   border-radius: 15px;
   cursor: pointer;
+  /* margin-left: 15px; */
 }
 
 button:hover {
@@ -186,4 +187,8 @@ label {
 
 .form-row {
   margin-bottom: -10px !important;
+}
+
+.demo-button {
+  margin-left: 20px;
 }
