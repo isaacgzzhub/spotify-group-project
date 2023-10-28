@@ -102,7 +102,7 @@ function HomeRedirectPage() {
           <OpenModalButton
             buttonText="Sign up"
             onItemClick={closeMenu}
-            modalComponent={<SignupFormModal />}
+            modalComponent={<SignupFormModal/>}
           />
 
           <button className="demo-button" type="button" onClick={handleDemoLogin}>Demo User</button>
