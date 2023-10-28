@@ -30,7 +30,7 @@ function SignupFormModal() {
   };
 
   return (
-    <div id="sign-up-modal">
+    <div id="modal-content" className="sign-up-content">
       <h1>Sign Up</h1>
       <form
         style={{
