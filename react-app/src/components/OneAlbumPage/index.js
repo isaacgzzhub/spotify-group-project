@@ -28,11 +28,13 @@ function OneAlbum() {
           alt="album-cover"
           title={`${album?.album_name}`}
         />
-        {/* make sure this navlink is right */}
-        <NavLink to={`/albums/${album.id}/add-song`} className="add-song-to-album">
+        {album?.user_id === userId &&
+          <NavLink to={`/albums/${album.id}/add-song`} className="add-song-to-album">
           {" "}
           Add a Song to this Album{" "}
         </NavLink>
+        }
+
       </div>
 
       <div className="album-wrapper">

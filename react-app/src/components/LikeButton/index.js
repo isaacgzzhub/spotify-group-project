@@ -15,7 +15,9 @@ function LikeButton({ songId }) {
 
   // populates likedSongs
   useEffect(() => {
-    dispatch(getLikesThunk(userId));
+    if (userId) {
+      dispatch(getLikesThunk(userId));
+    }
   }, [dispatch]);
 
   // sets state to true if the song is in user's liked songs list else false
