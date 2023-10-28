@@ -40,9 +40,10 @@ function SignupFormPage() {
         </ul>
         <label>
           <div className="form-row">
+            Email
             <p className="errors">{errors.songName}</p>
           </div>
-          Email
+
           <input
             type="text"
             value={email}
