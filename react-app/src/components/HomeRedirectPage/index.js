@@ -105,7 +105,7 @@ function HomeRedirectPage() {
             modalComponent={<SignupFormModal />}
           />
 
-          <button type="button" onClick={handleDemoLogin}>Demo User</button>
+          <button className="demo-button" type="button" onClick={handleDemoLogin}>Demo User</button>
 
         </div>
       </form>
