@@ -106,7 +106,7 @@ def get_likes(user_id):
     return jsonify([song.to_dict() for song in songs])
 
 #Get all likes on a single song
-@song_routes.route('/likes/count/')
+@song_routes.route('/likes/count')
 @login_required
 def get_likes_count():
     """
