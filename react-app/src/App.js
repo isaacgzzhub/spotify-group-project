@@ -33,8 +33,10 @@ function App() {
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
-  if (!user && location.pathname === "/") {
-    return <HomeRedirectPage />;
+  if (isLoaded) {
+    if (!user && location.pathname === "/") {
+      return <HomeRedirectPage />;
+    }
   }
 
   return (
