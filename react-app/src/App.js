@@ -22,6 +22,7 @@ import EditSongForm from "./components/EditSongForm";
 import HomeRedirectPage from "./components/HomeRedirectPage";
 import AudioPlayer from "./components/AudioPlayer";
 import AddPlaylistSong from "./components/AddPlaylistSongForm";
+import AddAlbumSong from "./components/AddAlbumSong";
 
 function App() {
   const dispatch = useDispatch();
@@ -71,6 +72,9 @@ function App() {
             </Route>
             <Route path="/albums/:albumId/update">
               <UpdateAlbum />
+            </Route>
+            <Route path="/albums/:albumId/add-song">
+              <AddAlbumSong />
             </Route>
             <Route path="/albums/:albumId">
               <OneAlbum />
