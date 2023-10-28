@@ -44,9 +44,7 @@ function EditSongForm() {
     const res = await dispatch(editSongThunk(songId, payload))
 
     if (res && res.errors) {
-      console.log(res)
       setErrors(res.errors)
-      console.log(typeof errors)
     }
   };
 

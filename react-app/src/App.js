@@ -58,6 +58,9 @@ function App() {
             <Route path="/testlikebutton">
               <LikeButton />
             </Route>
+            <Route path="/songs/:songId/update">
+              <EditSongForm />
+            </Route>
             <Route path="/songs/create">
               <CreateSongForm />
             </Route>

@@ -42,7 +42,6 @@ function AlbumForm() {
     const res = await dispatch(editAlbum(payload))
 
     if (res && res.errors) {
-      console.log(res)
       setErrors(res["errors"])
     } else {
       history.push(`/albums/${album.id}`);

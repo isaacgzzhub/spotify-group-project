@@ -7,7 +7,6 @@ import { getAllAlbumsThunk } from "../../store/albums";
 
 function AddAlbumSong() {
     const dispatch = useDispatch();
-    console.log(useParams())
     const { albumId } = useParams();
     const history = useHistory();
     const userId = useSelector((state) => state.session.user.id)

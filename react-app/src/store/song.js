@@ -121,7 +121,6 @@ export const deleteSongThunk = (songId) => async (dispatch) => {
 
 export const getLikesThunk = (userId) => async (dispatch) => {
   const response = await fetch(`/api/songs/likes/${userId}`);
-  console.log("thunk:", userId);
 
   if (response.ok) {
     const likes = await response.json();
