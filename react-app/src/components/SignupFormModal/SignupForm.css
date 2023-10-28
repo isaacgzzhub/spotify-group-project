@@ -1,3 +1,5 @@
-#sign-up-modal {
+#modal-content.sign-up-content {
   width: 300px;
+  margin-left: -250px;
+  margin-top: -300px;
 }
