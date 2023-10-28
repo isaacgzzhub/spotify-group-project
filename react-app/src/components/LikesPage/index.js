@@ -38,12 +38,14 @@ function LikesPage() {
             </NavLink>
             {/* This className is awful here lol, need to refactor later */}
             <div className="three-buttons-my-songs">
-              <button
+              {userId === song.user_id &&
+                <button
                 className="update-button"
                 onClick={() => history.push(`/songs/${song.id}/update`)}
               >
                 Update
               </button>
+              }
               <DeleteSongButton songUserId={song.user_id} songId={song.id} />
             </div>
           </div>

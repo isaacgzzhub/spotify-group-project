@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { getAllSongsThunk } from "../../store/song";
+import { getAllSongsThunk, getSongLikesThunk } from "../../store/song";
 import LikeButton from "../LikeButton";
 import DeleteSongButton from "../DeleteSongButton";
 import "./Songs.css";
@@ -9,9 +9,12 @@ import "./Songs.css";
 function SongsPage() {
   const dispatch = useDispatch();
   const songs = useSelector((state) => state.song.songs);
+  const userLikes = useSelector((state) => state.song.likeCount);
+  console.log(userLikes)
 
   useEffect(() => {
     dispatch(getAllSongsThunk());
+    dispatch(getSongLikesThunk());
   }, [dispatch]);
 
   return (
