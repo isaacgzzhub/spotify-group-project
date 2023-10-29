@@ -35,7 +35,7 @@ function SongsPage() {
                 title={`${song.song_name}`}
               />
               <a>{`${song.song_name}`}</a>
-              <p>{userLikes.filter(likedSong => song.id === likedSong.song_id).length}</p>
+              <p>{userLikes.filter(likedSong => song.id === likedSong.song_id).length}<span>  <i class="fas fa-heart"></i></span></p>
             </NavLink>
             <LikeButton songId={song.id} className="like-button" />
           </div>
