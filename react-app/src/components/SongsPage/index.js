@@ -10,12 +10,16 @@ function SongsPage() {
   const dispatch = useDispatch();
   const songs = useSelector((state) => state.song.songs);
   const userLikes = useSelector((state) => state.song.likeCount);
-  console.log(userLikes)
+  console.log(userLikes);
 
   useEffect(() => {
     dispatch(getAllSongsThunk());
     dispatch(getSongLikesThunk());
   }, [dispatch]);
+
+  const handleSongLiked = (songId) => {
+    dispatch(getSongLikesThunk());
+  };
 
   return (
     <div id="albums-page">
@@ -35,9 +39,22 @@ function SongsPage() {
                 title={`${song.song_name}`}
               />
               <a>{`${song.song_name}`}</a>
-              <p>{userLikes.filter(likedSong => song.id === likedSong.song_id).length}<span>  <i class="fas fa-heart"></i></span></p>
+              <p>
+                {
+                  userLikes.filter((likedSong) => song.id === likedSong.song_id)
+                    .length
+                }
+                <span>
+                  {" "}
+                  <i class="fas fa-heart"></i>
+                </span>
+              </p>
             </NavLink>
-            <LikeButton songId={song.id} className="like-button" />
+            <LikeButton
+              songId={song.id}
+              className="like-button"
+              onLike={handleSongLiked}
+            />
           </div>
         ))}
       </div>
