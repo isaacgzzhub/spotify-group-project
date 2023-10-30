@@ -34,14 +34,18 @@ function App() {
   }, [dispatch]);
 
   if (isLoaded) {
-    if (!user && location.pathname === "/") {
+    if (!user) {
       return <HomeRedirectPage />;
     }
+
   }
+
 
   return (
     <>
+      {isLoaded && (
       <Navigation isLoaded={isLoaded} />
+      )}
       <div style={{ paddingBottom: "100px" }}>
         {isLoaded && (
           <Switch>
@@ -113,7 +117,9 @@ function App() {
             zIndex: 1000,
           }}
         >
-          <AudioPlayer />
+          {isLoaded && (
+            <AudioPlayer isLoaded={isLoaded} />
+          )}
         </div>
       </div>
     </>

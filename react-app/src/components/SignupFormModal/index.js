@@ -30,15 +30,25 @@ function SignupFormModal() {
   };
 
   return (
-    <>
+    <div id="modal-content" className="sign-up-content">
       <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
+      <form
+        style={{
+          display: "grid",
+          justifyItems: "center",
+        }}
+        onSubmit={handleSubmit}
+      >
         <ul>
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}
         </ul>
-        <label>
+        <label
+          style={{
+            display: "grid",
+          }}
+        >
           Email
           <input
             type="text"
@@ -47,7 +57,11 @@ function SignupFormModal() {
             required
           />
         </label>
-        <label>
+        <label
+          style={{
+            display: "grid",
+          }}
+        >
           Username
           <input
             type="text"
@@ -56,7 +70,11 @@ function SignupFormModal() {
             required
           />
         </label>
-        <label>
+        <label
+          style={{
+            display: "grid",
+          }}
+        >
           Password
           <input
             type="password"
@@ -65,7 +83,11 @@ function SignupFormModal() {
             required
           />
         </label>
-        <label>
+        <label
+          style={{
+            display: "grid",
+          }}
+        >
           Confirm Password
           <input
             type="password"
@@ -76,7 +98,7 @@ function SignupFormModal() {
         </label>
         <button type="submit">Sign Up</button>
       </form>
-    </>
+    </div>
   );
 }
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import { getLikesThunk } from "../../store/song";
-import DeleteSongButton from "../DeleteSongButton";
+import LikeButton from "../LikeButton";
 
 function LikesPage() {
   const dispatch = useDispatch();
@@ -38,13 +38,7 @@ function LikesPage() {
             </NavLink>
             {/* This className is awful here lol, need to refactor later */}
             <div className="three-buttons-my-songs">
-              <button
-                className="update-button"
-                onClick={() => history.push(`/songs/${song.id}/update`)}
-              >
-                Update
-              </button>
-              <DeleteSongButton songUserId={song.user_id} songId={song.id} />
+              <LikeButton songId={song.id} />
             </div>
           </div>
         ))}

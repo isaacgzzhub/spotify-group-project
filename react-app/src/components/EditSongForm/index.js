@@ -9,7 +9,7 @@ function EditSongForm() {
   const userId = useSelector((state) => state.session.user.id);
   const song = useSelector((state) => state.song?.song);
   const userAlbums = useSelector((state) => state.albums.userAlbums)
-  // const history = useHistory();
+  const history = useHistory();
   const { songId } = useParams()
   const [songName, setSongName] = useState("");
   const [songThumbnail, setSongThumbnail] = useState("");
@@ -46,6 +46,8 @@ function EditSongForm() {
     if (res && res.errors) {
       setErrors(res.errors)
     }
+
+    history.push("/mysongs")
   };
 
   return (

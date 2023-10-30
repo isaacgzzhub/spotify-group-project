@@ -105,6 +105,24 @@ def get_likes(user_id):
 
     return jsonify([song.to_dict() for song in songs])
 
+#Get all likes on a single song
+@song_routes.route('/likes/count')
+@login_required
+def get_likes_count():
+    """
+    Query for all entries in UserLikes table that has equals passed in song_id
+    """
+    # Join UserLike with Song on song_id and filter by user_id
+    result = UserLike.query.all()
+
+    # # result is a list of tuple with the songdata being index 1
+    print(result)
+
+    # songs = [song[1] for song in result]
+    # print(songs)
+
+    return jsonify([song.to_dict() for song in result])
+
 #Like a song
 @song_routes.route('/<int:song_id>/like/<int:user_id>', methods=['POST'])
 @login_required

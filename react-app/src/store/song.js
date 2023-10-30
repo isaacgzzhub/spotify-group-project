@@ -7,6 +7,7 @@ const DELETE_SONG = "song/DELETE_SONG";
 const GET_LIKES = "song/GET_LIKES";
 const LIKE_A_SONG = "song/LIKE_A_SONG";
 const UNLIKE_A_SONG = "song/UNLIKE_A_SONG";
+const GET_SONG_LIKES = "song/GET_SONG_LIKES";
 
 const getAllSongs = (songs) => ({
   type: GET_SONGS,
@@ -46,6 +47,11 @@ const likeSong = (data) => ({
 const unlikeSong = (data) => ({
   type: UNLIKE_A_SONG,
   payload: data,
+});
+
+const getSongLikes = (songId) => ({
+  type: GET_SONG_LIKES,
+  payload: songId
 });
 
 export const getAllSongsThunk = () => async (dispatch) => {
@@ -132,6 +138,19 @@ export const getLikesThunk = (userId) => async (dispatch) => {
   }
 };
 
+export const getSongLikesThunk = () => async (dispatch) => {
+  const response = await fetch(`/api/songs/likes/count`);
+
+  if (response.ok) {
+    const likeCount = await response.json();
+    if (likeCount.errors) {
+      return likeCount.errors;
+    }
+
+    dispatch(getSongLikes(likeCount));
+  }
+};
+
 export const likeASongThunk = (songId, userId) => async (dispatch) => {
   const response = await fetch(`/api/songs/${songId}/like/${userId}`, {
     method: "POST",
@@ -164,7 +183,7 @@ export const unlikeASongThunk = (songId, userId) => async (dispatch) => {
   }
 };
 
-const initialState = { songs: [], song: null, likes: [], likedSong: null, createdSong: null, editedSong: null };
+const initialState = { songs: [], song: null, likes: [], likedSong: null, createdSong: null, editedSong: null, likeCount: [] };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
@@ -181,6 +200,8 @@ export default function reducer(state = initialState, action) {
       return { ...state, likes: action.payload };
     case LIKE_A_SONG:
       return { ...state, likedSong: action.payload };
+    case GET_SONG_LIKES:
+      return { ...state, likeCount: action.payload };
     case UNLIKE_A_SONG:
       return { ...state, likedSong: action.payload };
     case EDIT_SONG:
