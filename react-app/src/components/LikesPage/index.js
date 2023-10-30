@@ -17,9 +17,9 @@ function LikesPage() {
   return (
     <div id="albums-page">
       <h1>Liked Songs</h1>
-      <NavLink to="/" className="create-song-button">
+      {/* <NavLink to="/" className="create-song-button">
         Create Song
-      </NavLink>
+      </NavLink> */}
       <div className="album-wrapper">
         {likes.map((song) => (
           <div>
