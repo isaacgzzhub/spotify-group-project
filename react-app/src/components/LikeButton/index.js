@@ -6,7 +6,7 @@ import {
   unlikeASongThunk,
 } from "../../store/song";
 
-function LikeButton({ songId }) {
+function LikeButton({ songId, onLike }) {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.session.user.id);
   const likedSongs = useSelector((state) => state.song.likes);
@@ -30,11 +30,13 @@ function LikeButton({ songId }) {
     if (isLiked) {
       dispatch(unlikeASongThunk(songId, userId)).then(() => {
         setIsLiked(false);
+        if (onLike) onLike(songId);
       });
       // if the song is not liked, dispatch action to like it (adding the record from UserLike in db) and set state to true(liked)
     } else {
       dispatch(likeASongThunk(songId, userId)).then(() => {
         setIsLiked(true);
+        if (onLike) onLike(songId);
       });
     }
   };
