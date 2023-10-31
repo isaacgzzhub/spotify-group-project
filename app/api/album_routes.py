@@ -64,7 +64,8 @@ def create_album():
         db.session.commit()
         return new_album.to_dict()
     else:
-        return {'errors': validation_errors_to_error_messages(form.errors)}, 400  # Bad Request status
+        # return {'errors': validation_errors_to_error_messages(form.errors)}, 400  # Bad Request status
+        return {'errors': form.errors}, 400
 
 
 #Edit an Album
@@ -81,7 +82,8 @@ def edit_album(id):
 
         db.session.commit()
         return album.to_dict()
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+    # return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+    return {'errors': form.errors}, 400
 
 
 #Delete an Album

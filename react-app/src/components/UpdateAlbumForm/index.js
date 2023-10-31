@@ -14,7 +14,7 @@ function AlbumForm() {
   const [albumName, setAlbumName] = useState(album?.album_name);
   const [thumbnailUrl, setThumbnailUrl] = useState(album?.thumbnail_url);
   const [releaseYear, setReleaseYear] = useState(album?.release_year);
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState({});
   const updateAlbumName = (e) => setAlbumName(e.target.value);
   const updateThumbnailUrl = (e) => setThumbnailUrl(e.target.value);
   const updateReleaseYear = (e) => setReleaseYear(e.target.value);
@@ -30,7 +30,7 @@ function AlbumForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrors([]);
+    setErrors({});
     const payload = {
       id: album.id,
       user_id: userId,
@@ -42,7 +42,7 @@ function AlbumForm() {
     const res = await dispatch(editAlbum(payload))
 
     if (res && res.errors) {
-      setErrors(res["errors"])
+      setErrors(res.errors);
     } else {
       history.push(`/albums/${album.id}`);
     };
@@ -54,15 +54,15 @@ function AlbumForm() {
      <form className="form" onSubmit={handleSubmit}>
 
       <h1>Update {album?.album_name} Album</h1>
-
+{/*
       {errors ?? errors.map((error, index) => {
           return <p>{error}</p>
-        })}
+        })} */}
 
       <label>
         <div className="form-row">
             Album Name
-            <p className="errors">{errors.albumName}</p>
+            <p style={{color:"red", fontSize:11}}>{errors.album_name}</p>
         </div>
         <input
             type="text"
@@ -75,7 +75,7 @@ function AlbumForm() {
       <label>
         <div className="form-row">
             Release Year
-            <p className="errors">{errors.releaseYear}</p>
+            <p style={{color:"red", fontSize:11}}>{errors.release_year}</p>
         </div>
         <input
             type="text"
@@ -88,7 +88,7 @@ function AlbumForm() {
       <label>
         <div className="form-row">
             Cover Photo
-            <p className="errors">{errors.thumbnailUrl}</p>
+            <p style={{color:"red", fontSize:11}}>{errors.thumbnail_url}</p>
         </div>
         <input
             type="text"
