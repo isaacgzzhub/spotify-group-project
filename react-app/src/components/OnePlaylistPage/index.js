@@ -21,8 +21,8 @@ function OnePlaylistPage() {
     playlistSongs.some((ps) => ps.song_id === song.id)
   );
 
-  const handleDelete = (playlistSongId) => {
-    dispatch(removePlaylistSong(playlistSongId));
+  const handleDelete = (playlistSongRelationshipId) => {
+    dispatch(removePlaylistSong(playlistSongRelationshipId));
   };
 
   const handleAddSongClick = () => {
@@ -36,9 +36,6 @@ function OnePlaylistPage() {
 
   return (
     <div className="albums-page">
-      {" "}
-      {/* Tech debt here with using the same classname, but the name here makes no sense */}
-      {/* <div className="album-wrapper"> */}
       <div id="playlist-top-section">
         <h1> {playlist?.name} Playlist</h1>
         {userId === playlist?.user_id && (
@@ -48,27 +45,38 @@ function OnePlaylistPage() {
         )}
       </div>
       <div className="album-wrapper">
-        {truePlaylistSongs.map((song) => (
-          <div>
-            <NavLink
-              key={song.id}
-              className="album-tile"
-              to={`/songs/${song.id}`}
-            >
-              <img
-                className="album-img"
-                src={`${song?.thumbnail_url}`}
-                alt="album-cover"
-                title={`${song?.song_name}`}
-              />
-              <a>{`${song?.song_name}`}</a>
-            </NavLink>
-            <button onClick={() => handleDelete(song.id)}>Delete</button>
-          </div>
-        ))}
+        {truePlaylistSongs.map((song) => {
+          const playlistSongRelationshipId = playlistSongs.find(
+            (ps) => ps.song_id === song.id
+          )?.id;
+
+          return (
+            <div>
+              <NavLink
+                key={song.id}
+                className="album-tile"
+                to={`/songs/${song.id}`}
+              >
+                <img
+                  className="album-img"
+                  src={`${song?.thumbnail_url}`}
+                  alt="album-cover"
+                  title={`${song?.song_name}`}
+                />
+                <a>{`${song?.song_name}`}</a>
+              </NavLink>
+              {userId === playlist?.user_id && (
+                <button
+                  onClick={() => handleDelete(playlistSongRelationshipId)}
+                >
+                  Delete
+                </button>
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
-    // </div>
   );
 }
 

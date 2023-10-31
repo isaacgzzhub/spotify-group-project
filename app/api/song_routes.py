@@ -40,7 +40,9 @@ def create_song():
         db.session.add(song)
         db.session.commit()
         return song.to_dict()
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+    # return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+    return {'errors': form.errors}, 400
+
 
 # Edit a song
 # Come back for constraints/validators?
@@ -57,7 +59,8 @@ def edit_song(id):
 
         db.session.commit()
         return song.to_dict()
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+    # return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+    return {'errors': form.errors}, 400
 
 # Delete a song
 @song_routes.route('/<int:id>', methods=['DELETE'])

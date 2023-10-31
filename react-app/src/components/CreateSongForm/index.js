@@ -15,7 +15,7 @@ function CreateSongForm() {
   const [songUrl, setSongUrl] = useState("");
   const [releaseYear, setReleaseYear] = useState("");
   const [albumId, setAlbumId] = useState("");
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     dispatch(getUserAlbumsThunk(userId));
@@ -36,7 +36,7 @@ function CreateSongForm() {
     const res = await dispatch(createSongThunk(payload));
 
     if (res && res.errors) {
-      setErrors(res["errors"]);
+      setErrors(res.errors);
     } else {
       history.push("/mysongs");
     }
@@ -47,15 +47,10 @@ function CreateSongForm() {
       <form className="form" onSubmit={handleSubmit}>
         <h1>Create A New Song</h1>
 
-        {errors ??
-          errors.map((error) => {
-            return <p>{error}</p>;
-          })}
-
         <label>
           <div className="form-row">
             Song Name
-            <p className="errors">{errors.songName}</p>
+            <p style={{color:"red", fontSize:11}}>{errors.song_name}</p>
           </div>
 
           <input
@@ -69,7 +64,7 @@ function CreateSongForm() {
         <label>
           <div className="form-row">
             Song Audio URL
-            <p className="errors">{errors.songUrl}</p>
+            <p style={{color:"red", fontSize:11}}>{errors.song_url}</p>
           </div>
           <input
             type="text"
@@ -82,7 +77,7 @@ function CreateSongForm() {
         <label>
           <div className="form-row">
             Song Thumbnail Image
-            <p className="errors">{errors.songThumbnail}</p>
+            <p style={{color:"red", fontSize:11}}>{errors.thumbnail_url}</p>
           </div>
           <input
             type="text"
@@ -95,7 +90,7 @@ function CreateSongForm() {
         <label>
           <div className="form-row">
             Song's Release Year
-            <p className="errors">{errors.releaseYear}</p>
+            <p style={{color:"red", fontSize:11}}>{errors.release_year}</p>
           </div>
           <input
             type="text"
@@ -106,9 +101,9 @@ function CreateSongForm() {
         </label>
 
         <label>
-          <div className="form-row">
+          <div className="form-row" style={{marginBottom:500}}>
             Add Song to an Album
-            <p className="errors">{errors.songThumbnail}</p>
+            <p style={{color:"red", fontSize:11}}>{}</p>
           </div>
           <select onChange={(e) => setAlbumId(e.target.value)} value={albumId}>
             <option value="" disabled selected hidden>

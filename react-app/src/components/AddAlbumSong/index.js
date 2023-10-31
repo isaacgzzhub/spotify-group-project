@@ -16,7 +16,7 @@ function AddAlbumSong() {
     const [songThumbnail, setSongThumbnail] = useState("");
     const [songUrl, setSongUrl] = useState("");
     const [releaseYear, setReleaseYear] = useState("");
-    const [errors, setErrors] = useState([]);
+    const [errors, setErrors] = useState({});
 
     useEffect(() => {
         dispatch(getAllAlbumsThunk());
@@ -25,7 +25,7 @@ function AddAlbumSong() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        setErrors([]);
+        setErrors({});
         const payload = {
           user_id: userId,
           album_id: albumId,
@@ -49,18 +49,18 @@ function AddAlbumSong() {
         <form className="form" onSubmit={handleSubmit}>
         <h1>Add a New Song to the {`${album?.album_name}`} Album</h1>
 
-        {errors && errors.length > 0 && (
+        {/* {errors && errors.length > 0 && (
         <div className="error-messages">
             {errors.map((error, index) => (
             <p key={index}>{error}</p>
             ))}
         </div>
-)}
+)} */}
 
         <label>
           <div className="form-row">
             Song Name
-            <p className="errors">{errors.songName}</p>
+            <p style={{color:"red", fontSize:11}}>{errors.song_name}</p>
           </div>
 
           <input
@@ -75,7 +75,7 @@ function AddAlbumSong() {
         <label>
           <div className="form-row">
             Song Audio URL
-            <p className="errors">{errors.songUrl}</p>
+            <p style={{color:"red", fontSize:11}}>{errors.song_url}</p>
           </div>
           <input
             type="text"
@@ -88,7 +88,7 @@ function AddAlbumSong() {
         <label>
           <div className="form-row">
             Song Thumbnail Image
-            <p className="errors">{errors.songThumbnail}</p>
+            <p style={{color:"red", fontSize:11}}>{errors.thumbnail_url}</p>
           </div>
           <input
             type="text"
@@ -101,7 +101,7 @@ function AddAlbumSong() {
         <label>
           <div className="form-row">
             Song's Release Year
-            <p className="errors">{errors.releaseYear}</p>
+            <p style={{color:"red", fontSize:11}}>{errors.release_year}</p>
           </div>
           <input
             type="text"

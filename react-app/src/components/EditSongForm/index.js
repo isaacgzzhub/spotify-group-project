@@ -44,10 +44,11 @@ function EditSongForm() {
     const res = await dispatch(editSongThunk(songId, payload))
 
     if (res && res.errors) {
-      setErrors(res.errors)
+      setErrors(res.errors);
+    } else {
+      history.push("/mysongs")
     }
 
-    history.push("/mysongs")
   };
 
   return (
@@ -57,16 +58,11 @@ function EditSongForm() {
 
       <h1>Update {song?.song_name}</h1>
 
-      {errors[0] ?? <p>{errors[0]}</p>}
-      {errors[1] ?? <p>{errors[1]}</p>}
-
       <label>
         <div className="form-row">
             Song Name
-            <p className="errors">{errors.songName}</p>
+            <p style={{color:"red", fontSize:11}}>{errors.song_name}</p>
         </div>
-        {errors.songName ??
-          <h1>{errors.songName}</h1>}
         <input
             type="text"
             placeholder="Song Name"
@@ -78,7 +74,7 @@ function EditSongForm() {
       <label>
         <div className="form-row">
             Song Thumbnail
-            <p className="errors">{errors.songThumbnail}</p>
+            <p style={{color:"red", fontSize:11}}>{errors.thumbnail_url}</p>
         </div>
         <input
             type="text"
@@ -91,7 +87,7 @@ function EditSongForm() {
       <label>
         <div className="form-row">
             Song's Album
-            <p className="errors">{errors.albumId}</p>
+            <p className="errors">{}</p>
         </div>
         <select onChange={(e) => setAlbumId(e.target.value)} value={albumId}>
             {userAlbums?.map((album) => {
