@@ -1,0 +1,24 @@
+.album-wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+  margin: 0;
+}
+
+.album-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Styling a tags of the all albums */
+.album-wrapper a {
+  text-decoration: none;
+  color: white;
+}
+
+/* Center All Albums h1 to be in the center of the page */
+/* .albums-heading {
+  text-align: center;
+} */

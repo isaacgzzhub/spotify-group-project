@@ -1,11 +1,13 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField
-from wtforms.validators import DataRequired, Email, ValidationError
+from wtforms.validators import DataRequired, Email, ValidationError, Length, URL
 from app.models import Song
 
 class SongForm(FlaskForm):
-# album id??? field
-    song_name = StringField('song_name', validators=[DataRequired()])
-    seconds = IntegerField('seconds', validators=[DataRequired()])
-    song_content = StringField('song_content', validators=[DataRequired()])
-    release_year = IntegerField('release_year', validators=[DataRequired()])
+    user_id = IntegerField('user_id', validators=[DataRequired()])
+    album_id = IntegerField('album_id')
+    song_name = StringField('song_name', validators=[DataRequired(), Length(min=3, max=50)])
+    thumbnail_url = StringField('thumbnail_url', validators=[DataRequired(), URL(require_tld=False)])
+    seconds = IntegerField('seconds')
+    song_url = StringField('song_url', validators=[DataRequired(), URL(require_tld=False)])
+    release_year = IntegerField('release_year', validators=[DataRequired(message="This field is required and must be an integer")])

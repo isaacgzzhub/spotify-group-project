@@ -11,14 +11,14 @@ class Song(db.Model):
   album_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("albums.id")), nullable=True)
   song_name = db.Column(db.String(50), nullable=False)
   thumbnail_url = db.Column(db.String, nullable=True)
-  seconds = db.Column(db.Integer, nullable=False)
-  song_url = db.Column(db.String, unique=True, nullable=False)
+  seconds = db.Column(db.Integer, nullable=True)
+  song_url = db.Column(db.String, nullable=False)
   release_year = db.Column(db.Integer, nullable=False)
 
   album = db.relationship('Album', back_populates='songs')
   user = db.relationship('User', back_populates='songs')
-  playlist_song = db.relationship('PlaylistSong', back_populates='songs')
-  user_like = db.relationship('UserLike', back_populates='songs')
+  playlist_song = db.relationship('PlaylistSong', back_populates='songs', cascade="all, delete-orphan")
+  user_like = db.relationship('UserLike', back_populates='songs', cascade="all, delete-orphan")
 
   def to_dict(self):
       return {
