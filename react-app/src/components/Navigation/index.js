@@ -19,7 +19,11 @@ function Navigation({ isLoaded }) {
       <div id="home-profile">
         <div>
           <NavLink exact to="/songs">
-            <img src="/spotify-logo2.png" alt="Home" className="home-logo" />
+            <img
+              src="/spotify-logo-revised.jpg"
+              alt="Home"
+              className="home-logo"
+            />
           </NavLink>
         </div>
         {isLoaded && (
