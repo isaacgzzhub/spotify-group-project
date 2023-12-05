@@ -4,6 +4,8 @@ from app.models import Album, db
 from app.forms.album_form import AlbumForm
 from app.forms.album_edit_form import AlbumEditForm
 from .auth_routes import validation_errors_to_error_messages
+from app.api.aws import (
+    upload_file_to_s3, get_unique_filename)
 
 album_routes = Blueprint('albums', __name__)
 
@@ -54,10 +56,26 @@ def create_album():
     form = AlbumForm()  # Assuming AlbumForm can validate JSON data
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+
+        #AWS Steps
+        image = form.data["thumbnail_url"]
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+        print(upload)
+
+        if "url" not in upload:
+        # if the dictionary doesn't have a url key
+        # it means that there was an error when we tried to upload
+        # so we send back that error message (and we printed it above)
+            return {"errors": upload.errors}
+
+        url = upload["url"]
+
+
         new_album = Album(
             user_id=form.data['user_id'],
             album_name=form.data['album_name'],
-            thumbnail_url=form.data['thumbnail_url'],
+            thumbnail_url=url,
             release_year=form.data['release_year']
         )
         db.session.add(new_album)

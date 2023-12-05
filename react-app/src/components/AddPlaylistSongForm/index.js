@@ -56,7 +56,7 @@ function AddPlaylistSong() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form encType="multipart/form-data" onSubmit={handleSubmit}>
         <h1>Choose Songs to add to {playlist?.name} playlist</h1>
         {songs
           ?.filter((song) => !playlistSongIds?.includes(song.id))

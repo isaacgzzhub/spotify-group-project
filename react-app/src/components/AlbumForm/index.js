@@ -10,11 +10,15 @@ function AlbumForm() {
   const albumsObj = useSelector((state) => state.albums);
   const albums = Object.values(albumsObj);
   const [albumName, setAlbumName] = useState("");
-  const [thumbnailUrl, setThumbnailUrl] = useState("");
+  // const [thumbnailUrl, setThumbnailUrl] = useState("");
+  const [image, setImage] = useState(null);
+  const [imageLoading, setImageLoading] = useState(false);
   const [releaseYear, setReleaseYear] = useState("");
   const [errors, setErrors] = useState({});
+  const [generalError, setGeneralError] = useState("");
+
   const updateAlbumName = (e) => setAlbumName(e.target.value);
-  const updateThumbnailUrl = (e) => setThumbnailUrl(e.target.value);
+  // const updateThumbnailUrl = (e) => setThumbnailUrl(e.target.value);
   const updateReleaseYear = (e) => setReleaseYear(e.target.value);
 
   useEffect(() => {
@@ -32,26 +36,53 @@ function AlbumForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors({});
-    const payload = {
-      user_id: userId,
-      album_name: albumName,
-      thumbnail_url: thumbnailUrl,
-      release_year: releaseYear,
-    };
+    setGeneralError("");
 
-    // res will be album if successful else it will be errors (look at thunk in store)
-    const res = await dispatch(createAlbum(payload));
+    const formData = new FormData();
+    formData.append("user_id", userId);
+    formData.append("album_name", albumName);
+    formData.append("thumbnail_url", image);
+    formData.append("release_year", releaseYear);
+    setImageLoading(true);
 
-    if (res && res.errors) {
-      setErrors(res.errors);
-    } else {
-      history.push(`/albums/${albums.length + 1}`);
-    };
+    try {
+      const response = await dispatch(createAlbum(formData));
+
+      if (response && response.errors) {
+          setErrors(response.errors);
+      } else {
+          history.push(`/albums/${albums.length + 1}`);
+      }
+    } catch (error) {
+        setGeneralError("An error occurred. Please try again later.");
+    } finally {
+        setImageLoading(false);
+    }
+
+
+    // const payload = {
+    //   user_id: userId,
+    //   album_name: albumName,
+    //   thumbnail_url: thumbnailUrl,
+    //   release_year: releaseYear,
+    // };
+
+    // // res will be album if successful else it will be errors (look at thunk in store)
+    // const res = await dispatch(createAlbum(payload));
+
+    // if (res && res.errors) {
+    //   setErrors(res.errors);
+    // } else {
+    //   history.push(`/albums/${albums.length + 1}`);
+    // };
 
   };
+
+
+
   return (
     <div>
-      <form className="form" onSubmit={handleSubmit}>
+      <form className="form" encType="multipart/form-data" onSubmit={handleSubmit}>
         <h1>Create A New Album</h1>
 
         {/* {errors ?? errors.map(error => {
@@ -90,16 +121,15 @@ function AlbumForm() {
             <p style={{color:"red", fontSize:11}}>{errors.thumbnail_url}</p>
           </div>
           <input
-            type="text"
-            placeholder="Cover Photo URL"
-            value={thumbnailUrl}
-            onChange={updateThumbnailUrl}
-          />
+              type="file"
+              accept="image/*"
+              onChange={(e) => setImage(e.target.files?.[0])}
+            />
         </label>
 
         <button
           type="submit"
-          disabled={!albumName || !releaseYear || !thumbnailUrl}
+          disabled={!albumName || !releaseYear || !image}
         >
           Create Album
         </button>
