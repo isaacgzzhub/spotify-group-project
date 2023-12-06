@@ -5,7 +5,7 @@ import uuid
 
 BUCKET_NAME = os.environ.get("S3_BUCKET")
 S3_LOCATION = f"https://{BUCKET_NAME}.s3.amazonaws.com/"
-ALLOWED_EXTENSIONS = {"pdf", "png", "jpg", "jpeg", "gif", "mp3"}
+ALLOWED_EXTENSIONS = {"pdf", "png", "jpg", "jpeg", "gif"}
 
 s3 = boto3.client(
    "s3",
@@ -22,6 +22,9 @@ def get_unique_filename(filename):
 
 def upload_file_to_s3(file, acl="public-read"):
     try:
+        # print("S3 Upload - Content Type:", file.content_type)
+        # print("S3 Upload - Filename:", file.filename)
+
         s3.upload_fileobj(
             file,
             BUCKET_NAME,

@@ -46,31 +46,74 @@ def get_user_albums(user_id):  # Note the argument to accept album_id
         return {"error": "Albums not found"}, 404
 
 #Create an album
+# @album_routes.route('/create-album', methods=['POST'])
+# @login_required
+# def create_album():
+#     """
+#     Create a new album and returns it
+#     """
+#     # data = request.get_json()
+#     form = AlbumForm()  # Assuming AlbumForm can validate JSON data
+#     form['csrf_token'].data = request.cookies['csrf_token']
+#     if form.validate_on_submit():
+
+#         #AWS Steps
+#         image = form.data["thumbnail_url"]
+#         image.filename = get_unique_filename(image.filename)
+#         upload = upload_file_to_s3(image)
+#         print("UPLOAD:", upload)
+
+#         if "url" not in upload:
+#         # if the dictionary doesn't have a url key
+#         # it means that there was an error when we tried to upload
+#         # so we send back that error message (and we printed it above)
+#             print("S3 Upload Error:", upload['errors'])
+
+#     # Return an appropriate error response.
+#             return {"errors": [upload['errors']]}
+
+#         url = upload["url"]
+
+
+#         new_album = Album(
+#             user_id=form.data['user_id'],
+#             album_name=form.data['album_name'],
+#             thumbnail_url=url,
+#             release_year=form.data['release_year']
+#         )
+#         db.session.add(new_album)
+#         db.session.commit()
+#         return new_album.to_dict()
+#          # return {'errors': validation_errors_to_error_messages(form.errors)}, 400  # Bad Request status
+#     return {'errors': form.errors}, 400
 @album_routes.route('/create-album', methods=['POST'])
 @login_required
 def create_album():
     """
-    Create a new album and returns it
+    Create a new album and return it
     """
-    # data = request.get_json()
-    form = AlbumForm()  # Assuming AlbumForm can validate JSON data
+    form = AlbumForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
 
-        #AWS Steps
+    if form.validate_on_submit():
+        # AWS Steps
         image = form.data["thumbnail_url"]
         image.filename = get_unique_filename(image.filename)
-        upload = upload_file_to_s3(image)
-        print(upload)
+        upload = upload_file_to_s3(image.filename)
+        print("Content Type:", image.content_type)
+        print("Filename:", image)
+        print("UPLOAD:", upload)
 
         if "url" not in upload:
-        # if the dictionary doesn't have a url key
-        # it means that there was an error when we tried to upload
-        # so we send back that error message (and we printed it above)
-            return {"errors": upload.errors}
+            # If the dictionary doesn't have a 'url' key,
+            # it means that there was an error when trying to upload.
+            # Log the error details for debugging purposes.
+            print("S3 Upload Error:", upload['errors'])
+
+            # Return an appropriate error response.
+            return {"errors": [upload['errors']]}
 
         url = upload["url"]
-
 
         new_album = Album(
             user_id=form.data['user_id'],
@@ -78,13 +121,14 @@ def create_album():
             thumbnail_url=url,
             release_year=form.data['release_year']
         )
+
         db.session.add(new_album)
         db.session.commit()
-        return new_album.to_dict()
-    else:
-        # return {'errors': validation_errors_to_error_messages(form.errors)}, 400  # Bad Request status
-        return {'errors': form.errors}, 400
 
+        return new_album.to_dict()
+
+    # If form validation fails, return an error response.
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 #Edit an Album
 @album_routes.route('/<int:id>', methods=['PUT'])

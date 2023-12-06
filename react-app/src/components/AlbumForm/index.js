@@ -48,10 +48,24 @@ function AlbumForm() {
     try {
       const response = await dispatch(createAlbum(formData));
 
-      if (response && response.errors) {
-          setErrors(response.errors);
-      } else {
+      if (response) {
+        console.log(response)
+      }
+      // Check if the response is JSON
+      const contentType = response.headers.get("content-type");
+
+      if (contentType && contentType.includes("application/json")) {
+        const responseData = await response.json();
+        console.log(responseData);
+
+        if (responseData && responseData.errors) {
+          setErrors(responseData.errors);
+        } else {
           history.push(`/albums/${albums.length + 1}`);
+        }
+      } else {
+        // Log the raw response or handle it accordingly
+        console.log(response);
       }
     } catch (error) {
         setGeneralError("An error occurred. Please try again later.");
@@ -85,9 +99,11 @@ function AlbumForm() {
       <form className="form" encType="multipart/form-data" onSubmit={handleSubmit}>
         <h1>Create A New Album</h1>
 
-        {/* {errors ?? errors.map(error => {
-          return {error}
-        })} */}
+        {generalError && (
+              <p className="errors" style={{ color: "red", fontSize: 11 }}>
+                  {generalError}
+              </p>
+          )}
 
         <label>
           <div className="form-row">
@@ -133,6 +149,7 @@ function AlbumForm() {
         >
           Create Album
         </button>
+        {(imageLoading)&& <p>Loading...</p>}
       </form>
     </div>
   );

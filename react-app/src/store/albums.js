@@ -85,7 +85,8 @@ export const createAlbum = (payload) => async (dispatch) => {
     dispatch(addAlbum(createdAlbum));
     return createdAlbum
   } catch(error) {
-    return error
+    console.error("Error parsing JSON in createAlbum:", error);
+    return { errors: ["Failed to parse JSON response"] };
   }
 
 //   if (response.ok) {
