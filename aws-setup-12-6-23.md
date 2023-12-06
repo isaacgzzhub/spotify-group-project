@@ -70,7 +70,7 @@ pipenv install boto3 from the root of the project, notice that our Pipfile now s
 
 open our requirements.txt and add: boto3==1.28.63
 
-copy paste this into:
+create a aws.py file in the /app/api folder, then copy paste the following in:
 
 import boto3
 import botocore
@@ -79,7 +79,7 @@ import uuid
 
 BUCKET_NAME = os.environ.get("S3_BUCKET")
 S3_LOCATION = f"https://{BUCKET_NAME}.s3.amazonaws.com/"
-ALLOWED_EXTENSIONS = {"pdf", "png", "jpg", "jpeg", "gif"}
+ALLOWED_EXTENSIONS = {"pdf", "png", "jpg", "jpeg", "gif", "mp3"}
 
 s3 = boto3.client(
 "s3",
@@ -119,3 +119,44 @@ Key=key
 except Exception as e:
 return { "errors": str(e) }
 return True
+
+--- Modify existing post forms
+
+Go to album form and add: from flask_wtf.file import FileField, FileAllowed, FileRequired
+Also add this: from app.api.aws import ALLOWED_EXTENSIONS
+
+REPLACE the thumbnail_url with this instead in our album_form.py thumbnail_url = FileField("Image File", validators=[FileRequired(), FileAllowed(list(ALLOWED_EXTENSIONS))])
+
+Go to /app/api/album_routes.py, and add this to the top: from app.api.aws import (
+upload_file_to_s3, get_unique_filename)
+
+In our album_form.py, find the create route, then add the following just under the form.validate_on_submit():
+
+if form.validate_on_submit():
+
+        # ***** Added this block below for AWS ***** #
+        image = form.data["thumbnail_url"] # make sure this matches our album_form.py's thumbnail_url column
+        image.filename = get_unique_filename(image.filename) # use helper function to generate teh unique filename using the uuid
+        # upload contains our errors for debugging incase upload to AWS fails
+        upload = upload_file_to_s3(image) # image is an actual file we are sending to AWS, the file will have all sorts of metadata AWS needs to store, most important is the actual file data (ex. image / mp3)
+        print(upload) # print out the error
+
+        if "url" not in upload:
+        # if the dictionary doesn't have a url key
+        # it means that there was an error when you tried to upload
+        # so you send back that error message (and you printed it above)
+            return {"errors": upload.errors}
+
+        url = upload["url"]
+        # ***** Added this block above for AWS ***** #
+
+        new_album = Album(
+            user_id=form.data['user_id'],
+            album_name=form.data['album_name'],
+            # changed this line below from:
+            # thumbnail_url=form.data['thumbnail_url'],
+            thumbnail_url=url, # set the name of our image url column in our database to url found in the line url = upload["url"]
+            release_year=form.data['release_year']
+        )
+
+--- Refactor frontend to take in a file input
