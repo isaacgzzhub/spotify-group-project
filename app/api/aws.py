@@ -21,7 +21,9 @@ def get_unique_filename(filename):
 
 # Invoke this to upload a file (important function)
 def upload_file_to_s3(file, acl="public-read"):
+    print(f"File info - Filename: {file.filename}, Content Type: {file.content_type}, File Size: {file.content_length}")
     try:
+        print("Preparing to upload file to S3")
         s3.upload_fileobj(
             file,
             BUCKET_NAME,
@@ -31,10 +33,12 @@ def upload_file_to_s3(file, acl="public-read"):
                 "ContentType": file.content_type
             }
         )
+        print("File upload attempt finished")
     except Exception as e:
+        print(f"Error during upload: {e}")
         # in case our s3 upload fails
         return {"errors": str(e)}
-
+    print("Upload successful, URL:", f"{S3_LOCATION}{file.filename}")
     return {"url": f"{S3_LOCATION}{file.filename}"} # this is the exact url we are rendering our image from
 
 # use this function to delete files from bucket! this takes in a file name, just provide the string into the method

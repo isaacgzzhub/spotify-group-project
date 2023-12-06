@@ -59,16 +59,24 @@ def create_album():
 
         # ***** Added this block below for AWS ***** #
         image = form.data["thumbnail_url"] # make sure this matches our album_form.py's thumbnail_url column
-        image.filename = get_unique_filename(image.filename) # use helper function to generate teh unique filename using the uuid
+        # image = request.files.get('thumbnail_url')
+        image.read(100)  # Read first 100 bytes for testing
+        print("***************** this is the entire image", image)
+        print("****** first 100", image.read(100))
+        print(f"File size: {image.content_length}")
+        image.filename = get_unique_filename(image.filename) # use helper function to generate the unique filename using the uuid
         # upload contains our errors for debugging incase upload to AWS fails
+        print("About to call upload_file_to_s3")
+        print(type(image))
+
         upload = upload_file_to_s3(image) # image is an actual file we are sending to AWS, the file will have all sorts of metadata AWS needs to store, most important is the actual file data (ex. image / mp3)
-        print(upload) # print out the error
+        print("upload_file_to_s3 response:", upload)
 
         if "url" not in upload:
         # if the dictionary doesn't have a url key
         # it means that there was an error when you tried to upload
         # so you send back that error message (and you printed it above)
-            return {"errors": upload.errors}
+            return {"errors": upload.get("errors")}
 
         url = upload["url"]
         # ***** Added this block above for AWS ***** #

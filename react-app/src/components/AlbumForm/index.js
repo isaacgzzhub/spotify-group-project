@@ -10,7 +10,7 @@ function AlbumForm() {
   const albumsObj = useSelector((state) => state.albums);
   const albums = Object.values(albumsObj);
   const [albumName, setAlbumName] = useState("");
-  const [thumbnailUrl, setThumbnailUrl] = useState("");
+  // const [thumbnailUrl, setThumbnailUrl] = useState("");
   const [releaseYear, setReleaseYear] = useState("");
   const [errors, setErrors] = useState({});
   const updateAlbumName = (e) => setAlbumName(e.target.value);
@@ -105,7 +105,8 @@ function AlbumForm() {
         <label>
           <div className="form-row">
             Cover Photo
-            <p style={{ color: "red", fontSize: 11 }}>{errors.thumbnail_url}</p>
+            {/* <p style={{ color: "red", fontSize: 11 }}>{errors.thumbnail_url}</p> */}
+            <p style={{ color: "red", fontSize: 11 }}>{errors.image}</p>
           </div>
           <input
             // type="text"
@@ -120,10 +121,7 @@ function AlbumForm() {
           />
         </label>
 
-        <button
-          type="submit"
-          disabled={!albumName || !releaseYear || !thumbnailUrl}
-        >
+        <button type="submit" disabled={!albumName || !releaseYear || !image}>
           Create Album
         </button>
         {/* Added line below */}
