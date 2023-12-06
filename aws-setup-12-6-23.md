@@ -160,3 +160,71 @@ if form.validate_on_submit():
         )
 
 --- Refactor frontend to take in a file input
+
+Remigrate database since we changed our album model from nullable = False to nullable = True
+
+Go to /migrations/versions, then delete the file there
+Delete dev.db as well
+
+from the root of the project (in the terminal), run the following commands:
+flask db migrate
+pipenv shell
+run flask db migrate
+run flask db upgrade
+flask seed all
+
+Comment out the original input, put in this below:
+
+<input
+// type="text"
+// placeholder="Cover Photo URL"
+// value={thumbnailUrl}
+// onChange={updateThumbnailUrl}
+
+type="file"
+accept="image/\*"
+onChange={(e) => setImage(e.target.files[0])}
+/>
+</label>
+
+add these two lines to the top of the component
+
+const [image, setImage] = useState(null);
+const [imageLoading, setImageLoading] = useState(false);
+
+comment out the line here: // const updateThumbnailUrl = (e) => setThumbnailUrl(e.target.value);
+
+Add the following in the handleSubmit()
+
+const formData = new FormData();
+
+    formData.append("user_id", userId);
+    formData.append("album_name", albumName);
+    formData.append("thumbnail_url", image); // keep this consistent with backend column name
+    formData.append("release_year", releaseYear);
+
+    setImageLoading(true);
+
+    await dispatch(createAlbum(formData));
+
+    history.push(`/albums/${albums.length + 1}`);
+
+Change the albums.js store THUNK to not have the headers anymore
+
+Add the following right after the handleSubmit
+
+return (
+
+<div>
+{/_ Add encType="multipart/form-data" below _/}
+<form className="form" onSubmit={handleSubmit} encType="multipart/form-data">
+
+remove the stringify for the body in teh createalbum thunk, it should look like this now
+
+export const createAlbum = (payload) => async (dispatch) => {
+const response = await fetch("/api/albums/create-album", {
+method: "POST",
+// headers: { "Content-Type": "application/json" }, // remove headers now here
+// body: JSON.stringify(payload),
+body: payload, // don't stringify the payload anymore since it's a file
+});

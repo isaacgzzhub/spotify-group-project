@@ -4,7 +4,7 @@ const GET_ALBUM = "albums/GET_ALBUM";
 const ADD_ALBUM = "albums/ADD_ALBUM";
 const UPDATE_ALBUM = "albums/UPDATE_ALBUM";
 const DELETE_ALBUM = "albums/DELETE_ALBUM";
-const GET_USER_ALBUMS = "albums/GET_USER_ALBUMS"
+const GET_USER_ALBUMS = "albums/GET_USER_ALBUMS";
 
 // Action Creators
 const load = (allAlbums) => ({
@@ -29,7 +29,7 @@ const deleteAlbum = (albumId) => ({
 });
 const getUserAlbums = (userId) => ({
   type: GET_USER_ALBUMS,
-  payload: userId
+  payload: userId,
 });
 
 // Thunk Middleware
@@ -76,22 +76,23 @@ export const getAlbumByIdThunk = (albumId) => async (dispatch) => {
 export const createAlbum = (payload) => async (dispatch) => {
   const response = await fetch("/api/albums/create-album", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
+    // headers: { "Content-Type": "application/json" }, // remove headers now here
+    // body: JSON.stringify(payload),
+    body: payload, // don't stringify the payload anymore since it's a file
   });
 
   try {
     const createdAlbum = await response.json();
     dispatch(addAlbum(createdAlbum));
-    return createdAlbum
-  } catch(error) {
-    return error
+    return createdAlbum;
+  } catch (error) {
+    return error;
   }
 
-//   if (response.ok) {
-//     const createdAlbum = await response.json();
-//     dispatch(addAlbum(createdAlbum));
-//   }
+  //   if (response.ok) {
+  //     const createdAlbum = await response.json();
+  //     dispatch(addAlbum(createdAlbum));
+  //   }
 };
 
 export const editAlbum = (payload) => async (dispatch) => {
@@ -104,9 +105,9 @@ export const editAlbum = (payload) => async (dispatch) => {
   try {
     const updatedAlbum = await response.json();
     dispatch(updateAlbum(updatedAlbum));
-    return updatedAlbum
-  } catch(error) {
-    return error
+    return updatedAlbum;
+  } catch (error) {
+    return error;
   }
 
   // if (response.ok) {
