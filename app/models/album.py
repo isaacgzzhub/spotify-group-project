@@ -9,7 +9,7 @@ class Album(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
   album_name = db.Column(db.String(50), nullable=False)
-  thumbnail_url = db.Column(db.String, nullable=False)
+  thumbnail_url = db.Column(db.String, nullable=True) # Can switch this back to nullable=False later
   release_year = db.Column(db.Integer, nullable=False)
 
   songs = db.relationship('Song', back_populates='album')
