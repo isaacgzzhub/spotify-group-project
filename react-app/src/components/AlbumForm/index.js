@@ -57,7 +57,7 @@ function AlbumForm() {
     formData.append("release_year", releaseYear);
 
     setImageLoading(true);
-
+    console.log("Form Data Content:", Array.from(formData.entries()));
     await dispatch(createAlbum(formData));
 
     history.push(`/albums/${albums.length + 1}`);

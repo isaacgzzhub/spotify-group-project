@@ -21,7 +21,7 @@ def get_unique_filename(filename):
 
 # Invoke this to upload a file (important function)
 def upload_file_to_s3(file, acl="public-read"):
-    print(f"File info - Filename: {file.filename}, Content Type: {file.content_type}, File Size: {file.content_length}")
+    print(f"File info - Filename: {file.filename}, Content Type: {file.content_type}, File Size: {file.content_length}, File: {file}")
     try:
         print("Preparing to upload file to S3")
         s3.upload_fileobj(
