@@ -10,12 +10,14 @@ function AlbumForm() {
   const albumsObj = useSelector((state) => state.albums);
   const albums = Object.values(albumsObj);
   const [albumName, setAlbumName] = useState("");
-  const [thumbnailUrl, setThumbnailUrl] = useState("");
+  // const [thumbnailUrl, setThumbnailUrl] = useState("");
   const [releaseYear, setReleaseYear] = useState("");
   const [errors, setErrors] = useState({});
   const updateAlbumName = (e) => setAlbumName(e.target.value);
-  const updateThumbnailUrl = (e) => setThumbnailUrl(e.target.value);
+  // const updateThumbnailUrl = (e) => setThumbnailUrl(e.target.value);
   const updateReleaseYear = (e) => setReleaseYear(e.target.value);
+  const [image, setImage] = useState(null);
+  const [imageLoading, setImageLoading] = useState(false);
 
   useEffect(() => {
     dispatch(getAllAlbumsThunk());
@@ -27,31 +29,47 @@ function AlbumForm() {
     // if (!releaseYear) errors.releaseYear = "Release Year for album required";
     // setErrors(errors);
   }, [dispatch]);
-// }, [dispatch, albumName, thumbnailUrl, releaseYear]);
+  // }, [dispatch, albumName, thumbnailUrl, releaseYear]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors({});
-    const payload = {
-      user_id: userId,
-      album_name: albumName,
-      thumbnail_url: thumbnailUrl,
-      release_year: releaseYear,
-    };
+    // const payload = {
+    //   user_id: userId,
+    //   album_name: albumName,
+    //   thumbnail_url: thumbnailUrl,
+    //   release_year: releaseYear,
+    // };
 
     // res will be album if successful else it will be errors (look at thunk in store)
-    const res = await dispatch(createAlbum(payload));
+    //   const res = await dispatch(createAlbum(payload));
 
-    if (res && res.errors) {
-      setErrors(res.errors);
-    } else {
-      history.push(`/albums/${albums.length + 1}`);
-    };
+    //   if (res && res.errors) {
+    //     setErrors(res.errors);
+    //   } else {
+    //     history.push(`/albums/${albums.length + 1}`);
+    //   }
+    const formData = new FormData();
 
+    formData.append("user_id", userId);
+    formData.append("album_name", albumName);
+    formData.append("thumbnail_url", image); // keep this consistent with backend column name
+    formData.append("release_year", releaseYear);
+
+    setImageLoading(true);
+    console.log("Form Data Content:", Array.from(formData.entries()));
+    await dispatch(createAlbum(formData));
+
+    history.push(`/albums/${albums.length + 1}`);
   };
   return (
     <div>
-      <form className="form" onSubmit={handleSubmit}>
+      {/* Add encType="multipart/form-data" below, now the browser will handle the headers, so we won't set the headers in the thunk*/}
+      <form
+        className="form"
+        onSubmit={handleSubmit}
+        encType="multipart/form-data"
+      >
         <h1>Create A New Album</h1>
 
         {/* {errors ?? errors.map(error => {
@@ -61,7 +79,7 @@ function AlbumForm() {
         <label>
           <div className="form-row">
             Album Name
-            <p style={{color:"red", fontSize:11}}>{errors.album_name}</p>
+            <p style={{ color: "red", fontSize: 11 }}>{errors.album_name}</p>
           </div>
           <input
             type="text"
@@ -74,7 +92,7 @@ function AlbumForm() {
         <label>
           <div className="form-row">
             Release Year
-            <p style={{color:"red", fontSize:11}}>{errors.release_year}</p>
+            <p style={{ color: "red", fontSize: 11 }}>{errors.release_year}</p>
           </div>
           <input
             type="text"
@@ -87,22 +105,27 @@ function AlbumForm() {
         <label>
           <div className="form-row">
             Cover Photo
-            <p style={{color:"red", fontSize:11}}>{errors.thumbnail_url}</p>
+            {/* <p style={{ color: "red", fontSize: 11 }}>{errors.thumbnail_url}</p> */}
+            <p style={{ color: "red", fontSize: 11 }}>{errors.image}</p>
           </div>
           <input
-            type="text"
-            placeholder="Cover Photo URL"
-            value={thumbnailUrl}
-            onChange={updateThumbnailUrl}
+            // type="text"
+            // placeholder="Cover Photo URL"
+            // value={thumbnailUrl}
+            // onChange={updateThumbnailUrl}
+
+            type="file"
+            accept="image/*"
+            onChange={(e) => setImage(e.target.files[0])}
+            // Added 3 lines above here
           />
         </label>
 
-        <button
-          type="submit"
-          disabled={!albumName || !releaseYear || !thumbnailUrl}
-        >
+        <button type="submit" disabled={!albumName || !releaseYear || !image}>
           Create Album
         </button>
+        {/* Added line below */}
+        {imageLoading && <p>Loading...</p>}
       </form>
     </div>
   );
