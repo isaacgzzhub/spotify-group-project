@@ -8,9 +8,8 @@
 -   [Description](https://github.comissacgzzhub/spotify-group-project#description)
 -   [Getting Started](https://github.com/issacgzzhub/spotify-group-project#getting-started)
 -   [Technologies](https://github.com/issacgzzhub/spotify-group-project#technologies)
--   [Features](https://github.com/issacgzzhub/spotify-group-project$features)
+-   [Features](https://github.com/issacgzzhub/spotify-group-project#features)
 -   [Screenshots](https://github.com/issacgzzhub/spotify-group-project#screenshots)
--   [Future Features](https://github.com/issacgzzhub/spotify-group-project$future-)
 
 <br>
 
