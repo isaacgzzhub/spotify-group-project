@@ -5,6 +5,7 @@ from wtforms.validators import DataRequired, Email, ValidationError, Length, URL
 from app.models import Song
 from app.api.aws import ALLOWED_EXTENSIONS
 
+
 class SongForm(FlaskForm):
     user_id = IntegerField('user_id', validators=[DataRequired()])
     album_id = IntegerField('album_id')

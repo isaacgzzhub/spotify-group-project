@@ -49,12 +49,12 @@ function App() {
       <div style={{ paddingBottom: "100px" }}>
         {isLoaded && (
           <Switch>
-            <Route path="/login">
+            {/* <Route path="/login">
               <LoginFormPage />
             </Route>
             <Route path="/signup">
               <SignupFormPage />
-            </Route>
+            </Route> */}
             <Route path="/mysongs">
               <MySongsPage />
             </Route>

@@ -5,7 +5,7 @@ from app.forms.album_form import AlbumForm
 from app.forms.album_edit_form import AlbumEditForm
 from .auth_routes import validation_errors_to_error_messages
 from app.api.aws import (
-    upload_file_to_s3, get_unique_filename)
+    upload_file_to_s3, get_unique_filename, remove_file_from_s3)
 
 album_routes = Blueprint('albums', __name__)
 
@@ -99,7 +99,7 @@ def create_album():
         # AWS Steps
         image = form.data["thumbnail_url"]
         image.filename = get_unique_filename(image.filename)
-        upload = upload_file_to_s3(image.filename)
+        upload = upload_file_to_s3(image)
         print("Content Type:", image.content_type)
         print("Filename:", image)
         print("UPLOAD:", upload)

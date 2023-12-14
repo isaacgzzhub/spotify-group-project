@@ -11,11 +11,15 @@ function CreateSongForm() {
   const userAlbums = useSelector((state) => state.albums.userAlbums);
 
   const [songName, setSongName] = useState("");
-  const [songThumbnail, setSongThumbnail] = useState("");
-  const [songUrl, setSongUrl] = useState("");
+  const [image, setImage] = useState(null);
+  const [imageLoading, setImageLoading] = useState(false);
+  // const [songThumbnail, setSongThumbnail] = useState("");
+  const [songFile, setSongFile] = useState(null);
   const [releaseYear, setReleaseYear] = useState("");
   const [albumId, setAlbumId] = useState("");
   const [errors, setErrors] = useState({});
+  const [generalError, setGeneralError] = useState("");
+
 
   useEffect(() => {
     dispatch(getUserAlbumsThunk(userId));
@@ -23,29 +27,59 @@ function CreateSongForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setErrors([]);
-    const payload = {
-      user_id: userId,
-      album_id: albumId ? parseInt(albumId) : undefined,
-      song_name: songName,
-      thumbnail_url: songThumbnail,
-      song_url: songUrl,
-      release_year: releaseYear,
-    };
-    const res = await dispatch(createSongThunk(payload));
+    setGeneralError("");
 
-    if (res && res.errors) {
-      setErrors(res.errors);
-    } else {
-      history.push("/mysongs");
+    const formData = new FormData();
+    formData.append("user_id", userId);
+    formData.append("album_id", albumId ? parseInt(albumId) : undefined);
+    formData.append("thumbnail_url", image);
+    formData.append("song_name", songName);
+    formData.append("song_url", songFile);
+    formData.append("release_year", releaseYear);
+    setImageLoading(true);
+            // console.log("Form Data Content:", Array.from(formData.entries()));
+
+
+    try {
+      const response = await dispatch(createSongThunk(formData));
+console.log(response)
+      if (response && response.errors) {
+          setErrors(response.errors);
+      } else {
+          history.push(`/mysongs`);
+      }
+    } catch (error) {
+        setGeneralError("An error occurred. Please try again later.");
+    } finally {
+        setImageLoading(false);
     }
+    // const payload = {
+    //   user_id: userId,
+    //   album_id: albumId ? parseInt(albumId) : undefined,
+    //   song_name: songName,
+    //   thumbnail_url: songThumbnail,
+    //   song_url: songUrl,
+    //   release_year: releaseYear,
+    // };
+    // const res = await dispatch(createSongThunk(payload));
+
+    // if (res && res.errors) {
+    //   setErrors(res.errors);
+    // } else {
+    //   history.push("/mysongs");
+    // }
   };
 
   return (
     <div>
       <form className="form" onSubmit={handleSubmit}>
         <h1>Create A New Song</h1>
+        {generalError && (
+              <p className="errors" style={{ color: "red", fontSize: 11 }}>
+                  {generalError}
+              </p>
+          )}
 
         <label>
           <div className="form-row">
@@ -63,14 +97,13 @@ function CreateSongForm() {
 
         <label>
           <div className="form-row">
-            Song Audio URL
-            <p style={{color:"red", fontSize:11}}>{errors.song_url}</p>
+            Song Audio File
+            <p style={{ color: "red", fontSize: 11 }}>{errors.song_url}</p>
           </div>
           <input
-            type="text"
-            placeholder="Song Audio URL"
-            value={songUrl}
-            onChange={(e) => setSongUrl(e.target.value)}
+            type="file"
+            accept="audio/mp3"
+            onChange={(e) => setSongFile(e.target.files?.[0])}
           />
         </label>
 
@@ -80,11 +113,10 @@ function CreateSongForm() {
             <p style={{color:"red", fontSize:11}}>{errors.thumbnail_url}</p>
           </div>
           <input
-            type="text"
-            placeholder="Song Thumbnail Image"
-            value={songThumbnail}
-            onChange={(e) => setSongThumbnail(e.target.value)}
-          />
+              type="file"
+              accept="image/*"
+              onChange={(e) => setImage(e.target.files?.[0])}
+            />
         </label>
 
         <label>
@@ -118,10 +150,11 @@ function CreateSongForm() {
 
         <button
           type="submit"
-          disabled={!songName || !releaseYear || !songThumbnail || !songUrl}
+          disabled={!songName || !releaseYear || !image || !songFile}
         >
           Create Song
         </button>
+        {(imageLoading)&& <p>Loading...</p>}
       </form>
     </div>
   );

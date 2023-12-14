@@ -83,8 +83,8 @@ export const getSongByIdThunk = (songId) => async (dispatch) => {
 export const createSongThunk = (payload) => async (dispatch) => {
   const response = await fetch(`/api/songs/`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
+    // headers: { "Content-Type": "application/json" },
+    body: payload,
   });
 
   try {
