@@ -4,12 +4,12 @@
 
 ## Cool Music Player: Table of Contents
 
--   [Link to Live Site](https://github.com/issacgzzhub/spotify-group-project#link-to-live-site)
--   [Description](https://github.comissacgzzhub/spotify-group-project#description)
--   [Getting Started](https://github.com/issacgzzhub/spotify-group-project#getting-started)
--   [Technologies](https://github.com/issacgzzhub/spotify-group-project#technologies)
--   [Features](https://github.com/issacgzzhub/spotify-group-project#features)
--   [Screenshots](https://github.com/issacgzzhub/spotify-group-project#screenshots)
+-   [Link to Live Site](https://github.com/isaacgzzhub/spotify-group-project#link-to-live-site)
+-   [Description](https://github.com/isaacgzzhub/spotify-group-project#description)
+-   [Getting Started](https://github.com/isaacgzzhub/spotify-group-project#getting-started)
+-   [Technologies](https://github.com/isaacgzzhub/spotify-group-project#technologies)
+-   [Features](https://github.com/isaacgzzhub/spotify-group-project#features)
+-   [Screenshots](https://github.com/isaacgzzhub/spotify-group-project#screenshots)
 
 <br>
 
@@ -85,7 +85,7 @@ Cool Music Player, based on Spotify, is a fullstack CRUD app implemented with a 
   &nbsp;
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" style="width:75px;" />
   &nbsp;
-  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAY1BMVEX///9G47c84rQt4bGY7dKQ7NCi79ju/fg44rP3/vz6/v3p/PbC9OSI685Q5Lp76cjO9+q88+LZ+O596sqr8NpY5b0E36vL9ujT9+zj+vOy8t5o58KV7dG/9OSc7tV86slv6MPXNy61AAADXUlEQVR4nO3d2XaqMBhA4RqnaNUKijhU6vs/ZU9vzlqxPyohI93fdcTsImjUytsbAAAAAAAAAAAAkJ55uS3O+9mrmtK49VUctDTGNNKQVYi2xXG/q/Q/qoPx1djGTrqxNgvH0pC197xydvlJG3WlzT/+WtqCuiuUhkz95p2aje4el0/h6mKbl0dhsdHWeTkUFqNefckXHquefYkXLr6k+xpQYW3x3JBV4dTBDky5cF652IEJF5aO+pItrHufQhMvLNwcgukWnh0GJlnocg8mWVg7DUywsHR3kkmzcO7saSLVwspxYHKF01d2oVL6dePCuIPdWGIWHqQhjt6neX6WUVpdpue6PL2/auFmam4snu1Brdd1UjPuavewUOlbHXuGPR0fPkb11yn2BHvbPNqBVfl8A6k7P3iu103s2bnQfhAqdYw9ORfad6Gqsj5//td6FKrL8vmtM9C6rFeX2FNz5NZyGKrNMPbg23vrLpzHnpojs5ZdqAdxFv3RsmrSs9gTc+XU8iCtYkxGbX4bffbc6F5+kOooL9W8rIAv8lnmw8mMu/JRuGzZhXFWEz4Kj+JhGGkXeimUD0O9dTPjrnwUyot75WbCnfkoFJ8N1cTNhDvzUSgehtFezngonMsnmlirQg+F8mcV0VZNHgrFtaHq+zrJmofCQvwwoXh+Qz88FIpPh/HWTcEKo70B7KFQXP7qaIt7Ci1QGBiFFlIrlP4bYVCFtw/BvtcmEyv0gML8UZg/CvNHYf4ozB+F+UussN4K+r0vlljhQfoydb9vQSdW+AfW+BR2R2FgFFqgMDAKLVAYGIUWKAyMQgsUBkahBQoDG/77NMXqt2u/b9klVugBhfmjMH8U5o/C/FGYPwrzl1jhbi0499pkYoXD/5738Nf4FFqgMDAKLVAYGIUWKAyMQgsUBkahBQoDo9CCWDgeVKF0yb6Ihe7fp1kuJI7m2504m4H8TiwAAAAwaI10kayDOUZLY8wfcd1KF9s6JHHNLnkFbI4RL2FyM4aIvwqexnXXKKSQQgoppJBCCimkkEIKKaSQwmEUNuKn3OaYkfTR812h9PH0+GoWSnd1XyjdVb/3aVafk9/u/miNMGRi/hT8aSoM+TQvMFhIdzUxC8XNRLvqDQAAAAAAAAAAAP6abwmkVTxMuFMsAAAAAElFTkSuQmCC" style="width:75px;" />
+  <img src="https://images.g2crowd.com/uploads/product/image/large_detail/large_detail_477db83f729d63210139ec7cd29c1351/render-render.png" style="width:75px;" />
   &nbsp;
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" style="width:75px;" />
   &nbsp;
