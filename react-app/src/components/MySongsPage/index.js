@@ -46,7 +46,7 @@ function MySongsPage() {
               <a>{`${song.song_name}`}</a>
             </NavLink>
             <div className="three-buttons-my-songs">
-              <LikeButton songId={song.id} />
+              {/* <LikeButton songId={song.id} /> */}
               <button
                 className="update-button"
                 onClick={() => history.push(`/songs/${song.id}/update`)}
