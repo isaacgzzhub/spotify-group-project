@@ -1,29 +1,49 @@
+#  <img src="./react-app/public/favicon.ico" style="width:40px;" />   &nbsp; Cool Music Player
 
-# Flask React Project (test)
+<br>
 
-This is the starter for the Flask React project.
+## Cool Music Player: Table of Contents
 
-## Getting started
+-   [Link to Live Site](https://github.com/issacgzzhub/spotify-group-project#link-to-live-site)
+-   [Description](https://github.comissacgzzhub/spotify-group-project#description)
+-   [Getting Started](https://github.com/issacgzzhub/spotify-group-project#getting-started)
+-   [Technologies](https://github.com/issacgzzhub/spotify-group-project#technologies)
+-   [Features](https://github.com/issacgzzhub/spotify-group-project#features)
+-   [Screenshots](https://github.com/issacgzzhub/spotify-group-project#screenshots)
 
-1. Clone this repository (only this branch)
+<br>
+
+## Link to Live Site
+
+[Cool Music Player Live Site](https://cool-music-player-group-project.onrender.com)
+
+<br>
+
+## Description
+
+Cool Music Player, based on Spotify, is a fullstack CRUD app implemented with a PFRN stack. This app allows users to upload and listen to songs, as well as delete and edit songs they own. Users can also organize songs into albums and playlists.
+
+<br>
+
+## Getting Started
+
+1. Clone this repository
+
+   ```bash
+   git clone https://github.com/isaacgzzhub/spotify-group-project.git
+   ```
 
 2. Install dependencies
 
-   ```bash
-   pipenv install -r requirements.txt
-   ```
+      ```bash
+      pipenv install -r requirements.txt
+      ```
 
-3. Create a **.env** file based on the example with proper settings for your
-   development environment
+3. Create a **.env** file based on the .env.example file with credentials of your choice.
 
-4. Make sure the SQLite3 database connection URL is in the **.env** file
+4. Setup your PostgreSQL user, password and database to match your chosen credentials in the .env file.
 
-5. This starter organizes all tables inside the `flask_schema` schema, defined
-   by the `SCHEMA` environment variable. Replace the value for
-   `SCHEMA` with a unique name, **making sure you use the snake_case
-   convention**.
-
-6. Get into your pipenv, migrate your database, seed your database, and run your Flask app
+5. Enter your shell environment, upgrade and seed your database, and run your flask app
 
    ```bash
    pipenv shell
@@ -41,109 +61,77 @@ This is the starter for the Flask React project.
    flask run
    ```
 
-7. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
+6. To run the React App, go inside the `react-app` directory, `npm install` and `npm start`. This should open your browser automatically but if not, you may navigate to `localhost:5000` to access the application.
 
-## Deployment through Render.com
+<br>
+<br>
 
-First, refer to your Render.com deployment articles for more detailed
-instructions about getting started with [Render.com], creating a production
-database, and deployment debugging tips.
+## Technologies
 
-From the [Dashboard], click on the "New +" button in the navigation bar, and
-click on "Web Service" to create the application that will be deployed.
 
-Look for the name of the application you want to deploy, and click the "Connect"
-button to the right of the name.
+<br>
+<p float="left">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" style="width:75px;" />
+  &nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" style="width:75px;" />
+  &nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original-wordmark.svg" style="width:75px;" />
+  &nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original-wordmark.svg" style="width:75px;" />
+  &nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" style="width:75px;" />
+  &nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" style="width:75px;" />
+  &nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" style="width:75px;" />
+  &nbsp;
+  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAY1BMVEX///9G47c84rQt4bGY7dKQ7NCi79ju/fg44rP3/vz6/v3p/PbC9OSI685Q5Lp76cjO9+q88+LZ+O596sqr8NpY5b0E36vL9ujT9+zj+vOy8t5o58KV7dG/9OSc7tV86slv6MPXNy61AAADXUlEQVR4nO3d2XaqMBhA4RqnaNUKijhU6vs/ZU9vzlqxPyohI93fdcTsImjUytsbAAAAAAAAAAAAkJ55uS3O+9mrmtK49VUctDTGNNKQVYi2xXG/q/Q/qoPx1djGTrqxNgvH0pC197xydvlJG3WlzT/+WtqCuiuUhkz95p2aje4el0/h6mKbl0dhsdHWeTkUFqNefckXHquefYkXLr6k+xpQYW3x3JBV4dTBDky5cF652IEJF5aO+pItrHufQhMvLNwcgukWnh0GJlnocg8mWVg7DUywsHR3kkmzcO7saSLVwspxYHKF01d2oVL6dePCuIPdWGIWHqQhjt6neX6WUVpdpue6PL2/auFmam4snu1Brdd1UjPuavewUOlbHXuGPR0fPkb11yn2BHvbPNqBVfl8A6k7P3iu103s2bnQfhAqdYw9ORfad6Gqsj5//td6FKrL8vmtM9C6rFeX2FNz5NZyGKrNMPbg23vrLpzHnpojs5ZdqAdxFv3RsmrSs9gTc+XU8iCtYkxGbX4bffbc6F5+kOooL9W8rIAv8lnmw8mMu/JRuGzZhXFWEz4Kj+JhGGkXeimUD0O9dTPjrnwUyot75WbCnfkoFJ8N1cTNhDvzUSgehtFezngonMsnmlirQg+F8mcV0VZNHgrFtaHq+zrJmofCQvwwoXh+Qz88FIpPh/HWTcEKo70B7KFQXP7qaIt7Ci1QGBiFFlIrlP4bYVCFtw/BvtcmEyv0gML8UZg/CvNHYf4ozB+F+UussN4K+r0vlljhQfoydb9vQSdW+AfW+BR2R2FgFFqgMDAKLVAYGIUWKAyMQgsUBkahBQoDG/77NMXqt2u/b9klVugBhfmjMH8U5o/C/FGYPwrzl1jhbi0499pkYoXD/5738Nf4FFqgMDAKLVAYGIUWKAyMQgsUBkahBQoDo9CCWDgeVKF0yb6Ihe7fp1kuJI7m2504m4H8TiwAAAAwaI10kayDOUZLY8wfcd1KF9s6JHHNLnkFbI4RL2FyM4aIvwqexnXXKKSQQgoppJBCCimkkEIKKaSQwmEUNuKn3OaYkfTR812h9PH0+GoWSnd1XyjdVb/3aVafk9/u/miNMGRi/hT8aSoM+TQvMFhIdzUxC8XNRLvqDQAAAAAAAAAAAP6abwmkVTxMuFMsAAAAAElFTkSuQmCC" style="width:75px;" />
+  &nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" style="width:75px;" />
+  &nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlalchemy/sqlalchemy-original-wordmark.svg" style="width:75px;" />
+  &nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original-wordmark.svg" style="width:75px;" />
+  &nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" style="width:75px;" />
+  &nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original-wordmark.svg" style="width:75px;" />
+  &nbsp;
+</p>
 
-Now, fill out the form to configure the build and start commands, as well as add
-the environment variables to properly deploy the application.
+<br>
 
-### Part A: Configure the Start and Build Commands
+## Features
 
-Start by giving your application a name.
+Users
+- Users can sign up, log in, and log out.
+- Users can use a demo log in to try the site.
+- Users can't use certain features without logging in (like creating and liking songs).
 
-Leave the root directory field blank. By default, Render will run commands from
-the root directory.
+Songs
+- Users should be able to view all Songs.
+- Users should be able to upload songs.
+- Users should be able to update their uploaded songs.
+- Users should be able to delete their uploaded songs.
 
-Make sure the Environment field is set set to "Python 3", the Region is set to
-the location closest to you, and the Branch is set to "main".
+Albums
+- Users should be able to view all albums created by users.
+- Users should be able to add songs to an album they created.
+- Users should be able to remove songs from their albums.
+- Users should be able to delete their albums.
 
-Next, add your Build command. This is a script that should include everything
-that needs to happen _before_ starting the server.
+Likes
+- Users should be able to view the likes on a song.
+- Users should be able to like a song.
+- Users should be able to unlike a song.
 
-For your Flask project, enter the following command into the Build field, all in
-one line:
+Playlists
+- Users should be able to view all of their playlists.
+- Users should be able to add a song to one of their playlists.
+- Users should be able to remove a song from a playlist.
 
-```shell
-# build command - enter all in one line
-npm install --prefix react-app &&
-npm run build --prefix react-app &&
-pip install -r requirements.txt &&
-pip install psycopg2 &&
-flask db upgrade &&
-flask seed all
-```
+<br>
 
-This script will install dependencies for the frontend, and run the build
-command in the **package.json** file for the frontend, which builds the React
-application. Then, it will install the dependencies needed for the Python
-backend, and run the migration and seed files.
+## Screenshots
 
-Now, add your start command in the Start field:
-
-```shell
-# start script
-gunicorn app:app
-```
-
-_If you are using websockets, use the following start command instead for increased performance:_
-
-`gunicorn --worker-class eventlet -w 1 app:app`
-
-### Part B: Add the Environment Variables
-
-Click on the "Advanced" button at the bottom of the form to configure the
-environment variables your application needs to access to run properly. In the
-development environment, you have been securing these variables in the **.env**
-file, which has been removed from source control. In this step, you will need to
-input the keys and values for the environment variables you need for production
-into the Render GUI.
-
-Click on "Add Environment Variable" to start adding all of the variables you
-need for the production environment.
-
-Add the following keys and values in the Render GUI form:
-
-- SECRET_KEY (click "Generate" to generate a secure secret for production)
-- FLASK_ENV production
-- FLASK_APP app
-- SCHEMA (your unique schema name, in snake_case)
-- REACT_APP_BASE_URL (use render.com url, located at top of page, similar to
-  https://this-application-name.onrender.com)
-
-In a new tab, navigate to your dashboard and click on your Postgres database
-instance.
-
-Add the following keys and values:
-
-- DATABASE_URL (copy value from Internal Database URL field)
-
-_Note: Add any other keys and values that may be present in your local **.env**
-file. As you work to further develop your project, you may need to add more
-environment variables to your local **.env** file. Make sure you add these
-environment variables to the Render GUI as well for the next deployment._
-
-Next, choose "Yes" for the Auto-Deploy field. This will re-deploy your
-application every time you push to main.
-
-Now, you are finally ready to deploy! Click "Create Web Service" to deploy your
-project. The deployment process will likely take about 10-15 minutes if
-everything works as expected. You can monitor the logs to see your build and
-start commands being executed, and see any errors in the build process.
-
-When deployment is complete, open your deployed site and check to see if you
-successfully deployed your Flask application to Render! You can find the URL for
-your site just below the name of the Web Service at the top of the page.
-
-[Render.com]: https://render.com/
-[Dashboard]: https://dashboard.render.com/
+<img src="./react-app/public/images/<image_name_here>" style="width:600px;" />
