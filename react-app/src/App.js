@@ -37,15 +37,11 @@ function App() {
     if (!user) {
       return <HomeRedirectPage />;
     }
-
   }
-
 
   return (
     <>
-      {isLoaded && (
-      <Navigation isLoaded={isLoaded} />
-      )}
+      {isLoaded && <Navigation isLoaded={isLoaded} />}
       <div style={{ paddingBottom: "100px" }}>
         {isLoaded && (
           <Switch>
@@ -108,7 +104,7 @@ function App() {
             </Route>
           </Switch>
         )}
-        <div
+        {/* <div
           style={{
             position: "fixed",
             bottom: 0,
@@ -120,7 +116,7 @@ function App() {
           {isLoaded && (
             <AudioPlayer isLoaded={isLoaded} />
           )}
-        </div>
+        </div> */}
       </div>
     </>
   );
