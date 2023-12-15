@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, NavLink } from "react-router-dom";
 import { getAlbumByIdThunk } from "../../store/albums";
 import { getAllSongsThunk } from "../../store/song";
+import AudioPlayer from "../AudioPlayer";
 import "./OneAlbumPage.css";
 import Modal from "react-modal";
 
@@ -24,17 +25,23 @@ function OneAlbum() {
         <h1> {album?.album_name} Album</h1>
         <img
           className="album-cover"
+          // For now as a test, the thumbnail_url is the url to our AWS S3 bucket with the url for our MP3, NOT THE IMAGE
           src={`${album?.thumbnail_url}`}
           alt="album-cover"
           title={`${album?.album_name}`}
         />
-        {album?.user_id === userId &&
-          <NavLink to={`/albums/${album.id}/add-song`} className="add-song-to-album">
-          {" "}
-          Add a Song to this Album{" "}
-        </NavLink>
-        }
+        {/* Render AudioPlayer below the album cover for testing purposes for now */}
+        <AudioPlayer songUrl={album?.thumbnail_url} />
 
+        {album?.user_id === userId && (
+          <NavLink
+            to={`/albums/${album.id}/add-song`}
+            className="add-song-to-album"
+          >
+            {" "}
+            Add a Song to this Album{" "}
+          </NavLink>
+        )}
       </div>
 
       <div className="album-wrapper">
