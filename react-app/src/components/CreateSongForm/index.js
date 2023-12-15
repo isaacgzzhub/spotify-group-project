@@ -44,10 +44,10 @@ function CreateSongForm() {
     formData.append("song_name", songName);
     formData.append("song_url", songFile);
     formData.append("release_year", releaseYear);
-    console.log("*********FORM DATA************", formData);
+    // console.log("*********FORM DATA************", formData);
 
     setImageLoading(true);
-    console.log("Form Data Content:", Array.from(formData.entries()));
+    // console.log("Form Data Content:", Array.from(formData.entries()));
 
     await dispatch(createSongThunk(formData));
 
@@ -83,8 +83,13 @@ function CreateSongForm() {
 
   return (
     <div>
-      <form className="form" onSubmit={handleSubmit}>
+      <form
+        className="form"
+        onSubmit={handleSubmit}
+        encType="multipart/form-data" // added this here, it was missing, this is so we don't put headers in the thunk, the browser handles it instead
+      >
         <h1>Create A New Song</h1>
+
         {generalError && (
           <p className="errors" style={{ color: "red", fontSize: 11 }}>
             {generalError}
@@ -113,7 +118,7 @@ function CreateSongForm() {
           <input
             type="file"
             accept="audio/mp3"
-            onChange={(e) => setSongFile(e.target.files?.[0])}
+            onChange={(e) => setSongFile(e.target.files[0])} // removed the ?. from files?.
           />
         </label>
 
@@ -125,7 +130,7 @@ function CreateSongForm() {
           <input
             type="file"
             accept="image/*"
-            onChange={(e) => setImage(e.target.files?.[0])}
+            onChange={(e) => setImage(e.target.files[0])} // removed the ?. from files?.
           />
         </label>
 
@@ -160,7 +165,7 @@ function CreateSongForm() {
 
         <button
           type="submit"
-          disabled={!songName || !releaseYear || !image || !songFile}
+          disabled={!songName || !releaseYear || !image || !songFile} // RE-ENABLE LATER
         >
           Create Song
         </button>
