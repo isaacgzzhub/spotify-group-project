@@ -17,23 +17,27 @@ function Navigation({ isLoaded }) {
   return (
     <div className="navbar-container">
       <div id="home-profile">
-        <div>
+        <div className="row">
           <NavLink exact to="/songs">
             <img
               src="/spotify-logo-revised.jpg"
               alt="Home"
               className="home-logo"
             />
+
           </NavLink>
+          <p className="home-imgs">HOME</p>
         </div>
         {isLoaded && (
-          <div>
+          <div className="row">
             <ProfileButton user={sessionUser} />
+            <p className="home-imgs">HELLO, {sessionUser.username.toUpperCase()}</p>
           </div>
         )}
       </div>
 
       <div id="nav-links">
+        {/* <p>Your Library</p> */}
         {/* For each NavLink, we attach an onClick handler that calls handleNavLinkClick with a string argument.
             This argument is used to set the activeSection, determining which section is displayed in the NavBarPreview component. */}
         <NavLink
