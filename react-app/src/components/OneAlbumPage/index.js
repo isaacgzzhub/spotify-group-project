@@ -30,8 +30,8 @@ function OneAlbum() {
           alt="album-cover"
           title={`${album?.album_name}`}
         />
-        {/* Render AudioPlayer below the album cover for testing purposes for now */}
-        <AudioPlayer songUrl={album?.thumbnail_url} />
+        {/* Render AudioPlayer below the album cover for testing purposes for now, wait for the thumbnail_url to be available, otherwise a hard page refresh makes the audio player ghosted out */}
+        {album?.thumbnail_url && <AudioPlayer songUrl={album?.thumbnail_url} />}
 
         {album?.user_id === userId && (
           <NavLink
