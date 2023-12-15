@@ -30,28 +30,40 @@ function CreateSongForm() {
     setGeneralError("");
 
     const formData = new FormData();
+
+    // console.log("user_id", userId);
+    // console.log("album_id", albumId);
+    // console.log("thumbnail_url", image);
+    // console.log("song_name", songName);
+    // console.log("song_url", songFile);
+    // console.log("release_year", releaseYear);
+
     formData.append("user_id", userId);
     formData.append("album_id", albumId ? parseInt(albumId) : undefined);
     formData.append("thumbnail_url", image);
     formData.append("song_name", songName);
     formData.append("song_url", songFile);
     formData.append("release_year", releaseYear);
-    setImageLoading(true);
-    // console.log("Form Data Content:", Array.from(formData.entries()));
+    console.log("*********FORM DATA************", formData);
 
-    try {
-      const response = await dispatch(createSongThunk(formData));
-      console.log(response);
-      if (response && response.errors) {
-        setErrors(response.errors);
-      } else {
-        history.push(`/mysongs`);
-      }
-    } catch (error) {
-      setGeneralError("An error occurred. Please try again later.");
-    } finally {
-      setImageLoading(false);
-    }
+    setImageLoading(true);
+    console.log("Form Data Content:", Array.from(formData.entries()));
+
+    await dispatch(createSongThunk(formData));
+
+    // try {
+    //   const response = await dispatch(createSongThunk(formData));
+    //   console.log(response);
+    //   if (response && response.errors) {
+    //     setErrors(response.errors);
+    //   } else {
+    //     history.push(`/mysongs`);
+    //   }
+    // } catch (error) {
+    //   setGeneralError("An error occurred. Please try again later.");
+    // } finally {
+    //   setImageLoading(false);
+    // }
     // const payload = {
     //   user_id: userId,
     //   album_id: albumId ? parseInt(albumId) : undefined,
