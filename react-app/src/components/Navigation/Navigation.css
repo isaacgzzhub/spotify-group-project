@@ -1,7 +1,37 @@
+
 #home-profile {
   display: flex;
-  align-items: center; /* Vertically center items */
-  justify-content: start; /* Align items to the start of the container */
+  flex-direction: column; /* Horizontal layout */
+  flex-wrap: wrap; /* Wrap onto next line if overflow or run out of space */
+  padding: 16px;
+  gap: 16px; /* Gap between links */
+  border-radius: 10px;
+  background-color: rgb(18, 17, 17);
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+}
+#home-profile button {
+  background-color: rgb(18, 17, 17);
+  border: none;
+  cursor: pointer;
+}
+
+
+#nav-links, .nb-prev {
+  display: flex;
+  flex-direction: row; /* Horizontal layout */
+  flex-wrap: wrap; /* Wrap onto next line if overflow or run out of space */
+  padding: 16px;
+  gap: 16px; /* Gap between links */
+  border-radius: 10px;
+  background-color: rgb(18, 17, 17);
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  /* border-bottom: 3px solid white; */
 }
 
 .profile-dropdown {
@@ -14,13 +44,12 @@
 
 /* Home logo styling */
 .home-logo {
-  margin-right: 20px;
   height: 30px;
   width: 30px;
 }
 
 .navbar-container {
-  background-color: #1f1e1e;
+  background-color: black;
   position: fixed; /* Make it stick to the window */
   left: 0; /* Left and top 0 makes the navbar start from the top left and hug the left side of the screen */
   top: 0;
@@ -28,7 +57,6 @@
   width: 25%;
   z-index: 1000;
   overflow-y: auto; /* Enable scrolling if the content overflows */
-  border-right: 3px solid white;
 }
 
 /* Hide scroll bar */
@@ -36,20 +64,6 @@
   display: none; /* For Chrome, Safari, and Opera */
 }
 
-#home-profile {
-  background-color: #1f1e1e;
-  padding: 16px;
-  margin-bottom: 10px;
-}
-
-#nav-links {
-  display: flex;
-  flex-direction: row; /* Horizontal layout */
-  flex-wrap: wrap; /* Wrap onto next line if overflow or run out of space */
-  padding: 16px;
-  gap: 16px; /* Gap between links */
-  border-bottom: 3px solid white;
-}
 
 .active-link {
   color: rgb(39, 201, 39) !important;
@@ -75,4 +89,34 @@
 .album-img {
   width: 150px;
   height: 150px;
+}
+
+.profile-btn {
+  /* background-color: black; */
+  /* border-radius: 100%; */
+  /* box-shadow: 2px 4px 4px #C69C6D; */
+  /* border: 1px solid #323131; */
+  cursor: pointer;
+
+}
+
+.user-logo {
+  width: 23px; /* Adjust the width to your desired size */
+  display:flex;
+  margin-left: 0px auto; /* Center the logo */
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.row a {
+  padding-top: 4%;
+}
+
+.home-imgs {
+  padding-left: 5px;
+  font-weight: bold;
+  color: rgb(104, 102, 102);
 }
