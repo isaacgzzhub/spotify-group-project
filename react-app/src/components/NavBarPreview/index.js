@@ -14,7 +14,7 @@ function NavBarPreview({ activeSection }) {
   const myAlbums = albums.filter((album) => album.user_id === user.id);
 
   return (
-    <div>
+    <div className="nb-prev">
       {/* Check if the activeSection is "allAlbums" */}
       {activeSection === "allAlbums" && (
         <div>
