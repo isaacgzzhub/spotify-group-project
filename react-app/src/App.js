@@ -23,6 +23,7 @@ import HomeRedirectPage from "./components/HomeRedirectPage";
 import AudioPlayer from "./components/AudioPlayer";
 import AddPlaylistSong from "./components/AddPlaylistSongForm";
 import AddAlbumSong from "./components/AddAlbumSong";
+import AboutUs from "./components/AboutUsPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,15 +38,11 @@ function App() {
     if (!user) {
       return <HomeRedirectPage />;
     }
-
   }
-
 
   return (
     <>
-      {isLoaded && (
-      <Navigation isLoaded={isLoaded} />
-      )}
+      {isLoaded && <Navigation isLoaded={isLoaded} />}
       <div style={{ paddingBottom: "100px" }}>
         {isLoaded && (
           <Switch>
@@ -103,6 +100,9 @@ function App() {
             <Route exact path="/playlists">
               <PlaylistsPage />
             </Route>
+            <Route path="/about-us">
+              <AboutUs />
+            </Route>
             <Route path="/">
               <SongsPage />
             </Route>
@@ -117,9 +117,7 @@ function App() {
             zIndex: 1000,
           }}
         >
-          {isLoaded && (
-            <AudioPlayer isLoaded={isLoaded} />
-          )}
+          {isLoaded && <AudioPlayer isLoaded={isLoaded} />}
         </div>
       </div>
     </>

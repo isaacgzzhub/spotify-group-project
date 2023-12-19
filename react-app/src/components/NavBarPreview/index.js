@@ -7,10 +7,10 @@ function NavBarPreview({ activeSection }) {
   const user = useSelector((state) => state.session.user);
   const albumsObj = useSelector((state) => state.albums);
   const albums = Object.values(albumsObj);
-  const allSongs = useSelector((state) => state.song.songs)
-  const likedSongs = useSelector((state) => state.song.likes)
+  const allSongs = useSelector((state) => state.song.songs);
+  const likedSongs = useSelector((state) => state.song.likes);
 
-  const mySongs = allSongs.filter((song) => song.user_id === user.id)
+  const mySongs = allSongs.filter((song) => song.user_id === user.id);
   const myAlbums = albums.filter((album) => album.user_id === user.id);
 
   return (
@@ -20,24 +20,25 @@ function NavBarPreview({ activeSection }) {
         <div>
           <div className="album-tile-list">
             {/* Show the first five albums here */}
-            {albums.slice(0, 5).map((album) => (
-              // conditional below to only render album if it exists
-              album && (
-              <NavLink
-                key={album.id}
-                className="album-tile"
-                to={`/albums/${album.id}`}
-              >
-                <img
-                  className="album-img"
-                  src={`${album.thumbnail_url}`}
-                  alt="album-cover"
-                  title={`${album.album_name}`}
-                />
-                <a>{`${album.album_name}`}</a>
-              </NavLink>
-              )
-            ))}
+            {albums.slice(0, 5).map(
+              (album) =>
+                // conditional below to only render album if it exists
+                album && (
+                  <NavLink
+                    key={album.id}
+                    className="album-tile"
+                    to={`/albums/${album.id}`}
+                  >
+                    <img
+                      className="album-img"
+                      src={`${album.thumbnail_url}`}
+                      alt="album-cover"
+                      title={`${album.album_name}`}
+                    />
+                    <a>{`${album.album_name}`}</a>
+                  </NavLink>
+                )
+            )}
           </div>
         </div>
       )}
@@ -72,23 +73,24 @@ function NavBarPreview({ activeSection }) {
         <div>
           <div className="album-tile-list">
             {/* Show the first five albums here */}
-            {allSongs.slice(0, 5).map((song) => (
-              song && (
-              <NavLink
-                key={song.id}
-                className="album-tile"
-                to={`/songs/${song.id}`}
-              >
-                <img
-                  className="album-img"
-                  src={`${song.thumbnail_url}`}
-                  alt="album-cover"
-                  title={`${song.song_name}`}
-                />
-                <a>{`${song.song_name}`}</a>
-              </NavLink>
-              )
-            ))}
+            {allSongs.slice(0, 5).map(
+              (song) =>
+                song && (
+                  <NavLink
+                    key={song.id}
+                    className="album-tile"
+                    to={`/songs/${song.id}`}
+                  >
+                    <img
+                      className="album-img"
+                      src={`${song.thumbnail_url}`}
+                      alt="album-cover"
+                      title={`${song.song_name}`}
+                    />
+                    <a>{`${song.song_name}`}</a>
+                  </NavLink>
+                )
+            )}
           </div>
         </div>
       )}
@@ -97,23 +99,24 @@ function NavBarPreview({ activeSection }) {
         <div>
           <div className="album-tile-list">
             {/* Show the first five albums here */}
-            {mySongs.slice(0, 5).map((song) => (
-              song && (
-              <NavLink
-                key={song.id}
-                className="album-tile"
-                to={`/songs/${song.id}`}
-              >
-                <img
-                  className="album-img"
-                  src={`${song.thumbnail_url}`}
-                  alt="album-cover"
-                  title={`${song.song_name}`}
-                />
-                <a>{`${song.song_name}`}</a>
-              </NavLink>
-              )
-            ))}
+            {mySongs.slice(0, 5).map(
+              (song) =>
+                song && (
+                  <NavLink
+                    key={song.id}
+                    className="album-tile"
+                    to={`/songs/${song.id}`}
+                  >
+                    <img
+                      className="album-img"
+                      src={`${song.thumbnail_url}`}
+                      alt="album-cover"
+                      title={`${song.song_name}`}
+                    />
+                    <a>{`${song.song_name}`}</a>
+                  </NavLink>
+                )
+            )}
           </div>
         </div>
       )}
@@ -122,27 +125,30 @@ function NavBarPreview({ activeSection }) {
         <div>
           <div className="album-tile-list">
             {/* Show the first five albums here */}
-            {likedSongs.slice(0, 5).map((song) => (
-              song && (
-              <NavLink
-                key={song.id}
-                className="album-tile"
-                to={`/songs/${song.id}`}
-              >
-                <img
-                  className="album-img"
-                  src={`${song.thumbnail_url}`}
-                  alt="album-cover"
-                  title={`${song.song_name}`}
-                />
-                <a>{`${song.song_name}`}</a>
-              </NavLink>
-              )
-            ))}
+            {likedSongs.slice(0, 5).map(
+              (song) =>
+                song && (
+                  <NavLink
+                    key={song.id}
+                    className="album-tile"
+                    to={`/songs/${song.id}`}
+                  >
+                    <img
+                      className="album-img"
+                      src={`${song.thumbnail_url}`}
+                      alt="album-cover"
+                      title={`${song.song_name}`}
+                    />
+                    <a>{`${song.song_name}`}</a>
+                  </NavLink>
+                )
+            )}
           </div>
         </div>
       )}
-
+      <div className="about-us-link">
+        <NavLink to="/about-us">About Us</NavLink>
+      </div>
     </div>
   );
 }
