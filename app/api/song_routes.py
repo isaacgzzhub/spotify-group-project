@@ -35,28 +35,29 @@ def create_song():
         image.filename = get_unique_filename(image.filename)
         upload = upload_file_to_s3(image)
 
-        # song = form.data["song_url"]
-        # song.filename = get_unique_filename(song.filename)
-        # uploadSong = upload_file_to_s3(song)
+        song = form.data["song_url"]
+        song.filename = get_unique_filename(song.filename)
+        uploadSong = upload_file_to_s3(song)
 
         # print("*****UPLOAD*****", upload)
         # print("*****IMAGE*****", image)
         # print("*****UPLOAD SONG*****", uploadSong)
         # print("*****SONG*****", song)
-  # Issue is with upload and uploadSong above???
+
+  # ********************** Issue is with upload and uploadSong above???
         if "url" not in upload:
         # if the dictionary doesn't have a url key
         # it means that there was an error when we tried to upload
         # so we send back that error message (and we printed it above)
             return {"errors": upload.get("errors")}
-        # songUrl = uploadSong["url"]
+        songUrl = uploadSong["url"]
         url = upload["url"]
 
         new_song = Song(
             user_id = form.data['user_id'],
             album_id=form.data['album_id'],
             thumbnail_url=url,
-            # song_url=songUrl,
+            song_url=songUrl,
             song_name=form.data['song_name'],
             release_year=form.data['release_year']
           # seconds=form.data['seconds'], # omit seconds for now

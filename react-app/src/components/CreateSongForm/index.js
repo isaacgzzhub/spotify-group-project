@@ -42,7 +42,7 @@ function CreateSongForm() {
     formData.append("album_id", albumId ? parseInt(albumId) : undefined);
     formData.append("thumbnail_url", image);
     formData.append("song_name", songName);
-    // formData.append("song_url", songFile);
+    formData.append("song_url", songFile);
     formData.append("release_year", releaseYear);
     // console.log("*********FORM DATA************", formData);
 
@@ -110,7 +110,7 @@ function CreateSongForm() {
           />
         </label>
 
-        {/* <label>
+        <label>
           <div className="form-row">
             Song Audio File
             <p style={{ color: "red", fontSize: 11 }}>{errors.song_url}</p>
@@ -120,7 +120,7 @@ function CreateSongForm() {
             accept="audio/mp3"
             onChange={(e) => setSongFile(e.target.files[0])} // removed the ?. from files?.
           />
-        </label> */}
+        </label>
 
         <label>
           <div className="form-row">
