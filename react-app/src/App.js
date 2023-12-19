@@ -46,18 +46,6 @@ function App() {
       }
     : {};
 
-  const rootStyles = user
-    ? {
-        border: "solid black 1px",
-        padding: "10px",
-        borderRadius: "10px",
-        fontFamily: '"Nunito", sans-serif',
-        background: "linear-gradient(to bottom, rgb(7, 44, 3), #000000)",
-        backgroundAttachment: "fixed",
-        marginLeft: "25.5%",
-      }
-    : {};
-
   if (isLoaded) {
     if (!user) {
       return <HomeRedirectPage />;
