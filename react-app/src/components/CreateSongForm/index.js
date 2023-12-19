@@ -30,28 +30,40 @@ function CreateSongForm() {
     setGeneralError("");
 
     const formData = new FormData();
+
+    // console.log("user_id", userId);
+    // console.log("album_id", albumId);
+    // console.log("thumbnail_url", image);
+    // console.log("song_name", songName);
+    // console.log("song_url", songFile);
+    // console.log("release_year", releaseYear);
+
     formData.append("user_id", userId);
     formData.append("album_id", albumId ? parseInt(albumId) : undefined);
     formData.append("thumbnail_url", image);
     formData.append("song_name", songName);
     formData.append("song_url", songFile);
     formData.append("release_year", releaseYear);
+    // console.log("*********FORM DATA************", formData);
+
     setImageLoading(true);
     // console.log("Form Data Content:", Array.from(formData.entries()));
 
-    try {
-      const response = await dispatch(createSongThunk(formData));
-      console.log(response);
-      if (response && response.errors) {
-        setErrors(response.errors);
-      } else {
-        history.push(`/mysongs`);
-      }
-    } catch (error) {
-      setGeneralError("An error occurred. Please try again later.");
-    } finally {
-      setImageLoading(false);
-    }
+    await dispatch(createSongThunk(formData));
+
+    // try {
+    //   const response = await dispatch(createSongThunk(formData));
+    //   console.log(response);
+    //   if (response && response.errors) {
+    //     setErrors(response.errors);
+    //   } else {
+    //     history.push(`/mysongs`);
+    //   }
+    // } catch (error) {
+    //   setGeneralError("An error occurred. Please try again later.");
+    // } finally {
+    //   setImageLoading(false);
+    // }
     // const payload = {
     //   user_id: userId,
     //   album_id: albumId ? parseInt(albumId) : undefined,
@@ -71,8 +83,13 @@ function CreateSongForm() {
 
   return (
     <div>
-      <form className="form" onSubmit={handleSubmit}>
+      <form
+        className="form"
+        onSubmit={handleSubmit}
+        encType="multipart/form-data" // added this here, it was missing, this is so we don't put headers in the thunk, the browser handles it instead
+      >
         <h1>Create A New Song</h1>
+
         {generalError && (
           <p className="errors" style={{ color: "red", fontSize: 11 }}>
             {generalError}
@@ -101,7 +118,7 @@ function CreateSongForm() {
           <input
             type="file"
             accept="audio/mp3"
-            onChange={(e) => setSongFile(e.target.files?.[0])}
+            onChange={(e) => setSongFile(e.target.files[0])} // removed the ?. from files?.
           />
         </label>
 
@@ -113,7 +130,7 @@ function CreateSongForm() {
           <input
             type="file"
             accept="image/*"
-            onChange={(e) => setImage(e.target.files?.[0])}
+            onChange={(e) => setImage(e.target.files[0])} // removed the ?. from files?.
           />
         </label>
 
@@ -148,7 +165,7 @@ function CreateSongForm() {
 
         <button
           type="submit"
-          disabled={!songName || !releaseYear || !image || !songFile}
+          // disabled={!songName || !releaseYear || !image || !songFile} // RE-ENABLE LATER
         >
           Create Song
         </button>

@@ -55,9 +55,9 @@ function AlbumForm() {
     formData.append("album_name", albumName);
     formData.append("thumbnail_url", image); // keep this consistent with backend column name
     formData.append("release_year", releaseYear);
-
+    // console.log("*********FORM DATA************", formData);
     setImageLoading(true);
-    console.log("Form Data Content:", Array.from(formData.entries()));
+    // console.log("Form Data Content:", Array.from(formData.entries()));
     await dispatch(createAlbum(formData));
 
     history.push(`/albums/${albums.length + 1}`);
