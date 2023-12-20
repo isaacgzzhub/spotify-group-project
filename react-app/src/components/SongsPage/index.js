@@ -5,6 +5,7 @@ import { getAllSongsThunk, getSongLikesThunk } from "../../store/song";
 import LikeButton from "../LikeButton";
 import DeleteSongButton from "../DeleteSongButton";
 import "./Songs.css";
+import AudioPlayer from "../AudioPlayer";
 
 function SongsPage() {
   const dispatch = useDispatch();
@@ -27,10 +28,9 @@ function SongsPage() {
       <div className="album-wrapper">
         {songs.map((song) => (
           <div>
-            <NavLink
+            <div
               key={song.id}
               className="album-tile"
-              to={`/songs/${song.id}`}
             >
               <img
                 className="album-img"
@@ -49,12 +49,13 @@ function SongsPage() {
                   <i class="fas fa-heart"></i>
                 </span>
               </p>
-            </NavLink>
+            </div>
             <LikeButton
               songId={song.id}
               className="like-button"
               onLike={handleSongLiked}
             />
+            <AudioPlayer songUrl={song?.song_url} />
           </div>
         ))}
       </div>
