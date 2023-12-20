@@ -49,21 +49,21 @@ function CreateSongForm() {
     setImageLoading(true);
     // console.log("Form Data Content:", Array.from(formData.entries()));
 
-    await dispatch(createSongThunk(formData));
+    // await dispatch(createSongThunk(formData));
 
-    // try {
-    //   const response = await dispatch(createSongThunk(formData));
-    //   console.log(response);
-    //   if (response && response.errors) {
-    //     setErrors(response.errors);
-    //   } else {
-    //     history.push(`/mysongs`);
-    //   }
-    // } catch (error) {
-    //   setGeneralError("An error occurred. Please try again later.");
-    // } finally {
-    //   setImageLoading(false);
-    // }
+    try {
+      const response = await dispatch(createSongThunk(formData));
+      console.log(response);
+      if (response && response.errors) {
+        setErrors(response.errors);
+      } else {
+        history.push(`/mysongs`);
+      }
+    } catch (error) {
+      setGeneralError("An error occurred. Please try again later.");
+    } finally {
+      setImageLoading(false);
+    }
     // const payload = {
     //   user_id: userId,
     //   album_id: albumId ? parseInt(albumId) : undefined,
@@ -165,7 +165,7 @@ function CreateSongForm() {
 
         <button
           type="submit"
-          // disabled={!songName || !releaseYear || !image || !songFile} // RE-ENABLE LATER
+          disabled={!songName || !releaseYear || !image || !songFile} // RE-ENABLE LATER
         >
           Create Song
         </button>
