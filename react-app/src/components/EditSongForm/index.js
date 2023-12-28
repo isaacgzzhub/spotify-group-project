@@ -12,6 +12,7 @@ function EditSongForm() {
   const history = useHistory();
   const { songId } = useParams()
   const [songName, setSongName] = useState("");
+  const [artist, setArtist] = useState("");
   const [songThumbnail, setSongThumbnail] = useState("");
   const [albumId, setAlbumId] = useState("");
   const [errors, setErrors] = useState({});
@@ -27,6 +28,7 @@ function EditSongForm() {
   useEffect(() => {
     if (song) {
     setSongName(song?.song_name)
+    setArtist(song?.artist)
     setSongThumbnail(song?.thumbnail_url)
     setAlbumId(song?.album_id)
     }
@@ -38,6 +40,7 @@ function EditSongForm() {
     const payload = {
       album_id: albumId ? parseInt(albumId) : undefined,
       song_name: songName,
+      artist,
       thumbnail_url: songThumbnail
     };
 
@@ -68,6 +71,19 @@ function EditSongForm() {
             placeholder="Song Name"
             value={songName}
             onChange={(e) => setSongName(e.target.value)}
+        />
+      </label>
+
+      <label>
+        <div className="form-row">
+            Artist Name
+            <p style={{color:"red", fontSize:11}}>{errors.artist}</p>
+        </div>
+        <input
+            type="text"
+            placeholder="Artist Name"
+            value={artist}
+            onChange={(e) => setArtist(e.target.value)}
         />
       </label>
 

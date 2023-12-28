@@ -23,6 +23,7 @@ import HomeRedirectPage from "./components/HomeRedirectPage";
 import AudioPlayer from "./components/AudioPlayer";
 import AddPlaylistSong from "./components/AddPlaylistSongForm";
 import AddAlbumSong from "./components/AddAlbumSong";
+import OneSong from "./components/OneSongPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -79,6 +80,9 @@ function App() {
             </Route>
             <Route path="/songs/create">
               <CreateSongForm />
+            </Route>
+            <Route path="/songs/:songId">
+              <OneSong />
             </Route>
             <Route path="/songs">
               <SongsPage />

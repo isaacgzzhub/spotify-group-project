@@ -19,9 +19,19 @@ label {
 }
 
 /* Styling a tags to not show the underline, and be white color text */
-a {
+p {
   text-decoration: none;
   color: white;
+}
+
+a {
+  text-decoration: none;
+}
+
+.artist {
+  color: gray;
+  font-style: italic;
+  font-size: large;
 }
 
 /**************** Styling update and delete buttons ***********************/

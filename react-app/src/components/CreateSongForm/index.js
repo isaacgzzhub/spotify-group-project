@@ -11,6 +11,7 @@ function CreateSongForm() {
   const userAlbums = useSelector((state) => state.albums.userAlbums);
 
   const [songName, setSongName] = useState("");
+  const [artist, setArtist] = useState("");
   const [image, setImage] = useState(null);
   const [imageLoading, setImageLoading] = useState(false);
   // const [songThumbnail, setSongThumbnail] = useState("");
@@ -42,6 +43,7 @@ function CreateSongForm() {
     formData.append("album_id", albumId ? parseInt(albumId) : undefined);
     formData.append("thumbnail_url", image);
     formData.append("song_name", songName);
+    formData.append("artist", artist);
     formData.append("song_url", songFile);
     formData.append("release_year", releaseYear);
     // console.log("*********FORM DATA************", formData);
@@ -107,6 +109,20 @@ function CreateSongForm() {
             placeholder="Song Name"
             value={songName}
             onChange={(e) => setSongName(e.target.value)}
+          />
+        </label>
+
+        <label>
+          <div className="form-row">
+            Artist Name
+            <p style={{ color: "red", fontSize: 11 }}>{errors.artist}</p>
+          </div>
+
+          <input
+            type="text"
+            placeholder="Artist Name"
+            value={artist}
+            onChange={(e) => setArtist(e.target.value)}
           />
         </label>
 

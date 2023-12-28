@@ -46,6 +46,7 @@ function OneAlbum() {
 
       <div className="album-wrapper">
         {albumSongs?.map((song) => (
+          <div>
           <NavLink
             key={song?.id}
             className="album-tile"
@@ -57,8 +58,9 @@ function OneAlbum() {
               alt="album-cover"
               title={`${song?.song_name}`}
             />
-            <div>{`${song?.song_name}`}</div>
           </NavLink>
+            <p>{`${song?.song_name}`}</p>
+            </div>
         ))}
       </div>
     </div>

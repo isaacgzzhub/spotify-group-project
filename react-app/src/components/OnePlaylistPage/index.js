@@ -63,8 +63,8 @@ function OnePlaylistPage() {
                   alt="album-cover"
                   title={`${song?.song_name}`}
                 />
-                <a>{`${song?.song_name}`}</a>
               </NavLink>
+                <p>{`${song?.song_name}`}</p>
               {userId === playlist?.user_id && (
                 <button
                   onClick={() => handleDelete(playlistSongRelationshipId)}

@@ -19,6 +19,7 @@ function AlbumsPage() {
       <h1>All Albums</h1>
       <div className="album-wrapper">
         {albums.map((album) => (
+          <div>
           <NavLink
             key={album.id}
             className="album-tile"
@@ -30,8 +31,9 @@ function AlbumsPage() {
               alt="album-cover"
               title={`${album.album_name}`}
             />
-            <a>{`${album.album_name}`}</a>
           </NavLink>
+            <p>{`${album.album_name}`}</p>
+          </div>
         ))}
       </div>
     </div>

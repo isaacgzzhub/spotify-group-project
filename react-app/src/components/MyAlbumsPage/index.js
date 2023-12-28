@@ -59,8 +59,8 @@ function MyAlbumsPage() {
                   alt="album-cover"
                   title={`${album.album_name}`}
                 />
-                {`${album.album_name}`}
               </NavLink>
+                <p>{`${album.album_name}`}</p>
               <div className="button-wrapper">
                 <button
                   className="update-button"

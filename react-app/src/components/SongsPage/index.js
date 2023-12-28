@@ -32,16 +32,22 @@ function SongsPage() {
               key={song.id}
               className="album-tile"
             >
+              <NavLink
+                key={song?.id}
+                className="album-tile"
+                to={`/songs/${song?.id}`}
+              >
               <img
                 className="album-img"
                 src={`${song.thumbnail_url}`}
                 alt="album-cover"
                 title={`${song.song_name}`}
               />
-              <a>{`${song.song_name}`}</a>
+              </NavLink>
+              <p>{`${song.song_name}`}</p>
               <p>
                 {
-                  userLikes.filter((likedSong) => song.id === likedSong.song_id)
+                  userLikes.filter((likedSong) => song?.id === likedSong?.song_id)
                     .length
                 }
                 <span>
@@ -51,7 +57,7 @@ function SongsPage() {
               </p>
             </div>
             <LikeButton
-              songId={song.id}
+              songId={song?.id}
               className="like-button"
               onLike={handleSongLiked}
             />
