@@ -132,6 +132,16 @@ Playlists
 
 <br>
 
+## About
+
+Cool Music Player was created to serve three purposes:
+
+1. Allow the user to retrieve/upload/edit/delete music.
+2. Listen to songs on any page.
+3. Create and share different albums and playlists with other people.
+
+<br>
+
 ## Screenshots
 
 <img src="./react-app/public/images/<image_name_here>" style="width:600px;" />
